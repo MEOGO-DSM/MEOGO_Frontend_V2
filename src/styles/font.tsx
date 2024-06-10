@@ -6,11 +6,19 @@ interface FontPropsType {
   text?: string;
   kind?: keyof typeof fonts;
   color?: keyof typeof color;
+  style?: TextStyle;
 }
 
-export const Font = ({text, kind = '', color: textColor}: FontPropsType) => {
+export const Font = ({
+  text,
+  kind = '',
+  color: textColor = 'black',
+  style,
+}: FontPropsType) => {
   const textColorStyle = textColor ? {color: color[textColor]} : {};
-  return <Text style={{...fonts[kind], ...textColorStyle}}>{text}</Text>;
+  return (
+    <Text style={{...fonts[kind], ...textColorStyle, ...style}}>{text}</Text>
+  );
 };
 
 const fonts: {[key: string]: TextStyle} = {
