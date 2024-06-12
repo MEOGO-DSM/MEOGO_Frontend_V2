@@ -4,6 +4,20 @@
  *
  * @format
  */
+<<<<<<< Updated upstream
+=======
+import React from 'react';
+import Login from './src/app/login/page';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import Main from './src/app/main/page';
+import IdAndPassword from './src/app/signup/IdAndPassword';
+import Name from './src/app/signup/Name';
+import School from './src/app/signup/School';
+import FindSchool from './src/app/signup/FindSchool';
+import School2 from './src/app/signup/School2';
+>>>>>>> Stashed changes
+
 import React from 'react';
 import Signup from './src/app/signup/page';
 import Login from './src/app/login/page';
