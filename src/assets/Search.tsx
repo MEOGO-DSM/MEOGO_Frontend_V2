@@ -1,4 +1,3 @@
-import {TextStyle} from 'react-native';
 import Svg, {Path} from 'react-native-svg';
 
 interface PropsType {
