@@ -2,7 +2,7 @@ import React from 'react';
 import {Dimensions} from 'react-native';
 import styled from 'styled-components/native';
 import {color} from '../../styles/color';
-import {Bell, Logo, Search} from '../../assets';
+import {Logo, Search, Bell} from '../../assets';
 
 function Header() {
   const screenWidth = Dimensions.get('screen').width;

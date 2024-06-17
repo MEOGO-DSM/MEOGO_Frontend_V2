@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import {Font} from '../styles/font';
-import {Arrow_Left, Blank} from '../assets';
+import {Blank} from '../assets';
 import {Dimensions} from 'react-native';
 
 interface PropsType {
@@ -16,7 +16,7 @@ function TopBar({text = '', leftIcon, rightIcon = <Blank />}: PropsType) {
   return (
     <Container size={screenWidth}>
       {leftIcon}
-      <Font text={text} kind="medium18" />
+      <Font text={text} kind="medium18" color="black" />
       {rightIcon}
     </Container>
   );
@@ -34,4 +34,5 @@ const Container = styled.View<{size: number}>`
   padding: 20px 16px;
   flex-direction: row;
   background-color: white;
+  z-index: 1000;
 `;

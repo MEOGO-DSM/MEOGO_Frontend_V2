@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components/native';
 import {color} from '../../styles/color';
 import {Font} from '../../styles/font';
-import {Arrow_Right} from '../../assets';
+import {Arrow} from '../../assets';
 
 function EventCard() {
   return (
@@ -16,7 +16,7 @@ function EventCard() {
           />
           <Font kind="bold20" color="white" text="내 학교 리뷰 쓰러가기" />
         </EventText>
-        <Arrow_Right color={`${color.gray600}`} />
+        <Arrow rotate="right" color={`${color.gray600}`} />
       </EventBox>
     </EventContainer>
   );
