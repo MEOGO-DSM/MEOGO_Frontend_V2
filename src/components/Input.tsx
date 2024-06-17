@@ -4,41 +4,45 @@ import {Font} from '../styles/font';
 import {color} from '../styles/color';
 import {Eye, EyeOff} from '../assets';
 
-interface InputPropsType {
+interface InputProps {
   title?: string;
   placeholder?: string;
-  errorMasage?: string;
+  errorMessage?: string;
   password?: boolean;
   icon?: React.ReactNode;
   autoFocus?: boolean;
   value?: string;
-  onChange?: () => void;
-  onChangeText?: () => void;
+  noError?: boolean;
+  multiline?: boolean;
+  onChangeText?: (i: string) => void;
+  onKeyPress?: (i: any) => void;
 }
 
 function Input({
   title,
   placeholder,
-  errorMasage = '',
+  errorMessage = '',
   password,
   icon,
   autoFocus,
   value,
-  onChange,
+  noError,
+  multiline,
   onChangeText,
-}: InputPropsType) {
+  onKeyPress,
+}: InputProps) {
   const [press, setPress] = useState<boolean>(false);
   const [isFocused, setIsFocused] = useState<boolean>(false);
 
   return (
     <Container>
-      <TitleBox>
-        <Font kind="medium14" text={title} />
-      </TitleBox>
+      {title && (
+        <TitleBox>
+          <Font kind="medium14" text={title} />
+        </TitleBox>
+      )}
       <InputContainer focused={isFocused}>
         <InputBox
-          onChange={onChange}
-          onChangeText={onChangeText}
           value={value}
           autoFocus={autoFocus}
           secureTextEntry={password && !press}
@@ -46,6 +50,10 @@ function Input({
           placeholderTextColor={color.gray400}
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
+          onChangeText={onChangeText}
+          onKeyPress={onKeyPress}
+          multiline={multiline}
+          enterKeyHint="go"
         />
         {password ? (
           <PwdButton onPress={() => setPress(!press)}>
@@ -55,10 +63,11 @@ function Input({
           <ButtonBox>{icon}</ButtonBox>
         )}
       </InputContainer>
-
-      <ErrorBox>
-        <Font text={errorMasage} kind="medium14" color="red" />
-      </ErrorBox>
+      {!noError && (
+        <ErrorBox>
+          <Font text={errorMessage} kind="medium14" color="red" />
+        </ErrorBox>
+      )}
     </Container>
   );
 }
@@ -71,7 +80,7 @@ const Container = styled.View`
 `;
 
 const TitleBox = styled.View`
-  padding-left: 0px;
+  padding-left: 6px;
 `;
 
 const InputBox = styled.TextInput`
@@ -81,7 +90,7 @@ const InputBox = styled.TextInput`
   padding: 8px 14px;
 `;
 
-const InputContainer = styled.TouchableOpacity<{focused: boolean}>`
+const InputContainer = styled.View<{focused: boolean}>`
   height: 48px;
   width: 100%;
   border-radius: 8px;
