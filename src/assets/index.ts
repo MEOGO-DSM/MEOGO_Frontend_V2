@@ -13,3 +13,5 @@ export * from './Heart';
 export * from './Menu';
 export * from './Edit';
 export * from './Image';
+export * from './Close';
+export * from './Plus';
