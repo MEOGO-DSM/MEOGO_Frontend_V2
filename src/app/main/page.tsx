@@ -3,10 +3,11 @@ import styled from 'styled-components/native';
 import Header from '../../components/main/Header';
 import {color} from '../../styles/color';
 import {Font} from '../../styles/font';
-import {Arrow_Right} from '../../assets';
+import {Arrow} from '../../assets';
 import EventCard from '../../components/main/EventCard';
 import ReviewCard from '../../components/main/ReviewCard';
 import ContentCard from '../../components/ContentCard';
+import {useNavigation} from '@react-navigation/native';
 
 interface PropsType {
   schoolName?: string;
@@ -17,6 +18,7 @@ interface PropsType {
 }
 
 function Main() {
+  const navigation = useNavigation();
   return (
     <>
       <Header />
@@ -28,9 +30,9 @@ function Main() {
             <ReviewCard />
             <ReviewCard />
             <ReviewCard />
-            <SeeMoreSchool>
+            <SeeMoreSchool onPress={() => navigation.navigate()}>
               <Font text="리뷰 더보기" kind="medium18" color="gray500" />
-              <Arrow_Right color={`${color.gray300}`} />
+              <Arrow rotate="right" color={`${color.gray300}`} />
             </SeeMoreSchool>
           </AroundSchoolList>
         </AroundSchoolContainer>
@@ -41,9 +43,10 @@ function Main() {
             <ContentCard />
             <ContentCard />
             <MoreContentBox>
-              <MoreContentButton>
+              <MoreContentButton
+                onPress={() => navigation.navigate('Community')}>
                 <Font kind="medium16" text="인기글 더보기" />
-                <Arrow_Right size={16} color={`${color.gray400}`} />
+                <Arrow rotate="right" size={16} color={`${color.gray400}`} />
               </MoreContentButton>
             </MoreContentBox>
           </ContentsList>
