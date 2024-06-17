@@ -3,7 +3,7 @@ import Input from '../../components/Input';
 import Button from '../../components/Button';
 import TopBar from '../../components/TopBar';
 import {TouchableOpacity} from 'react-native';
-import {Arrow_Left, Search} from '../../assets';
+import {Arrow, Search} from '../../assets';
 import styled from 'styled-components/native';
 import {useNavigation} from '@react-navigation/native';
 import {color} from '../../styles/color';
@@ -16,7 +16,7 @@ function School({route}: any) {
         text="회원가입"
         leftIcon={
           <TouchableOpacity onPress={() => navigation.navigate('Name')}>
-            <Arrow_Left />
+            <Arrow />
           </TouchableOpacity>
         }
       />

@@ -1,6 +1,6 @@
 import React from 'react';
 import TopBar from '../../components/TopBar';
-import {Arrow_Left} from '../../assets';
+import {Arrow} from '../../assets';
 import {styled} from 'styled-components/native';
 import Input from '../../components/Input';
 import {color} from '../../styles/color';
@@ -16,7 +16,7 @@ function IdAndPassword() {
         text="회원가입"
         leftIcon={
           <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-            <Arrow_Left />
+            <Arrow />
           </TouchableOpacity>
         }
       />

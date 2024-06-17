@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import TopBar from '../../components/TopBar';
-import {Arrow_Left, Warn} from '../../assets';
+import {Arrow, Warn} from '../../assets';
 import styled from 'styled-components/native';
 import Input from '../../components/Input';
 import {color} from '../../styles/color';
@@ -22,7 +22,7 @@ function Name() {
           leftIcon={
             <TouchableOpacity
               onPress={() => navigation.navigate('IdAndPassword')}>
-              <Arrow_Left />
+              <Arrow />
             </TouchableOpacity>
           }
         />
