@@ -4,31 +4,21 @@
  *
  * @format
  */
-<<<<<<< Updated upstream
-=======
-import React from 'react';
-import Login from './src/app/login/page';
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import Main from './src/app/main/page';
-import IdAndPassword from './src/app/signup/IdAndPassword';
-import Name from './src/app/signup/Name';
-import School from './src/app/signup/School';
-import FindSchool from './src/app/signup/FindSchool';
-import School2 from './src/app/signup/School2';
->>>>>>> Stashed changes
 
 import React from 'react';
-import Signup from './src/app/signup/page';
 import Login from './src/app/login/page';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Main from './src/app/main/page';
 import IdAndPassword from './src/app/signup/IdAndPassword';
+import Community from './src/app/community/page';
 import Name from './src/app/signup/Name';
 import School from './src/app/signup/School';
 import FindSchool from './src/app/signup/FindSchool';
 import School2 from './src/app/signup/School2';
+import Post from './src/app/community/Post';
+import EditPost from './src/app/community/EditPost';
+import AddTag from './src/app/community/AddTag';
 
 function App(): React.JSX.Element {
   const Stack = createNativeStackNavigator();
@@ -68,6 +58,26 @@ function App(): React.JSX.Element {
         <Stack.Screen
           name="Main"
           component={Main}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Community"
+          component={Community}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Post"
+          component={Post}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="EditPost"
+          component={EditPost}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="AddTag"
+          component={AddTag}
           options={{headerShown: false}}
         />
       </Stack.Navigator>
