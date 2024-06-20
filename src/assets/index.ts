@@ -15,3 +15,9 @@ export * from './Edit';
 export * from './Image';
 export * from './Close';
 export * from './Plus';
+export * from "./Link"
+export * from "./Setting"
+export * from "./Pen"
+export * from "./Filter"
+export * from "./Media"
+export * from "./TransparentStarGroup"
