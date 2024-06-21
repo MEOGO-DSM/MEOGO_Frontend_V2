@@ -22,7 +22,7 @@ import AddTag from './src/app/community/AddTag';
 import Review from "./src/app/review/page"
 import ReviewWrite from "./src/app/review/ReviewWrite"
 import Search from "./src/app/search/page"
-
+import KeywordReview from "./src/app/review/KeywordReview"
 
 function App(): React.JSX.Element {
   const Stack = createNativeStackNavigator();
@@ -98,6 +98,11 @@ function App(): React.JSX.Element {
         <Stack.Screen
         name="Search"
         component={Search}
+        options={{headerShown: false}}
+        />
+        <Stack.Screen
+        name="KeywordReview"
+        component={KeywordReview}
         options={{headerShown: false}}
         />
       </Stack.Navigator>
