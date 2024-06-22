@@ -32,7 +32,7 @@ export default function ReviewWrite() {
             />
             <Container>
                 <ScoreWrap>
-                    {/* <StarRating /> */}
+                    <StarRating />
                 </ScoreWrap>
                 <ContentBox>
                     <WriteWrap>
