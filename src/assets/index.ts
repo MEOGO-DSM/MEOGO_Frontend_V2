@@ -21,3 +21,6 @@ export * from "./Pen"
 export * from "./Filter"
 export * from "./Media"
 export * from "./TransparentStarGroup"
+export * from './Home';
+export * from './Chat';
+export * from './My';
