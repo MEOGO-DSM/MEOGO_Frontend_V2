@@ -29,7 +29,7 @@ function School2({route}: any) {
       <TopBar
         text="회원가입"
         leftIcon={
-          <TouchableOpacity onPress={() => navigation.navigate('FindSchool')}>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
             <Arrow />
           </TouchableOpacity>
         }

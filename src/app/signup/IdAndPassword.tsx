@@ -15,7 +15,7 @@ function IdAndPassword() {
       <TopBar
         text="회원가입"
         leftIcon={
-          <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
             <Arrow />
           </TouchableOpacity>
         }

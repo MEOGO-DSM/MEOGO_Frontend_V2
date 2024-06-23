@@ -12,16 +12,15 @@ import {Font} from '../../styles/font';
 function Name() {
   const [visibleModal, setVisibleModal] = useState<boolean>();
   const navigation = useNavigation();
-  const screenWidth = Dimensions.get('screen').width;
-  const screenHeight = Dimensions.get('screen').height;
+  const screenWidth = Dimensions.get('window').width;
+  const screenHeight = Dimensions.get('window').height;
   return (
     <>
       <Container>
         <TopBar
           text="회원가입"
           leftIcon={
-            <TouchableOpacity
-              onPress={() => navigation.navigate('IdAndPassword')}>
+            <TouchableOpacity onPress={() => navigation.goBack()}>
               <Arrow />
             </TouchableOpacity>
           }
@@ -76,6 +75,7 @@ const ModalScreen = styled.View<{width: number; height: number}>`
   position: absolute;
   width: ${({width}) => width}px;
   height: ${({height}) => height}px;
+  flex: 1;
   top: 0;
   left: 0;
   justify-content: flex-end;

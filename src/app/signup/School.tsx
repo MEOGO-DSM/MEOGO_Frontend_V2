@@ -15,7 +15,7 @@ function School({route}: any) {
       <TopBar
         text="회원가입"
         leftIcon={
-          <TouchableOpacity onPress={() => navigation.navigate('Name')}>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
             <Arrow />
           </TouchableOpacity>
         }
