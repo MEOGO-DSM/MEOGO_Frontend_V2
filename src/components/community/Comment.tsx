@@ -34,7 +34,7 @@ export default Comment;
 
 const Container = styled.View`
   width: 100%;
-  gap: 8px;
+  gap: 4px;
   padding: 20px 0;
   border-bottom-width: 1px;
   border-bottom-color: ${color.gray200};
