@@ -22,7 +22,7 @@ function Main() {
   return (
     <>
       <Header />
-      <Container>
+      <Container showsVerticalScrollIndicator={false}>
         <EventCard />
         <AroundSchoolContainer>
           <Font text="주변 학교 리뷰" kind="bold20" />

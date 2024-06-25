@@ -5,7 +5,7 @@ import {color} from '../../styles/color';
 import {Heart} from '../../assets';
 
 function InputComment() {
-  const screenWidth = Dimensions.get('screen').width;
+  const screenWidth = Dimensions.get('window').width;
   const [pressed, setPressed] = useState<boolean>(false);
   return (
     <Container width={screenWidth}>

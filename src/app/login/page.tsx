@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components/native';
 import {Logo} from '../../assets';
 import Input from '../../components/Input';
@@ -9,6 +9,7 @@ import {useNavigation} from '@react-navigation/native';
 
 function Login() {
   const navigation = useNavigation();
+
   return (
     <Container>
       <Logo size={64} />
@@ -18,7 +19,7 @@ function Login() {
           <Input placeholder="비밀번호" password />
         </InputBox>
         <ButtonBox>
-          <Button onPress={() => navigation.navigate('Main')} text="로그인" />
+          <Button onPress={() => navigation.navigate('NavBar')} text="로그인" />
           <GotoSignupBox>
             <Font kind="medium14" text="계정이 없으신가요?" color="gray500" />
             <MoveSignup onPress={() => navigation.navigate('IdAndPassword')}>

@@ -112,7 +112,7 @@ const TagBox = styled.View`
 const CommentContainer = styled.View`
   padding: 16px 20px;
   width: 100%;
-  background-color: ${color.gray100};
+  background-color: ${color.gray50};
 `;
 
 const CommentTotalNum = styled.View`
