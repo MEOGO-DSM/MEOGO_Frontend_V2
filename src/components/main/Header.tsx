@@ -5,7 +5,7 @@ import {color} from '../../styles/color';
 import {Logo, Search, Bell} from '../../assets';
 
 function Header() {
-  const screenWidth = Dimensions.get('screen').width;
+  const screenWidth = Dimensions.get('window').width;
   return (
     <Container width={screenWidth}>
       <IconBox>
