@@ -6,16 +6,16 @@
  */
 
 import React from 'react';
-import Login from './src/app/login/page';
+import Login from './src/app/Login/page';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Main from './src/app/main/page';
-import IdAndPassword from './src/app/signup/IdAndPassword';
+import IdAndPassword from './src/app/Signup/IdAndPassword';
 import Community from './src/app/community/page';
-import Name from './src/app/signup/Name';
-import School from './src/app/signup/School';
-import FindSchool from './src/app/signup/FindSchool';
-import School2 from './src/app/signup/School2';
+import Name from './src/app/Signup/Name';
+import School from './src/app/Signup/School';
+import FindSchool from './src/app/Signup/FindSchool';
+import School2 from './src/app/Signup/School2';
 import Post from './src/app/community/Post';
 import EditPost from './src/app/community/EditPost';
 import AddTag from './src/app/community/AddTag';
@@ -24,7 +24,6 @@ import ReviewWrite from './src/app/review/ReviewWrite';
 import Search from './src/app/search/page';
 import NavBar from './src/components/NavBar';
 // import KeywordReview from './src/app/review/KeywordReview';
-import Test from './src/app/dummy/Test';
 
 function App(): React.JSX.Element {
   const Stack = createNativeStackNavigator();
@@ -100,11 +99,6 @@ function App(): React.JSX.Element {
         <Stack.Screen
           name="Search"
           component={Search}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="Test"
-          component={Test}
           options={{headerShown: false}}
         />
       </Stack.Navigator>
