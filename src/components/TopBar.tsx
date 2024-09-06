@@ -8,12 +8,17 @@ interface PropsType {
   leftIcon?: React.ReactNode;
   text?: string;
   rightIcon?: React.ReactNode;
-  padding?: number
+  padding?: number;
 }
 
 const screenWidth = Dimensions.get('window').width;
 
-function TopBar({text = '', leftIcon, rightIcon = <Blank />, padding = 20}: PropsType) {
+export const TopBar = ({
+  text = '',
+  leftIcon,
+  rightIcon = <Blank />,
+  padding = 20,
+}: PropsType) => {
   return (
     <Container padding={padding} size={screenWidth}>
       {leftIcon}
@@ -21,11 +26,9 @@ function TopBar({text = '', leftIcon, rightIcon = <Blank />, padding = 20}: Prop
       {rightIcon}
     </Container>
   );
-}
+};
 
-export default TopBar;
-
-const Container = styled.View<{size: number, padding?:number}>`
+const Container = styled.View<{size: number; padding?: number}>`
   width: ${({size}) => size}px;
   justify-content: space-between;
   align-items: center;

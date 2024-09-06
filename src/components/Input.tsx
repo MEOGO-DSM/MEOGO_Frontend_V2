@@ -18,7 +18,7 @@ interface InputProps {
   onKeyPress?: (i: any) => void;
 }
 
-function Input({
+export const Input = ({
   title,
   placeholder,
   errorMessage = '',
@@ -30,7 +30,7 @@ function Input({
   multiline,
   onChangeText,
   onKeyPress,
-}: InputProps) {
+}: InputProps) => {
   const [press, setPress] = useState<boolean>(false);
   const [isFocused, setIsFocused] = useState<boolean>(false);
 
@@ -70,9 +70,7 @@ function Input({
       )}
     </Container>
   );
-}
-
-export default Input;
+};
 
 const Container = styled.View`
   width: 100%;
@@ -112,7 +110,7 @@ const ErrorBox = styled.View`
   width: 100%;
 `;
 
-const PwdButton = styled.TouchableOpacity`
+const PwdButton = styled.Pressable`
   padding: 8px 14px;
 `;
 

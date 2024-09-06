@@ -10,7 +10,7 @@ import MyPage from '../app/mypage/page';
 
 const Tab = createBottomTabNavigator();
 
-function NavBar() {
+export const NavBar = () => {
   return (
     <Tab.Navigator
       initialRouteName="Main"
