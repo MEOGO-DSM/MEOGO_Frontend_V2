@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react';
 import {TouchableOpacity} from 'react-native';
-
 import {TopBar, Input} from '../../components';
 import {Arrow, Search} from '../../assets';
 import styled from 'styled-components/native';
@@ -40,8 +39,8 @@ function FindSchool() {
       <TopBar
         text="학교 검색"
         leftIcon={
-          <TouchableOpacity onPress={() => navigation.navigate('School')}>
-            <Arrow_Left />
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <Arrow />
           </TouchableOpacity>
         }
       />

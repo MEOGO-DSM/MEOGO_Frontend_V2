@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import {color} from '../../styles/color';
-import {Arrow_Right, Logo_Img} from '../../assets';
+import {Arrow, Logo_Img} from '../../assets';
 import {Font} from '../../styles/font';
 
 interface ListPropsType {
@@ -19,7 +19,7 @@ function SchoolList({img, name, location, onPress}: ListPropsType) {
         <Font text={name} kind="semi18" color="black" />
         <Font text={location} kind="regular14" color="gray500" />
       </InfoBox>
-      <Arrow_Right color={`${color.gray300}`} />
+      <Arrow rotate="right" color={`${color.gray300}`} />
     </Container>
   );
 }

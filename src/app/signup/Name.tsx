@@ -62,6 +62,7 @@ const ModalScreen = styled.View<{width: number; height: number}>`
   position: absolute;
   width: ${({width}) => width}px;
   height: ${({height}) => height}px;
+  flex: 1;
   top: 0;
   left: 0;
   justify-content: flex-end;

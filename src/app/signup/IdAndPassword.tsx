@@ -1,3 +1,4 @@
+
 import React, {useState} from 'react';
 import {Arrow} from '../../assets';
 import {styled} from 'styled-components/native';
@@ -31,6 +32,7 @@ function IdAndPassword() {
           title="비밀번호"
           placeholder="특수문자 1자 이상, 최대 20자"
         />
+
         <Input
           onChangeText={text => {
             setData(prev => ({...prev, passwordCheck: text}));
