@@ -6,11 +6,19 @@ interface FontPropsType {
   text?: string;
   kind?: keyof typeof fonts;
   color?: keyof typeof color;
+  style?: TextStyle;
 }
 
-export const Font = ({text, kind = '', color: textColor}: FontPropsType) => {
+export const Font = ({
+  text,
+  kind = '',
+  color: textColor = 'black',
+  style,
+}: FontPropsType) => {
   const textColorStyle = textColor ? {color: color[textColor]} : {};
-  return <Text style={{...fonts[kind], ...textColorStyle}}>{text}</Text>;
+  return (
+    <Text style={{...fonts[kind], ...textColorStyle, ...style}}>{text}</Text>
+  );
 };
 
 const fonts: {[key: string]: TextStyle} = {
@@ -30,6 +38,11 @@ const fonts: {[key: string]: TextStyle} = {
     lineHeight: 44,
     fontWeight: '600',
   },
+  bold24: {
+    fontSize: 24,
+    lineHeight: 36,
+    fontWeight: '700',
+  },
   semi24: {
     fontSize: 24,
     lineHeight: 36,
@@ -45,7 +58,12 @@ const fonts: {[key: string]: TextStyle} = {
     lineHeight: 24,
     fontWeight: '700',
   },
-  Medium20: {
+  semi20: {
+    fontSize: 20,
+    lineHeight: 24,
+    fontWeight: '600'
+  },
+  medium20: {
     fontSize: 20,
     lineHeight: 24,
     fontWeight: '500',
@@ -94,6 +112,11 @@ const fonts: {[key: string]: TextStyle} = {
     fontSize: 14,
     lineHeight: 18,
     fontWeight: '400',
+  },
+  semi12: {
+    fontSize: 12,
+    lineHeight: 14,
+    fontWeight: '600',
   },
   medium12: {
     fontSize: 12,
