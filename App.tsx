@@ -23,7 +23,46 @@ import Review from './src/app/review/page';
 import ReviewWrite from './src/app/review/ReviewWrite';
 import Search from './src/app/search/page';
 import NavBar from './src/components/NavBar';
+import Signup from './src/app/Signup/page';
 // import KeywordReview from './src/app/review/KeywordReview';
+
+import {
+  Colors,
+  DebugInstructions,
+  Header,
+  LearnMoreLinks,
+  ReloadInstructions,
+} from 'react-native/Libraries/NewAppScreen';
+
+type SectionProps = PropsWithChildren<{
+  title: string;
+}>;
+
+function Section({children, title}: SectionProps): React.JSX.Element {
+  const isDarkMode = useColorScheme() === 'dark';
+  return (
+    <View style={styles.sectionContainer}>
+      <Text
+        style={[
+          styles.sectionTitle,
+          {
+            color: isDarkMode ? Colors.white : Colors.black,
+          },
+        ]}>
+        {title}
+      </Text>
+      <Text
+        style={[
+          styles.sectionDescription,
+          {
+            color: isDarkMode ? Colors.light : Colors.dark,
+          },
+        ]}>
+        {children}
+      </Text>
+    </View>
+  );
+}
 
 function App(): React.JSX.Element {
   const Stack = createNativeStackNavigator();
@@ -33,6 +72,11 @@ function App(): React.JSX.Element {
         <Stack.Screen
           name="Login"
           component={Login}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Signup"
+          component={Signup}
           options={{headerShown: false}}
         />
         <Stack.Screen

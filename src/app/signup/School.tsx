@@ -1,7 +1,5 @@
 import React from 'react';
-import Input from '../../components/Input';
-import Button from '../../components/Button';
-import TopBar from '../../components/TopBar';
+import {Input, Button, TopBar} from '../../components';
 import {TouchableOpacity} from 'react-native';
 import {Arrow, Search} from '../../assets';
 import styled from 'styled-components/native';

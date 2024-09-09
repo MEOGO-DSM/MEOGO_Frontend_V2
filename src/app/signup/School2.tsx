@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
-import Input from '../../components/Input';
-import Button from '../../components/Button';
-import TopBar from '../../components/TopBar';
+import {Input} from '../../components/Input';
+import {Button} from '../../components/Button';
+import {TopBar} from '../../components/TopBar';
 import {TouchableOpacity} from 'react-native';
 import {Arrow, Search} from '../../assets';
 import styled from 'styled-components/native';
@@ -10,7 +10,8 @@ import {color} from '../../styles/color';
 
 function School2({route}: any) {
   const navigation = useNavigation();
-  const {schoolName} = route.params;
+  // const {schoolName} = route.params;
+  const schoolName = 'rr';
 
   const [inputValue, setInputValue] = useState<string>(schoolName);
 
