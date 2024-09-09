@@ -6,7 +6,7 @@ import {Font} from '../../styles/font';
 import {Arrow} from '../../assets';
 import EventCard from '../../components/main/EventCard';
 import ReviewCard from '../../components/main/ReviewCard';
-import ContentCard from '../../components/ContentCard';
+import {ContentCard} from '../../components/ContentCard';
 import {useNavigation} from '@react-navigation/native';
 
 interface PropsType {
@@ -22,7 +22,7 @@ function Main() {
   return (
     <>
       <Header />
-      <Container>
+      <Container showsVerticalScrollIndicator={false}>
         <EventCard />
         <AroundSchoolContainer>
           <Font text="주변 학교 리뷰" kind="bold20" />
