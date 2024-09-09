@@ -1,28 +1,73 @@
-import React, {useState} from 'react';
+import React from 'react';
+import {useNavigation} from '@react-navigation/native';
 import styled from 'styled-components/native';
 import {Logo} from '../../assets';
-import Input from '../../components/Input';
-import Button from '../../components/Button';
-import {Font} from '../../styles/font';
-import {color} from '../../styles/color';
-import {useNavigation} from '@react-navigation/native';
+import {Button, Input} from '../../components';
+import {Font, color} from '../../styles';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {Controller, useForm} from 'react-hook-form';
+import {Alert} from 'react-native';
 
-function Login() {
-  const navigation = useNavigation();
+const navigation = useNavigation<StackNavigationProp<any>>();
+const {
+    control,
+    handleSubmit,
+    formState: {errors},
+  } = useForm({
+    defaultValues: {
+      id: '',
+      password: '',
+    },
+  });
+
+  const onLoginPress = (data: {id: string; password: string}) => {
+    if (data.id === 'hamster' && data.password === 'hamster@123') {
+      navigation.navigate('NavBar');
+    } else {
+      Alert.alert('아이디 또는 비밀번호를 잘못 입력했습니다.');
+    }
+  };
 
   return (
     <Container>
       <Logo size={64} />
       <LoginBox>
         <InputBox>
-          <Input noError placeholder="아이디" />
-          <Input placeholder="비밀번호" password />
+          <Controller
+            control={control}
+            name="id"
+            rules={{required: '아이디를 입력해주세요.'}}
+            render={({field: {onChange, value}}) => (
+              <Input
+                onChangeText={onChange}
+                value={value}
+                noError={!errors.id}
+                errorMessage={errors.id ? errors.id.message : ''}
+                placeholder="아이디"
+              />
+            )}
+          />
+          <Controller
+            control={control}
+            name="password"
+            rules={{required: '비밀번호를 입력해주세요.'}}
+            render={({field: {onChange, value}}) => (
+              <Input
+                onChangeText={onChange}
+                value={value}
+                noError={!errors.password}
+                errorMessage={errors.password ? errors.password.message : ''}
+                placeholder="비밀번호"
+                password
+              />
+            )}
+          />
         </InputBox>
         <ButtonBox>
-          <Button onPress={() => navigation.navigate('NavBar')} text="로그인" />
+          <Button onPress={handleSubmit(onLoginPress)} text="로그인" />
           <GotoSignupBox>
             <Font kind="medium14" text="계정이 없으신가요?" color="gray500" />
-            <MoveSignup onPress={() => navigation.navigate('IdAndPassword')}>
+            <MoveSignup onPress={() => navigation.navigate('Signup')}>
               <GotoSignup>회원가입</GotoSignup>
             </MoveSignup>
           </GotoSignupBox>
@@ -41,6 +86,7 @@ const Container = styled.View`
   align-items: center;
   background-color: ${color.white};
 `;
+
 const LoginBox = styled.View`
   width: 100%;
   gap: 40px;
