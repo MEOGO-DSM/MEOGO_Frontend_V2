@@ -5,9 +5,10 @@ import {Arrow, Search} from '../../assets';
 import styled from 'styled-components/native';
 import {useNavigation} from '@react-navigation/native';
 import {color} from '../../styles/color';
+import {StackNavigationProp} from '@react-navigation/stack';
 
 function School({route}: any) {
-  const navigation = useNavigation();
+  const navigation = useNavigation<StackNavigationProp<any>>();
   return (
     <Container>
       <TopBar
