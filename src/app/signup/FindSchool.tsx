@@ -1,12 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import Input from '../../components/Input';
-import TopBar from '../../components/TopBar';
 import {TouchableOpacity} from 'react-native';
-import {Arrow_Left, Blank, Search} from '../../assets';
+
+import {TopBar, Input} from '../../components';
+import {Arrow, Search} from '../../assets';
 import styled from 'styled-components/native';
 import {useNavigation} from '@react-navigation/native';
-import {color} from '../../styles/color';
-import {Font} from '../../styles/font';
+import {color, Font} from '../../styles';
 import {schoolList} from '../dummy/schoolList';
 import SchoolList from '../../components/signup/SchoolList';
 
@@ -16,7 +15,7 @@ function FindSchool() {
   const navigation = useNavigation();
   const [pressed, setPressed] = useState<number>(0);
   const [filteredSchoolList, setFilteredSchoolList] = useState(schoolList);
-  const [inputValue, setInputValue] = useState<string>('');
+  const [, setInputValue] = useState<string>('');
 
   useEffect(() => {
     if (inputValue) filterInputValue();

@@ -1,34 +1,20 @@
 import React, {useState} from 'react';
-import TopBar from '../../components/TopBar';
-import {Arrow_Left, Warn} from '../../assets';
+import {Arrow, Warn} from '../../assets';
 import styled from 'styled-components/native';
-import Input from '../../components/Input';
-import {color} from '../../styles/color';
-import Button from '../../components/Button';
+import {color, Font} from '../../styles';
+import {Button, Input, TopBar} from '../../components';
 import {useNavigation} from '@react-navigation/native';
 import {TouchableOpacity, Dimensions} from 'react-native';
-import {Font} from '../../styles/font';
 
 function Name() {
   const [visibleModal, setVisibleModal] = useState<boolean>();
   const navigation = useNavigation();
-  const screenWidth = Dimensions.get('screen').width;
-  const screenHeight = Dimensions.get('screen').height;
+  const screenWidth = Dimensions.get('window').width;
+  const screenHeight = Dimensions.get('window').height;
+
   return (
     <>
-      <Container>
-        <TopBar
-          text="회원가입"
-          leftIcon={
-            <TouchableOpacity
-              onPress={() => navigation.navigate('IdAndPassword')}>
-              <Arrow_Left />
-            </TouchableOpacity>
-          }
-        />
-        <Input autoFocus title="이름" placeholder="실명 입력" />
-        <Button text="다음" onPress={() => setVisibleModal(true)} />
-      </Container>
+      <Input autoFocus title="이름" placeholder="실명 입력" />
       {visibleModal && (
         <ModalScreen width={screenWidth} height={screenHeight}>
           <Modal>
