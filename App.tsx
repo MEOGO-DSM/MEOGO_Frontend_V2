@@ -10,12 +10,7 @@ import Login from './src/app/Login/page';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Main from './src/app/main/page';
-import IdAndPassword from './src/app/Signup/IdAndPassword';
 import Community from './src/app/community/page';
-import Name from './src/app/Signup/Name';
-import School from './src/app/Signup/School';
-import FindSchool from './src/app/Signup/FindSchool';
-import School2 from './src/app/Signup/School2';
 import Post from './src/app/community/Post';
 import EditPost from './src/app/community/EditPost';
 import AddTag from './src/app/community/AddTag';
@@ -68,83 +63,19 @@ function App(): React.JSX.Element {
   const Stack = createNativeStackNavigator();
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Test">
-        <Stack.Screen
-          name="Login"
-          component={Login}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="Signup"
-          component={Signup}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="IdAndPassword"
-          component={IdAndPassword}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="Name"
-          component={Name}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="School"
-          component={School}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="FindSchool"
-          component={FindSchool}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="School2"
-          component={School2}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="NavBar"
-          component={NavBar}
-          options={{headerShown: false}}
-        />
-
-        <Stack.Screen
-          name="Community"
-          component={Community}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="Post"
-          component={Post}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="EditPost"
-          component={EditPost}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="AddTag"
-          component={AddTag}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="Review"
-          component={Review}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="ReviewWrite"
-          component={ReviewWrite}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="Search"
-          component={Search}
-          options={{headerShown: false}}
-        />
+      <Stack.Navigator
+        screenOptions={{headerShown: false}}
+        initialRouteName="Test">
+        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="Signup" component={Signup} />
+        <Stack.Screen name="NavBar" component={NavBar} />
+        <Stack.Screen name="Community" component={Community} />
+        <Stack.Screen name="Post" component={Post} />
+        <Stack.Screen name="EditPost" component={EditPost} />
+        <Stack.Screen name="AddTag" component={AddTag} />
+        <Stack.Screen name="Review" component={Review} />
+        <Stack.Screen name="ReviewWrite" component={ReviewWrite} />
+        <Stack.Screen name="Search" component={Search} />
       </Stack.Navigator>
     </NavigationContainer>
   );
