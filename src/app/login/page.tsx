@@ -8,8 +8,9 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import {Controller, useForm} from 'react-hook-form';
 import {Alert} from 'react-native';
 
-const navigation = useNavigation<StackNavigationProp<any>>();
-const {
+function Login() {
+  const navigation = useNavigation<StackNavigationProp<any>>();
+  const {
     control,
     handleSubmit,
     formState: {errors},

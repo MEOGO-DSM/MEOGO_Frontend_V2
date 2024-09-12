@@ -6,7 +6,7 @@ import {Font} from '../../styles/font';
 import {Arrow} from '../../assets';
 import EventCard from '../../components/main/EventCard';
 import ReviewCard from '../../components/main/ReviewCard';
-import ContentCard from '../../components/ContentCard';
+import {ContentCard} from '../../components/ContentCard';
 import {useNavigation} from '@react-navigation/native';
 
 interface PropsType {

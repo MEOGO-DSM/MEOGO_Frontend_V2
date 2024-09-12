@@ -7,9 +7,10 @@ import {Arrow, Search} from '../../assets';
 import styled from 'styled-components/native';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {color} from '../../styles/color';
+import {StackNavigationProp} from '@react-navigation/stack';
 
 function School2({route}: any) {
-  const navigation = useNavigation();
+  const navigation = useNavigation<StackNavigationProp<any>>();
   // const {schoolName} = route.params;
   const schoolName = 'rr';
 
