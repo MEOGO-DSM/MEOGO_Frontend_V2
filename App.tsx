@@ -6,10 +6,10 @@
  */
 
 import React from 'react';
-import Login from './src/app/login/page';
+import Login from './src/app/Login/page';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import Main from './src/app/main/page';
+import Main from './src/app/Main/page';
 import Community from './src/app/community/page';
 import Post from './src/app/community/Post';
 import EditPost from './src/app/community/EditPost';
@@ -27,7 +27,7 @@ function App(): React.JSX.Element {
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{headerShown: false}}
-        initialRouteName="Login">
+        initialRouteName="NavBar">
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Signup" component={Signup} />
         <Stack.Screen name="NavBar" component={NavBar} />
