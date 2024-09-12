@@ -8,7 +8,7 @@ import ReviewCard from '../../components/main/ReviewCard';
 import {ContentCard} from '../../components';
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {SchoolReviewCard} from './SchoolReviewCard';
+import {SchoolReviewCard} from './Carousel';
 
 interface PropsType {
   schoolName?: string;
