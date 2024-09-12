@@ -14,11 +14,12 @@ interface InputProps {
   value?: string;
   noError?: boolean;
   multiline?: boolean;
+  readonly?: boolean;
   onChangeText?: (i: string) => void;
   onKeyPress?: (i: any) => void;
 }
 
-function Input({
+export const Input = ({
   title,
   placeholder,
   errorMessage = '',
@@ -27,10 +28,11 @@ function Input({
   autoFocus,
   value,
   noError,
+  readonly,
   multiline,
   onChangeText,
   onKeyPress,
-}: InputProps) {
+}: InputProps) => {
   const [press, setPress] = useState<boolean>(false);
   const [isFocused, setIsFocused] = useState<boolean>(false);
 
@@ -43,6 +45,7 @@ function Input({
       )}
       <InputContainer focused={isFocused}>
         <InputBox
+          readOnly={readonly}
           value={value}
           autoFocus={autoFocus}
           secureTextEntry={password && !press}
@@ -70,9 +73,7 @@ function Input({
       )}
     </Container>
   );
-}
-
-export default Input;
+};
 
 const Container = styled.View`
   width: 100%;
@@ -88,6 +89,7 @@ const InputBox = styled.TextInput`
   font-weight: 500;
   flex: 1;
   padding: 8px 14px;
+  color: black;
 `;
 
 const InputContainer = styled.View<{focused: boolean}>`
@@ -112,7 +114,7 @@ const ErrorBox = styled.View`
   width: 100%;
 `;
 
-const PwdButton = styled.TouchableOpacity`
+const PwdButton = styled.Pressable`
   padding: 8px 14px;
 `;
 

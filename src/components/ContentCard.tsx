@@ -16,14 +16,14 @@ interface PropsType {
 
 const tagList = ['학교폭파', '지구멸망'];
 
-function ContentCard({
+export const ContentCard = ({
   title = '아진짜대마고',
   content = '폭발시켜버리고 싶다',
   tag,
   date = '02.19 23:36',
   img,
   onPress,
-}: PropsType) {
+}: PropsType) => {
   const [pressed, setPressed] = useState<boolean>(false);
   return (
     <Container onPress={onPress}>
@@ -64,9 +64,7 @@ function ContentCard({
       </UserBox>
     </Container>
   );
-}
-
-export default ContentCard;
+};
 
 const Container = styled.TouchableOpacity`
   width: 100%;

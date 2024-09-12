@@ -1,13 +1,14 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import Header from '../../components/main/Header';
-import {color} from '../../styles/color';
-import {Font} from '../../styles/font';
+import {color, Font} from '../../styles';
 import {Arrow} from '../../assets';
 import EventCard from '../../components/main/EventCard';
 import ReviewCard from '../../components/main/ReviewCard';
-import ContentCard from '../../components/ContentCard';
+import {ContentCard} from '../../components';
 import {useNavigation} from '@react-navigation/native';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {SchoolReviewCard} from './Carousel';
 
 interface PropsType {
   schoolName?: string;
@@ -18,23 +19,15 @@ interface PropsType {
 }
 
 function Main() {
-  const navigation = useNavigation();
+  const navigation = useNavigation<StackNavigationProp<any>>();
   return (
     <>
       <Header />
-      <Container>
+      <Container showsVerticalScrollIndicator={false}>
         <EventCard />
         <AroundSchoolContainer>
-          <Font text="주변 학교 리뷰" kind="bold20" />
-          <AroundSchoolList horizontal showsHorizontalScrollIndicator={false}>
-            <ReviewCard />
-            <ReviewCard />
-            <ReviewCard />
-            <SeeMoreSchool onPress={() => navigation.navigate()}>
-              <Font text="리뷰 더보기" kind="medium18" color="gray500" />
-              <Arrow rotate="right" color={`${color.gray300}`} />
-            </SeeMoreSchool>
-          </AroundSchoolList>
+          <Title text="최근 학교 리뷰" kind="bold20" />
+          <SchoolReviewCard />
         </AroundSchoolContainer>
         <AllContentList>
           <Font text="오늘 인기글" kind="bold20" />
@@ -66,12 +59,7 @@ const Container = styled.ScrollView`
 
 const AroundSchoolContainer = styled.View`
   gap: 16px;
-  padding: 24px 20px;
-`;
-
-const AroundSchoolList = styled.ScrollView`
-  gap: 12px;
-  flex-direction: row;
+  padding: 24px 0;
 `;
 
 const AllContentList = styled.View`
@@ -101,14 +89,6 @@ const MoreContentButton = styled.TouchableOpacity`
   align-items: center;
 `;
 
-const SeeMoreSchool = styled.TouchableOpacity`
-  gap: 16px;
-  padding: 20px;
-  width: 230px;
-  height: 100%;
-  background-color: ${color.gray50};
-  border: 1px solid ${color.gray100};
-  justify-content: center;
-  align-items: center;
-  flex-direction: row;
+const Title = styled(Font)`
+  padding: 0 20px;
 `;

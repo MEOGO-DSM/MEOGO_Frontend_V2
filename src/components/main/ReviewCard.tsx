@@ -6,20 +6,14 @@ import {color} from '../../styles/color';
 // import StarRating from '../StarRating';
 
 interface PropsType {
-  schoolName?: string;
+  schoolName: string;
   location?: string;
   userName?: string;
-  num?: number;
-  review?: string;
+  num: number;
+  review: string;
 }
 
-function ReviewCard({
-  schoolName = '충남대학교',
-  location = '대전 유성구 궁동',
-  userName = '김어진',
-  num = 4,
-  review = '시설도 좋고 학교가 너무 넓어서 다리가 아프다는 게 단점이지 나머지는 나쁘지 않습니다! 학교 축제 때 블랙핑크 불',
-}: PropsType) {
+function ReviewCard({schoolName, location, userName, num, review}: PropsType) {
   const [pressBookmark, setPressBookmark] = useState<boolean>(false);
   return (
     <ReviewContainer>
@@ -42,9 +36,13 @@ function ReviewCard({
           {/* <StarRating num={num} /> */}
         </UserInfo>
       </UserBox>
-      <ReviewBox>
-        <Font kind="medium14" text={review} color="gray500" />
-      </ReviewBox>
+      <Font
+        ellipsizeMode="tail"
+        numberOfLines={3}
+        kind="medium14"
+        text={review}
+        color="gray500"
+      />
     </ReviewContainer>
   );
 }
@@ -91,10 +89,4 @@ const UserProfile = styled.View`
 
 const UserInfo = styled.View`
   gap: 2px;
-`;
-
-const ReviewBox = styled.View`
-  width: 100%;
-  height: 54px;
-  overflow: hidden;
 `;

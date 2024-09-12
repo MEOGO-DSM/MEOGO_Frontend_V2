@@ -1,21 +1,24 @@
 import React, {useState, useEffect} from 'react';
-import {Input} from '../../components';
-import {Search} from '../../assets';
+import {Arrow, Search} from '../../assets';
 import styled from 'styled-components/native';
-import {color, Font} from '../../styles';
-import {schoolList} from '../dummy/schoolList';
-import SchoolList from '../../components/signup/SchoolList';
-import {SchoolListType, SignupProps} from '../../interfaces';
-import {StackNavigationProp} from '@react-navigation/stack';
 import {useNavigation} from '@react-navigation/native';
+import {color} from '../../styles/color';
+import {Font} from '../../styles/font';
+import {schoolList} from '../dummy/schoolList';
+import SelectBox from '../../components/Review/SelectBox';
+import SchoolCard from '../../components/search/SchoolCard';
+import {TopBar, Input} from '../../components';
+import {searchSchool} from '../dummy/searchSchool';
 
 const tagList = ['초등학교', '중학교', '고등학교', '대학교'];
+const selectList = ['전체 지역', '학교 유형', '세부 유형'];
 
-function FindSchool({control, errors, onSelectSchool}: SignupProps) {
-  const navigation = useNavigation<StackNavigationProp<any>>();
+function FindSchool() {
+  const navigation = useNavigation();
   const [pressed, setPressed] = useState<number>(0);
   const [filteredSchoolList, setFilteredSchoolList] = useState(schoolList);
   const [inputValue, setInputValue] = useState<string>('');
+  const isSchoolData = searchSchool.length;
 
   useEffect(() => {
     if (inputValue) filterInputValue();
@@ -36,15 +39,29 @@ function FindSchool({control, errors, onSelectSchool}: SignupProps) {
   };
 
   return (
-    <>
-      <SearchBox>
-        <Input
-          value={inputValue}
-          onChangeText={handleInputChange}
-          placeholder="재학 중인 학교를 검색해주세요"
-          icon={<Search color={`${color.gray400}`} />}
-        />
-      </SearchBox>
+    <Container>
+      <TopBar
+        padding={8}
+        leftIcon={<Arrow />}
+        rightIcon={
+          <SearchBox>
+            <Input
+              noError
+              value={inputValue}
+              onChangeText={handleInputChange}
+              placeholder="원하는 학교를 검색해주세요!"
+              icon={<Search color={`${color.gray400}`} />}
+            />
+          </SearchBox>
+        }
+      />
+
+      <SelectContainer>
+        {selectList.map(value => (
+          <SelectBox text={value} />
+        ))}
+      </SelectContainer>
+
       <TagContainer>
         {tagList.map((tag, index) => (
           <TagBox
@@ -63,35 +80,37 @@ function FindSchool({control, errors, onSelectSchool}: SignupProps) {
         ))}
       </TagContainer>
 
-      {filteredSchoolList.length > 0 ? (
-        <ListBox
-          data={filteredSchoolList}
-          renderItem={({item}: any) => (
-            <SchoolList
-              onPress={() => {
-                if (onSelectSchool) {
-                  onSelectSchool(item.name);
-                }
-              }}
-              name={item.name}
-              location={item.location}
+      {isSchoolData ? (
+        <SchoolCardWrap>
+          {searchSchool.map(value => (
+            <SchoolCard
+              schoolName={value.schoolName}
+              address={value.address}
+              score={value.score}
+              reviewCount={value.reviewCount}
             />
-          )}
-          contentContainerStyle={{paddingBottom: 100}}></ListBox>
+          ))}
+        </SchoolCardWrap>
       ) : (
-        <NotListBox>
+        <NoSchoolWrap>
           <Font text="학교를 찾지 못했어요" kind="medium16" color="gray400" />
-        </NotListBox>
+        </NoSchoolWrap>
       )}
-    </>
+    </Container>
   );
 }
 
 export default FindSchool;
 
+const Container = styled.View`
+  background-color: ${color.white};
+  padding-top: 64px;
+  flex: 1;
+`;
+
 const SearchBox = styled.View`
-  padding: 0 20px;
-  width: 100%;
+  flex: 1;
+  padding-left: 20px;
 `;
 
 const TagContainer = styled.View`
@@ -109,13 +128,20 @@ const TagBox = styled.TouchableOpacity<{press: boolean}>`
   border-bottom-color: ${color.black};
 `;
 
-const ListBox = styled.FlatList`
+const SelectContainer = styled.View`
   padding: 8px 20px;
-  width: 100%;
+  gap: 6px;
+  flex-direction: row;
+  justify-content: flex-end;
 `;
 
-const NotListBox = styled.View`
+const SchoolCardWrap = styled.ScrollView`
+  padding: 8px 20px;
+`;
+
+const NoSchoolWrap = styled.View`
   flex: 1;
+  background-color: ${color.white};
   justify-content: center;
   align-items: center;
 `;

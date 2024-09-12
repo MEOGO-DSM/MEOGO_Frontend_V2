@@ -1,36 +1,29 @@
 import React from 'react';
-import Input from '../../components/Input';
-import Button from '../../components/Button';
-import TopBar from '../../components/TopBar';
-import {TouchableOpacity} from 'react-native';
-import {Arrow, Search} from '../../assets';
+import {Input} from '../../components';
 import styled from 'styled-components/native';
-import {useNavigation} from '@react-navigation/native';
-import {color} from '../../styles/color';
+import {SignupProps} from '../../interfaces';
+import {Controller} from 'react-hook-form';
 
-function School({route}: any) {
-  const navigation = useNavigation();
+interface SchoolProps extends SignupProps {
+  schoolName: string | null;
+}
+
+function School({control, errors, schoolName}: SchoolProps) {
   return (
     <Container>
-      <TopBar
-        text="회원가입"
-        leftIcon={
-          <TouchableOpacity onPress={() => navigation.navigate('Name')}>
-            <Arrow />
-          </TouchableOpacity>
-        }
-      />
-      <Input
-        title="학교 이름"
-        placeholder="재학 중인 학교 이름을 입력해주세요"
-        icon={
-          <Search
-            onPress={() => navigation.navigate('FindSchool')}
-            color={`${color.gray400}`}
+      <Controller
+        control={control}
+        render={({field: {onChange, value}}) => (
+          <Input
+            readonly
+            onChangeText={onChange}
+            title="학교 이름"
+            placeholder="재학 중인 학교 이름을 입력해주세요"
+            value={schoolName || ''}
           />
-        }
+        )}
+        name="school"
       />
-      <Button text="완료" />
     </Container>
   );
 }
@@ -38,8 +31,5 @@ function School({route}: any) {
 export default School;
 
 const Container = styled.View`
-  flex: 1;
-  padding: 80px 20px 24px;
-  background-color: ${color.white};
-  justify-content: space-between;
+  padding: 0 20px;
 `;

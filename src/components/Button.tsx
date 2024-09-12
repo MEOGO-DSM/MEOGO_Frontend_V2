@@ -21,8 +21,6 @@ export function Button({text, onPress, silverButton}: ButtonPropsType) {
   );
 }
 
-export default Button;
-
 const PrimaryButton = styled.TouchableOpacity<{silver?: boolean}>`
   width: 100%;
   border-radius: 8px;

@@ -1,49 +1,100 @@
 import React from 'react';
-import TopBar from '../../components/TopBar';
-import {Arrow} from '../../assets';
+import {Controller, useWatch} from 'react-hook-form';
 import {styled} from 'styled-components/native';
-import Input from '../../components/Input';
-import {color} from '../../styles/color';
-import Button from '../../components/Button';
-import {useNavigation} from '@react-navigation/native';
-import {TouchableOpacity} from 'react-native';
+import {SignupProps} from '../../interfaces';
+import {Input} from '../../components';
 
-function IdAndPassword() {
-  const navigation = useNavigation();
+function IdAndPassword({control, errors}: SignupProps) {
+  const password = useWatch({
+    control,
+    name: 'password',
+  });
+
   return (
-    <Container>
-      <TopBar
-        text="회원가입"
-        leftIcon={
-          <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-            <Arrow />
-          </TouchableOpacity>
-        }
+    <InputBox>
+      <Controller
+        control={control}
+        rules={{
+          required: '아이디를 입력해주세요.',
+          pattern: {
+            value: /^[a-zA-Z0-9]*$/,
+            message: '영어와 숫자만 사용 가능합니다.',
+          },
+          minLength: {value: 4, message: '아이디는 최소 4자여야 합니다.'},
+          maxLength: {
+            value: 20,
+            message: '아이디는 최대 20자까지 입력 가능합니다.',
+          },
+        }}
+        render={({field: {onChange, value}}) => (
+          <Input
+            value={value}
+            onChangeText={onChange}
+            title="아이디"
+            placeholder="최소 4자, 최대 20자"
+            errorMessage={errors.id?.message}
+          />
+        )}
+        name="id"
       />
-      <InputBox>
-        <Input autoFocus title="아이디" placeholder="최소 5자, 최대 15자" />
-        <Input
-          password
-          title="비밀번호"
-          placeholder="특수문자 1자 이상, 최대 20자"
-        />
-        <Input password title="비밀번호 확인" placeholder="비밀번호" />
-      </InputBox>
-      <Button text="다음" onPress={() => navigation.navigate('Name')} />
-    </Container>
+
+      <Controller
+        control={control}
+        rules={{
+          required: '비밀번호를 입력해주세요.',
+          pattern: {
+            value: /^(?=.*[!@#$%^&*])/,
+            message: '특수문자 1자 이상 포함해야 합니다.',
+          },
+          minLength: {
+            value: 12,
+            message: '비밀번호는 최소 12자여야 합니다.',
+          },
+          maxLength: {
+            value: 20,
+            message: '비밀번호는 최대 20자까지 가능합니다.',
+          },
+        }}
+        render={({field: {onChange, value}}) => (
+          <Input
+            value={value}
+            onChangeText={onChange}
+            password
+            title="비밀번호"
+            placeholder="특수문자 1자 이상, 최대 20자"
+            errorMessage={errors.password?.message}
+          />
+        )}
+        name="password"
+      />
+
+      <Controller
+        control={control}
+        rules={{
+          required: '비밀번호를 확인해주세요.',
+          validate: value =>
+            value === password || '비밀번호가 일치하지 않습니다.',
+        }}
+        render={({field: {onChange, value}}) => (
+          <Input
+            value={value}
+            onChangeText={onChange}
+            password
+            title="비밀번호 확인"
+            placeholder="비밀번호 확인"
+            errorMessage={errors.passwordCheck?.message}
+          />
+        )}
+        name="passwordCheck"
+      />
+    </InputBox>
   );
 }
 
 export default IdAndPassword;
 
-const Container = styled.View`
-  flex: 1;
-  padding: 80px 20px 24px;
-  background-color: ${color.white};
-  justify-content: space-between;
-`;
-
 const InputBox = styled.View`
   gap: 12px;
   width: 100%;
+  padding: 0 20px;
 `;

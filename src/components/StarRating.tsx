@@ -5,22 +5,24 @@ import {Font} from '../styles/font';
 
 interface PropsType {
   num: number;
+  size?: number
+  isText?: boolean
 }
 
-function StarRating({num = 0}: PropsType) {
+function StarRating({num = 0, size = 14, isText = true}: PropsType) {
   const stars: React.ReactNode[] = [];
   for (let i = 0; i < num; i++) {
-    stars.push(<Star key={`full-${i}`} size={14} full />);
+    stars.push(<Star key={`full-${i}`} size={size} full />);
   }
 
   for (let i = 0; i < 5 - num; i++) {
-    stars.push(<Star key={`empty-${i}`} size={14} />);
+    stars.push(<Star key={`empty-${i}`} size={size} />);
   }
 
   return (
     <StarContainer>
       <StarBox>{stars}</StarBox>
-      <Font text={num.toFixed(1)} kind="medium12" color="gray600" />
+      {isText && <Font text={num.toFixed(1)} kind="medium12" color="gray600" />}
     </StarContainer>
   );
 }

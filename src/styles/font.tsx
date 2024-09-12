@@ -7,17 +7,26 @@ interface FontPropsType {
   kind?: keyof typeof fonts;
   color?: keyof typeof color;
   style?: TextStyle;
+  numberOfLines?: number;
+  ellipsizeMode?: 'clip' | 'head' | 'middle' | 'tail';
 }
 
 export const Font = ({
+  ellipsizeMode,
   text,
   kind = '',
   color: textColor = 'black',
+  numberOfLines,
   style,
 }: FontPropsType) => {
   const textColorStyle = textColor ? {color: color[textColor]} : {};
   return (
-    <Text style={{...fonts[kind], ...textColorStyle, ...style}}>{text}</Text>
+    <Text
+      ellipsizeMode={ellipsizeMode}
+      numberOfLines={numberOfLines}
+      style={{...fonts[kind], ...textColorStyle, ...style}}>
+      {text}
+    </Text>
   );
 };
 
@@ -61,7 +70,7 @@ const fonts: {[key: string]: TextStyle} = {
   semi20: {
     fontSize: 20,
     lineHeight: 24,
-    fontWeight: '600'
+    fontWeight: '600',
   },
   medium20: {
     fontSize: 20,

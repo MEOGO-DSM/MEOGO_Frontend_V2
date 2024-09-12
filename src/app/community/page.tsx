@@ -14,7 +14,7 @@ function Community() {
   const [selected, setSelected] = useState<string>(commuList[0]);
 
   const navigation = useNavigation();
-  const screenWidth = Dimensions.get('screen').width;
+  const screenWidth = Dimensions.get('window').width;
 
   const handleSelect = (option: string) => {
     setSelected(option);
