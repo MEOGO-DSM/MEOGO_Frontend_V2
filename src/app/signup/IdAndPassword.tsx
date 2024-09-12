@@ -20,10 +20,10 @@ function IdAndPassword({control, errors}: SignupProps) {
             value: /^[a-zA-Z0-9]*$/,
             message: '영어와 숫자만 사용 가능합니다.',
           },
-          minLength: {value: 5, message: '아이디는 최소 5자여야 합니다.'},
+          minLength: {value: 4, message: '아이디는 최소 4자여야 합니다.'},
           maxLength: {
-            value: 15,
-            message: '아이디는 최대 15자까지 입력 가능합니다.',
+            value: 20,
+            message: '아이디는 최대 20자까지 입력 가능합니다.',
           },
         }}
         render={({field: {onChange, value}}) => (
@@ -31,7 +31,7 @@ function IdAndPassword({control, errors}: SignupProps) {
             value={value}
             onChangeText={onChange}
             title="아이디"
-            placeholder="최소 5자, 최대 15자"
+            placeholder="최소 4자, 최대 20자"
             errorMessage={errors.id?.message}
           />
         )}
@@ -45,6 +45,10 @@ function IdAndPassword({control, errors}: SignupProps) {
           pattern: {
             value: /^(?=.*[!@#$%^&*])/,
             message: '특수문자 1자 이상 포함해야 합니다.',
+          },
+          minLength: {
+            value: 12,
+            message: '비밀번호는 최소 12자여야 합니다.',
           },
           maxLength: {
             value: 20,
