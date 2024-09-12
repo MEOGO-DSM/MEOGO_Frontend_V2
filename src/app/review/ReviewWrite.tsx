@@ -1,29 +1,37 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components/native';
 import TopBar from '../../components/TopBar';
-import {Media, Close} from '../../assets';
-import {Font} from '../../styles/font';
-import {TouchableOpacity} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
-import {color} from '../../styles/color';
+import { Media, Close } from '../../assets';
+import { Font } from '../../styles/font';
+import { TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { color } from '../../styles/color';
 import AddImgContent from '../../components/Review/AddImgContent';
+import Stars from '../../components/Review/Star';
+import StarRating from "../../components/Review/StarRating";
 
 export default function ReviewWrite() {
   const [contentValue, setContentValue] = useState<string>();
 
-  const navigation = useNavigation();
+    const navigation = useNavigation()
+    const [isError, setIsError] = useState()
 
-  return (
-    <>
-      <TopBar
-        text="리뷰 작성"
-        leftIcon={<Close onPress={() => navigation.navigate('Review')} />}
-        rightIcon={
-          <TouchableOpacity onPress={() => navigation.navigate('Review')}>
-            <Font
-              text="등록"
-              kind="semi18"
-              color={contentValue == '' ? 'gray400' : 'black'}
+    const handleError = () => { }
+
+    return (
+        <>
+            <TopBar
+                text="리뷰 작성"
+                leftIcon={<Close onPress={() => navigation.navigate('Review')} />}
+                rightIcon={
+                    <TouchableOpacity onPress={() => navigation.navigate('Review')}>
+                        <Font
+                            text="등록"
+                            kind="semi18"
+                            color={isError ? 'gray400' : 'black'}
+                        />
+                    </TouchableOpacity>
+                }
             />
           </TouchableOpacity>
         }
