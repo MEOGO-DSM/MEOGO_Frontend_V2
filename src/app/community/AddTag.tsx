@@ -1,17 +1,16 @@
 import React, {useState} from 'react';
 import styled from 'styled-components/native';
-import TopBar from '../../components/TopBar';
+import {TopBar, Input} from '../../components';
 import {Arrow, Close, Plus} from '../../assets';
 import {TouchableOpacity} from 'react-native';
-import {Font} from '../../styles/font';
 import {useNavigation} from '@react-navigation/native';
-import Input from '../../components/Input';
-import {color} from '../../styles/color';
+import {color, Font} from '../../styles';
+import {StackNavigationProp} from '@react-navigation/stack';
 
 function AddTag() {
   const [inputValue, setInputValue] = useState<string>('');
   const [tagList, setTagList] = useState<string[]>(['학교폭파', '내인생']);
-  const navigation = useNavigation();
+  const navigation = useNavigation<StackNavigationProp<any>>();
   const tagPattern = /^[^\s!@#$%^&*()\-=+{};:',<.>/?[\]\\]*$/;
 
   const handleAddTag = () => {

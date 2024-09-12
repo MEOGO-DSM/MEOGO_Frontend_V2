@@ -6,13 +6,17 @@ import {color, Font} from '../../styles';
 import {schoolList} from '../dummy/schoolList';
 import SchoolList from '../../components/signup/SchoolList';
 import {SchoolListType, SignupProps} from '../../interfaces';
+import {StackNavigationProp} from '@react-navigation/stack';
 
 const tagList = ['초등학교', '중학교', '고등학교', '대학교'];
 
-function FindSchool({control, errors, onSelectSchool}: SignupProps) {
+
+
+function FindSchool() {
+  const navigation = useNavigation<StackNavigationProp<any>>();
   const [pressed, setPressed] = useState<number>(0);
   const [filteredSchoolList, setFilteredSchoolList] = useState(schoolList);
-  const [, setInputValue] = useState<string>('');
+  const [inputValue, setInputValue] = useState<string>('');
 
   useEffect(() => {
     if (inputValue) filterInputValue();

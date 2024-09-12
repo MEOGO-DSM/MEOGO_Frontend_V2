@@ -5,12 +5,17 @@ import styled from 'styled-components/native';
 import {color} from '../../styles';
 import {SignupProps} from '../../interfaces';
 import {Controller} from 'react-hook-form';
+import {useNavigation} from '@react-navigation/native';
+import {StackNavigationProp} from '@react-navigation/stack';
 
 interface SchoolProps extends SignupProps {
   schoolName: string | null;
 }
 
 function School({control, errors, schoolName}: SchoolProps) {
+
+function School({route}: any) {
+  const navigation = useNavigation<StackNavigationProp<any>>();
   return (
     <Container>
       <Controller
