@@ -75,3 +75,7 @@ yarn-error.log
 
 # Ignore Gradle build output directory
 build
+
+.env
+
+yarn.lock
