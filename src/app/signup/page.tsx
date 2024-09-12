@@ -17,6 +17,7 @@ function Signup() {
     control,
     handleSubmit,
     formState: {errors},
+    setValue,
   } = useForm({
     defaultValues: {
       id: '',
@@ -44,6 +45,7 @@ function Signup() {
       errors={errors}
       onSelectSchool={(schoolName: string) => {
         setSelectedSchool(schoolName);
+        setValue('school', schoolName);
         setPage(page + 1);
       }}
     />,
@@ -73,7 +75,7 @@ function Signup() {
     } else if (page < signupPage.length - 1) {
       setPage(page + 1);
     } else {
-      navigation.push('Main');
+      navigation.push('NavBar');
     }
     console.log('회원가입 데이터:', data);
   });
