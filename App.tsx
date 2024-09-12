@@ -6,20 +6,21 @@
  */
 
 import React from 'react';
-import Login from './src/app/Login/page';
+import Login from './src/app/login/page';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import Main from './src/app/Main/page';
+import Main from './src/app/main/page';
+import IdAndPassword from './src/app/signup/IdAndPassword';
 import Community from './src/app/community/page';
 import Post from './src/app/community/Post';
 import EditPost from './src/app/community/EditPost';
 import AddTag from './src/app/community/AddTag';
 import Review from './src/app/review/page';
 import ReviewWrite from './src/app/review/ReviewWrite';
+import KeywordReview from './src/app/review/KeywordReview';
 import Search from './src/app/search/page';
 import NavBar from './src/components/NavBar';
 import Signup from './src/app/Signup/page';
-// import KeywordReview from './src/app/review/KeywordReview';
 
 function App(): React.JSX.Element {
   const Stack = createNativeStackNavigator();

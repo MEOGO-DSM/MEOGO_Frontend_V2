@@ -28,35 +28,37 @@ export default function ReviewWrite() {
           </TouchableOpacity>
         }
       />
-      <Container>
-        <ScoreWrap>{/* <StarRating /> */}</ScoreWrap>
-        <ContentBox>
-          <WriteWrap>
-            <MainTextWrap
-              onChangeText={t => setContentValue(t)}
-              value={contentValue}
-              multiline
-              placeholder="본문을 입력하세요"
-              placeholderTextColor={color.gray300}
-            />
-          </WriteWrap>
-          <LimitText>
-            <Font text="0/300 자" kind="medium14" color="gray400" />
-          </LimitText>
-          <ImgWrap>
-            <Font text="이미지" kind="semi20" />
-            <UploadWrap>
-              <ImgUploadBox>
-                <Media color={`${color.gray300}`} />
-              </ImgUploadBox>
-              <AddImgContent />
-              <AddImgContent />
-            </UploadWrap>
-          </ImgWrap>
-        </ContentBox>
-      </Container>
-    </>
-  );
+
+            <Container>
+                <ScoreWrap>
+                    <StarRating />
+                </ScoreWrap>
+                <ContentBox>
+                    <WriteWrap>
+                        <MainTextWrap
+                            multiline
+                            placeholder="본문을 입력하세요"
+                            placeholderTextColor={color.gray300}
+                        >
+                        </MainTextWrap>
+                    </WriteWrap>
+                    <LimitText>
+                        <Font text="0/300 자" kind="medium14" color="gray400" />
+                    </LimitText>
+                    <ImgWrap>
+                        <Font text="이미지" kind="semi20" />
+                        <UploadWrap>
+                            <ImgUploadBox>
+                                <Media color="gray300" />
+                            </ImgUploadBox>
+                            <AddImgContent />
+                            <AddImgContent />
+                        </UploadWrap>
+                    </ImgWrap>
+                </ContentBox>
+            </Container>
+        </>
+    )
 }
 
 const Container = styled.View`

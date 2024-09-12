@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import {styled} from 'styled-components/native';
 import {Font} from '../../styles/font';
-import {Bookmark} from '../../assets';
+// import {Bookmark} from '../../assets';
 import {color} from '../../styles/color';
-import StarRating from '../StarRating';
+// import StarRating from '../StarRating';
 
 interface PropsType {
   schoolName: string;
@@ -23,17 +23,17 @@ function ReviewCard({schoolName, location, userName, num, review}: PropsType) {
           <Font text={location} kind="regular14" color="gray500" />
         </SchoolInfo>
         <BookMarkBox onPress={() => setPressBookmark(!pressBookmark)}>
-          <Bookmark
+          {/* <Bookmark
             size={24}
             color={pressBookmark ? `${color.gray700}` : 'none'}
-          />
+          /> */}
         </BookMarkBox>
       </SchoolBox>
       <UserBox>
         <UserProfile />
         <UserInfo>
           <Font text={userName} kind="medium14" />
-          <StarRating num={num} />
+          {/* <StarRating num={num} /> */}
         </UserInfo>
       </UserBox>
       <Font
