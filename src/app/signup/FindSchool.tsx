@@ -1,15 +1,16 @@
 import React, {useState, useEffect} from 'react';
-import {TouchableOpacity} from 'react-native';
-import {TopBar, Input} from '../../components';
-import {Arrow, Search} from '../../assets';
+import {Input} from '../../components';
+import {Search} from '../../assets';
 import styled from 'styled-components/native';
-import {useNavigation} from '@react-navigation/native';
 import {color, Font} from '../../styles';
 import {schoolList} from '../dummy/schoolList';
 import SchoolList from '../../components/signup/SchoolList';
+import {SchoolListType, SignupProps} from '../../interfaces';
 import {StackNavigationProp} from '@react-navigation/stack';
 
 const tagList = ['초등학교', '중학교', '고등학교', '대학교'];
+
+
 
 function FindSchool() {
   const navigation = useNavigation<StackNavigationProp<any>>();
@@ -36,15 +37,7 @@ function FindSchool() {
   };
 
   return (
-    <Container>
-      <TopBar
-        text="학교 검색"
-        leftIcon={
-          <TouchableOpacity onPress={() => navigation.goBack()}>
-            <Arrow />
-          </TouchableOpacity>
-        }
-      />
+    <>
       <SearchBox>
         <Input
           value={inputValue}
@@ -72,34 +65,30 @@ function FindSchool() {
       </TagContainer>
 
       {filteredSchoolList.length > 0 ? (
-        <ListBox contentContainerStyle={{paddingBottom: 100}}>
-          {filteredSchoolList.map((school, index) => (
+        <ListBox
+          data={filteredSchoolList}
+          renderItem={({item}: any) => (
             <SchoolList
               onPress={() => {
-                navigation.navigate('School2', {schoolName: school.name});
+                if (onSelectSchool) {
+                  onSelectSchool(item.name);
+                }
               }}
-              key={index}
-              name={school.name}
-              location={school.location}
+              name={item.name}
+              location={item.location}
             />
-          ))}
-        </ListBox>
+          )}
+          contentContainerStyle={{paddingBottom: 100}}></ListBox>
       ) : (
         <NotListBox>
           <Font text="학교를 찾지 못했어요" kind="medium16" color="gray400" />
         </NotListBox>
       )}
-    </Container>
+    </>
   );
 }
 
 export default FindSchool;
-
-const Container = styled.View`
-  flex: 1;
-  padding-top: 60px;
-  background-color: ${color.white};
-`;
 
 const SearchBox = styled.View`
   padding: 0 20px;
@@ -121,7 +110,7 @@ const TagBox = styled.TouchableOpacity<{press: boolean}>`
   border-bottom-color: ${color.black};
 `;
 
-const ListBox = styled.ScrollView`
+const ListBox = styled.FlatList`
   padding: 8px 20px;
   width: 100%;
 `;
