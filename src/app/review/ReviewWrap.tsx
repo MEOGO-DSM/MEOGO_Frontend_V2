@@ -41,7 +41,6 @@ export default function ReviewWrap() {
                                 </RatioBox>
                             </DataWrap>
                         ))}
-
                     </GraphWrap>
                 </ReviewValueContent>
             </ReviewTotalWrap>
@@ -75,8 +74,6 @@ export default function ReviewWrap() {
                     <Font text="아직 리뷰가 없어요!" kind="medium16" />
                 </NoReviewWrap>)
                 }
-
-
             </UserReviewWrap>
         </Container>
     )

@@ -19,8 +19,8 @@ export const reviewValue = [
         contents: "씹덕 많아요",
         image: [
             "https://i.namu.wiki/i/x1Pun4wIItn-ipUfrrlbr2ccx5zu1up-rzlYDycXMaqldKhMXElx-wt693x9dXxles_PrrQcSYk2dQN9M9t6HQ.webp",
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjcLq57YozaNaUebYnYenCe4kg12HyQptlJRWwutbN-ny3bTs5jCsjuEfAWJrHE78K-cI&usqp=CAU",
-            "https://i.ytimg.com/vi/gvUPCBbQkGY/hqdefault.jpg"
+            "https://tvstore-phinf.pstatic.net/20210622_99/1624331122672o6h8J_JPEG/00022.jpg",
+            "https://i.pinimg.com/736x/7c/69/0f/7c690f5d5c99b46120959d1488e17f7b.jpg"
         ]
     }
 ];

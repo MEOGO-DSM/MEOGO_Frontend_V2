@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components/native';
-import TopBar from '../../components/TopBar';
+import { TopBar } from '../../components/TopBar';
 import { Media, Close } from '../../assets';
 import { Font } from '../../styles/font';
 import { TouchableOpacity } from 'react-native';
@@ -8,65 +8,58 @@ import { useNavigation } from '@react-navigation/native';
 import { color } from '../../styles/color';
 import AddImgContent from '../../components/Review/AddImgContent';
 import Stars from '../../components/Review/Star';
-import StarRating from "../../components/Review/StarRating";
 
 export default function ReviewWrite() {
   const [contentValue, setContentValue] = useState<string>();
 
-    const navigation = useNavigation()
-    const [isError, setIsError] = useState()
+  const navigation = useNavigation()
+  const [isError, setIsError] = useState()
 
-    const handleError = () => { }
+  const handleError = () => { }
 
-    return (
-        <>
-            <TopBar
-                text="리뷰 작성"
-                leftIcon={<Close onPress={() => navigation.navigate('Review')} />}
-                rightIcon={
-                    <TouchableOpacity onPress={() => navigation.navigate('Review')}>
-                        <Font
-                            text="등록"
-                            kind="semi18"
-                            color={isError ? 'gray400' : 'black'}
-                        />
-                    </TouchableOpacity>
-                }
+  return (
+    <>
+      <TopBar
+        text="리뷰 작성"
+        leftIcon={<Close onPress={() => navigation.navigate('Review')} />}
+        rightIcon={
+          <TouchableOpacity onPress={() => navigation.navigate('Review')}>
+            <Font
+              text="등록"
+              kind="semi18"
+              color={isError ? 'gray400' : 'black'}
             />
           </TouchableOpacity>
         }
       />
-
-            <Container>
-                <ScoreWrap>
-                    <StarRating />
-                </ScoreWrap>
-                <ContentBox>
-                    <WriteWrap>
-                        <MainTextWrap
-                            multiline
-                            placeholder="본문을 입력하세요"
-                            placeholderTextColor={color.gray300}
-                        >
-                        </MainTextWrap>
-                    </WriteWrap>
-                    <LimitText>
-                        <Font text="0/300 자" kind="medium14" color="gray400" />
-                    </LimitText>
-                    <ImgWrap>
-                        <Font text="이미지" kind="semi20" />
-                        <UploadWrap>
-                            <ImgUploadBox>
-                                <Media color="gray300" />
-                            </ImgUploadBox>
-                            <AddImgContent />
-                            <AddImgContent />
-                        </UploadWrap>
-                    </ImgWrap>
-                </ContentBox>
-            </Container>
-        </>
-    )
+      <Container>
+        <ScoreWrap></ScoreWrap>
+        <ContentBox>
+          <WriteWrap>
+            <MainTextWrap
+              multiline
+              placeholder="본문을 입력하세요"
+              placeholderTextColor={color.gray300}
+            >
+            </MainTextWrap>
+          </WriteWrap>
+          <LimitText>
+            <Font text="0/300 자" kind="medium14" color="gray400" />
+          </LimitText>
+          <ImgWrap>
+            <Font text="이미지" kind="semi20" />
+            <UploadWrap>
+              <ImgUploadBox>
+                <Media color="gray300" />
+              </ImgUploadBox>
+              <AddImgContent />
+              <AddImgContent />
+            </UploadWrap>
+          </ImgWrap>
+        </ContentBox>
+      </Container>
+    </>
+  )
 }
 
 const Container = styled.View`

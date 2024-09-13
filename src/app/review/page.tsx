@@ -1,10 +1,10 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components/native';
-import TopBar from '../../components/TopBar';
-import {TouchableOpacity} from 'react-native';
-import {Arrow, Star, Bookmark, Link} from '../../assets';
-import {color} from '../../styles/color';
-import {Font} from '../../styles/font';
+import { TopBar } from '../../components/TopBar';
+import { TouchableOpacity } from 'react-native';
+import { Arrow, Star, Bookmark, Link } from '../../assets';
+import { color } from '../../styles/color';
+import { Font } from '../../styles/font';
 import ImgSlider from '../../components/Review/ImgSlider';
 import SchoolTag from '../../components/Review/SchoolTag';
 import ListWrap from '../../components/Review/ListWrap';
@@ -25,7 +25,7 @@ function Review() {
           </TouchableOpacity>
         }
       />
-      <Container contentContainerStyle={{gap: 6}}>
+      <Container contentContainerStyle={{ gap: 6 }}>
         <SchoolContentBox>
           <ImgSlider />
 
