@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {TouchableWithoutFeedback} from 'react-native';
 import styled from 'styled-components/native';
 import {color} from '../styles/color';
 import {Font} from '../styles/font';
@@ -25,46 +26,78 @@ export const ContentCard = ({
   onPress,
 }: PropsType) => {
   const [pressed, setPressed] = useState<boolean>(false);
+  const [more, setMore] = useState<boolean>(false);
+
+  const handleOutsidePress = () => {
+    if (more) {
+      setMore(false);
+    }
+  };
+
   return (
-    <Container onPress={onPress}>
-      <PostContent>
-        <TextBox>
-          <Font text={title} kind="semi18" />
-          <Font
-            text={content}
-            kind="medium14"
-            style={{height: 36}}
-            color="gray400"
-          />
-        </TextBox>
-        <ContentImg>{img ? <></> : <Logo_Img size={40} />}</ContentImg>
-      </PostContent>
-      <TagListBox>
-        <Tag school text="대덕소프트웨어마이스터고" />
-        {tagList.map((i, j) => (
-          <Tag text={i} key={j} />
-        ))}
-      </TagListBox>
-      <UserBox>
-        <PostedDate>
-          <Font text="익명" kind="medium14" />
-          <Font text={date} kind="medium12" color="gray400" />
-        </PostedDate>
-        <OtherFeat>
-          <IconBox onPress={() => setPressed(!pressed)}>
-            <Heart
-              color={`${color.gray500}`}
-              fill={pressed ? `${color.gray500}` : 'none'}
+    <TouchableWithoutFeedback onPress={handleOutsidePress}>
+      <Container onPress={onPress} activeOpacity={1}>
+        <PostContent>
+          <TextBox>
+            <Font text={title} kind="semi18" />
+            <Font
+              text={content}
+              kind="medium14"
+              style={{height: 36}}
+              color="gray400"
             />
-          </IconBox>
-          <IconBox>
-            <Menu color={`${color.gray500}`} />
-          </IconBox>
-        </OtherFeat>
-      </UserBox>
-    </Container>
+          </TextBox>
+          <ContentImg>{img ? <></> : <Logo_Img size={40} />}</ContentImg>
+        </PostContent>
+        <TagListBox>
+          <Tag school text="대덕소프트웨어마이스터고" />
+          {tagList.map((i, j) => (
+            <Tag text={i} key={j} />
+          ))}
+        </TagListBox>
+        <UserBox>
+          <PostedDate>
+            <Font text="익명" kind="medium14" />
+            <Font text={date} kind="medium12" color="gray400" />
+          </PostedDate>
+          <OtherFeat>
+            <IconBox
+              onPress={e => {
+                e.stopPropagation();
+                setPressed(!pressed);
+              }}>
+              <Heart
+                color={`${color.gray500}`}
+                fill={pressed ? `${color.gray500}` : 'none'}
+              />
+            </IconBox>
+            <IconBox
+              onPress={e => {
+                e.stopPropagation();
+                setMore(!more);
+              }}>
+              <Menu color={`${color.gray500}`} />
+            </IconBox>
+            {more && (
+              <MoreMessage>
+                <Font text="신고하기" color="red" kind="medium16" />
+              </MoreMessage>
+            )}
+          </OtherFeat>
+        </UserBox>
+      </Container>
+    </TouchableWithoutFeedback>
   );
 };
+
+const MoreMessage = styled.View`
+  background-color: white;
+  border-radius: 8px;
+  padding: 8px;
+  position: absolute;
+  right: 0;
+  top: 36px;
+`;
 
 const Container = styled.TouchableOpacity`
   width: 100%;
@@ -117,6 +150,7 @@ const PostedDate = styled.View`
 const OtherFeat = styled.View`
   flex-direction: row;
   gap: 4px;
+  position: relative;
 `;
 
 const IconBox = styled.TouchableOpacity`
