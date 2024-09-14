@@ -33,9 +33,6 @@ export const SchoolReviewCard = () => {
           <Arrow rotate="right" color={`${color.gray300}`} />
         </SeeMoreSchool>
       </AroundSchoolList>
-      <ArrowBox>
-        <Arrow rotate="right" color={`${color.gray600}`} />
-      </ArrowBox>
     </Container>
   );
 };
@@ -45,10 +42,14 @@ const Container = styled.View`
   position: relative;
 `;
 
-const AroundSchoolList = styled.ScrollView`
+const AroundSchoolList = styled.ScrollView.attrs(() => ({
+  snapToInterval: 242,
+  decelerationRate: 'fast',
+}))`
   gap: 12px;
   flex-direction: row;
 `;
+
 const SeeMoreSchool = styled.TouchableOpacity`
   gap: 16px;
   padding: 20px;
