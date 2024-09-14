@@ -7,10 +7,11 @@ import { TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { color } from '../../styles/color';
 import AddImgContent from '../../components/Review/AddImgContent';
-import { Star } from '../../assets'
-import { launchImageLibrary, ImagePickerResponse } from 'react-native-image-picker'
+import { Star } from '../../assets';
+import { launchImageLibrary, ImagePickerResponse } from 'react-native-image-picker';
+import { RequestStoragePermission } from '../../utils/RequestStoragePermission';
 
-export default function ReviewWrite() {
+export default function Write() {
   const navigation = useNavigation()
 
   const [rating, setRating] = useState<number>(0);
@@ -27,6 +28,13 @@ export default function ReviewWrite() {
   }
 
   const onSelectImage = async () => {
+    const hasPermission = await RequestStoragePermission()
+
+    if (!hasPermission) {
+      console.log('Storage permission is required to pick an image');
+      return;
+    }
+
     launchImageLibrary(
       {
         mediaType: 'photo',
