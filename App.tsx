@@ -15,7 +15,7 @@ import Post from './src/app/community/Post';
 import EditPost from './src/app/community/EditPost';
 import AddTag from './src/app/community/AddTag';
 import Review from './src/app/review/page';
-import ReviewWrite from './src/app/review/ReviewWrite';
+import Write from './src/app/review/Write';
 import KeywordReview from './src/app/review/KeywordReview';
 import Search from './src/app/search/page';
 import NavBar from './src/components/NavBar';
@@ -36,7 +36,7 @@ function App(): React.JSX.Element {
         <Stack.Screen name="EditPost" component={EditPost} />
         <Stack.Screen name="AddTag" component={AddTag} />
         <Stack.Screen name="Review" component={Review} />
-        <Stack.Screen name="ReviewWrite" component={ReviewWrite} />
+        <Stack.Screen name="ReviewWrite" component={Write} />
         <Stack.Screen name="Search" component={Search} />
         <Stack.Screen name="KeywordReview" component={KeywordReview} />
       </Stack.Navigator>

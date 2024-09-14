@@ -4,7 +4,7 @@ import { Font } from "../../styles/font"
 import { color } from "../../styles/color";
 import { yearlyPhoto } from "../dummy/yearlyPhoto"
 
-export default function PhotoWrap() {
+export default function Photo() {
     return (
         <Container>
             {yearlyPhoto.map((value, index) => (

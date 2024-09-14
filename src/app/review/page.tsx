@@ -7,9 +7,7 @@ import { color } from '../../styles/color';
 import { Font } from '../../styles/font';
 import ImgSlider from '../../components/Review/ImgSlider';
 import SchoolTag from '../../components/Review/SchoolTag';
-import ListWrap from './ListWrap';
-import ReviewWrap from './ReviewWrap';
-import PhotoWrap from './PhotoWrap';
+import ListWrap from './List';
 
 function Review() {
   const tagData = ['특목고', '마이스터고'];
