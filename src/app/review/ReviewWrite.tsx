@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import styled from 'styled-components/native';
 import { TopBar } from '../../components/TopBar';
-import { Media, Close } from '../../assets';
+import { Close, Media } from '../../assets';
 import { Font } from '../../styles/font';
 import { TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { color } from '../../styles/color';
 import AddImgContent from '../../components/Review/AddImgContent';
 import { Star } from '../../assets'
+import { launchImageLibrary, ImagePickerResponse } from 'react-native-image-picker'
 
 export default function ReviewWrite() {
   const navigation = useNavigation()
@@ -17,10 +18,38 @@ export default function ReviewWrite() {
   const [isError, setIsError] = useState<boolean>(false)
   const [contentValue, setContentValue] = useState<string>('');
   const [limit, setLimit] = useState<number>(0)
+  const [response, setResponse] = useState<ImagePickerResponse | null>(null);
+  const [imageFile, setImageFile] = useState<string | undefined>("");
 
   const handleChangeInput = (text: string) => {
     setContentValue(text);
     setLimit(text.length)
+  }
+
+  const onSelectImage = async () => {
+    launchImageLibrary(
+      {
+        mediaType: 'photo',
+        maxWidth: 100,
+        maxHeight: 100,
+        includeBase64: true
+      },
+      (response) => {
+        console.log(response)
+        if (response.didCancel) {
+          return;
+        } else if (response.errorCode) {
+          console.log("Image Error : " + response.errorCode);
+        }
+
+        setResponse(response);
+
+        if (response.assets && response.assets.length > 0) {
+          setImageFile(response.assets[0].base64);
+        } else {
+          setImageFile(undefined);
+        }
+      })
   }
 
   return (
@@ -29,7 +58,7 @@ export default function ReviewWrite() {
         text="리뷰 작성"
         leftIcon={<Close onPress={() => navigation.navigate('Review')} />}
         rightIcon={
-          <TouchableOpacity onPress={() => navigation.navigate('Review')}>
+          <TouchableOpacity onPress={() => navigation.navigate('KeywordReview')}>
             <Font
               text="다음"
               kind="semi18"
@@ -71,11 +100,10 @@ export default function ReviewWrite() {
           <ImgWrap>
             <Font text="이미지" kind="semi20" />
             <UploadWrap>
-              <ImgUploadBox>
+              <ImgUploadBox onPress={() => onSelectImage()}>
                 <Media color="gray300" />
               </ImgUploadBox>
-              <AddImgContent />
-              <AddImgContent />
+              {imageFile && <AddImgContent photo={imageFile} />}
             </UploadWrap>
           </ImgWrap>
         </ContentBox>
@@ -131,7 +159,7 @@ const UploadWrap = styled.View`
   gap: 8px;
 `;
 
-const ImgUploadBox = styled.View`
+const ImgUploadBox = styled.TouchableOpacity`
   width: 100px;
   height: 100px;
   justify-content: center;

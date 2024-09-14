@@ -3,10 +3,14 @@ import styled from "styled-components/native";
 import { Close } from "../../assets";
 import { color } from "../../styles/color"
 
-export default function AddImgContent() {
+interface PropsType {
+    photo?: string;
+}
+
+export default function AddImgContent({ photo }: PropsType) {
     return (
         <Container>
-            <ImgContent source={{ uri: "https://img.hankyung.com/photo/202102/AD.25399510.1.jpg" }} />
+            <ImgContent source={{ uri: `data:image/jpeg;base64,${photo}` }} />
             <CancelButton>
                 <Close size={16} />
             </CancelButton>
