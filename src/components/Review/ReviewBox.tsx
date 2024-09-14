@@ -82,7 +82,6 @@ height: 160px;
 display: flex;
 border-radius: 8px;
 overflow: hidden;
-background-color: red;
 `
 
 const ImgSlider = styled.ScrollView``;
