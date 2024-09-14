@@ -7,15 +7,27 @@ import { TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { color } from '../../styles/color';
 import AddImgContent from '../../components/Review/AddImgContent';
-import Stars from '../../components/Review/Star';
+import { Star } from '../../assets'
 
 export default function ReviewWrite() {
-  const [contentValue, setContentValue] = useState<string>();
-
   const navigation = useNavigation()
-  const [isError, setIsError] = useState()
 
-  const handleError = () => { }
+  const [rating, setRating] = useState<number>(0);
+  const [hoverRating, setHoverRating] = useState<number>(0);
+  const [isError, setIsError] = useState<boolean>(false)
+  const [contentValue, setContentValue] = useState<string>('');
+
+  const handlePress = (index: number) => {
+    setRating(index);
+  };
+
+  const handleTouchStart = (index: number) => {
+    setHoverRating(index);
+  };
+
+  const handleTouchEnd = () => {
+    setHoverRating(0);
+  };
 
   return (
     <>
@@ -33,7 +45,21 @@ export default function ReviewWrite() {
         }
       />
       <Container>
-        <ScoreWrap></ScoreWrap>
+        <ScoreWrap>
+          {[1, 2, 3, 4, 5].map((index) => (
+            <TouchableOpacity
+              key={index}
+            >
+              <Star
+                size={42}
+                full={(hoverRating >= index) || (!hoverRating && rating >= index)}
+                onPress={() => handlePress(index)}
+                onPressIn={() => handleTouchStart(index)}
+                onPressOut={handleTouchEnd}
+              />
+            </TouchableOpacity>
+          ))}
+        </ScoreWrap>
         <ContentBox>
           <WriteWrap>
             <MainTextWrap
@@ -70,6 +96,9 @@ const Container = styled.View`
 
 const ScoreWrap = styled.View`
   padding: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
   align-items: center;
   border-top-width: 1px;
   border-top-color: ${color.gray100};
