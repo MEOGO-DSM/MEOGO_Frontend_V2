@@ -14,6 +14,7 @@ interface PropsType {
 }
 
 export default function ReviewBox({ userName, score, contents, image }: PropsType) {
+    const wrapWidth = image.length > 2 ? '100%' : `${image.length * 160}px`;
 
     return (
         <Container>
@@ -30,18 +31,20 @@ export default function ReviewBox({ userName, score, contents, image }: PropsTyp
                     <SettingWrap>
                         <Setting />
                     </SettingWrap>
-
                 </TimeAndSetting>
             </ReviewInfoWrap>
 
             <Font text={contents} kind="medium14" />
 
-            {image.length > 0 && <ImgWrap contentContainerStyle={{columnGap: 2}} horizontal>
-                {image.map((imgSrc: string, index: number) => (
-                    <Img key={index} source={{ uri: imgSrc }} />
-                ))}
-            </ImgWrap>}
-
+            {image.length > 0 &&
+                <ImgWrap width={wrapWidth} >
+                    <ImgSlider contentContainerStyle={{ columnGap: 2 }} horizontal={true}>
+                        {image.map((imgSrc, index) => (
+                            <Img key={index} source={{ uri: imgSrc }} />
+                        ))}
+                    </ImgSlider>
+                </ImgWrap>
+            }
         </Container>
     )
 }
@@ -73,14 +76,20 @@ align-items: center;
 gap: 8px;
 `
 
-const ImgWrap = styled.ScrollView`
+const ImgWrap = styled.View<{ width: string }>`
+width: ${props => props.width};
 height: 160px;
+display: flex;
+border-radius: 8px;
+overflow: hidden;
+background-color: red;
 `
+
+const ImgSlider = styled.ScrollView``;
 
 const SettingWrap = styled.View`
 padding: 4px;
 `
-
 
 const Img = styled.Image`
 width: 160px;
