@@ -16,18 +16,12 @@ export default function ReviewWrite() {
   const [hoverRating, setHoverRating] = useState<number>(0);
   const [isError, setIsError] = useState<boolean>(false)
   const [contentValue, setContentValue] = useState<string>('');
+  const [limit, setLimit] = useState<number>(0)
 
-  const handlePress = (index: number) => {
-    setRating(index);
-  };
-
-  const handleTouchStart = (index: number) => {
-    setHoverRating(index);
-  };
-
-  const handleTouchEnd = () => {
-    setHoverRating(0);
-  };
+  const handleChangeInput = (text: string) => {
+    setContentValue(text);
+    setLimit(text.length)
+  }
 
   return (
     <>
@@ -37,7 +31,7 @@ export default function ReviewWrite() {
         rightIcon={
           <TouchableOpacity onPress={() => navigation.navigate('Review')}>
             <Font
-              text="등록"
+              text="다음"
               kind="semi18"
               color={isError ? 'gray400' : 'black'}
             />
@@ -53,9 +47,9 @@ export default function ReviewWrite() {
               <Star
                 size={42}
                 full={(hoverRating >= index) || (!hoverRating && rating >= index)}
-                onPress={() => handlePress(index)}
-                onPressIn={() => handleTouchStart(index)}
-                onPressOut={handleTouchEnd}
+                onPress={() => setRating(index)}
+                onPressIn={() => setHoverRating(index)}
+                onPressOut={() => setHoverRating(0)}
               />
             </TouchableOpacity>
           ))}
@@ -66,11 +60,13 @@ export default function ReviewWrite() {
               multiline
               placeholder="본문을 입력하세요"
               placeholderTextColor={color.gray300}
+              onChangeText={handleChangeInput}
+              value={contentValue}
             >
             </MainTextWrap>
           </WriteWrap>
           <LimitText>
-            <Font text="0/300 자" kind="medium14" color="gray400" />
+            <Font text={`${limit}/300 자`} kind="medium14" color={`${limit > 300 ? "red" : "gray400"}`} />
           </LimitText>
           <ImgWrap>
             <Font text="이미지" kind="semi20" />
