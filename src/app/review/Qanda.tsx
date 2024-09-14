@@ -1,7 +1,7 @@
 import React from 'react';
 import {Text} from 'react-native-svg';
 
-function Qanda() {
+function QandA() {
   return (
     <>
       <Text>여기는 Q&A 페이지</Text>
@@ -9,4 +9,4 @@ function Qanda() {
   );
 }
 
-export default Qanda;
+export default QandA;
