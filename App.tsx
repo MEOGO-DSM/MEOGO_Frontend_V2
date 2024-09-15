@@ -20,6 +20,7 @@ import KeywordReview from './src/app/review/KeywordReview';
 import Search from './src/app/search/page';
 import NavBar from './src/components/NavBar';
 import Signup from './src/app/signup/page';
+import QandADetail from './src/app/review/QandADetail'
 
 function App(): React.JSX.Element {
   const Stack = createNativeStackNavigator();
@@ -27,7 +28,7 @@ function App(): React.JSX.Element {
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{ headerShown: false }}
-        initialRouteName="Review">
+        initialRouteName="QandADetail">
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Signup" component={Signup} />
         <Stack.Screen name="NavBar" component={NavBar} />
@@ -39,6 +40,7 @@ function App(): React.JSX.Element {
         <Stack.Screen name="ReviewWrite" component={Write} />
         <Stack.Screen name="Search" component={Search} />
         <Stack.Screen name="KeywordReview" component={KeywordReview} />
+        <Stack.Screen name="QandADetail" component={QandADetail} />
       </Stack.Navigator>
     </NavigationContainer>
   );
