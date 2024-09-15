@@ -14,7 +14,9 @@ export default function QandA() {
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={{ alignItems: 'center', paddingHorizontal: 16 }}
       >
-        <Filter color={color.gray500} />
+        <FilterIcon>
+          <Filter color={color.gray500} />
+        </FilterIcon>
         <TagWrap>
           {tagList.map((value, index) => (
             <NewMarkTag key={index} text={value} mark={true} />
@@ -43,4 +45,8 @@ const TagWrap = styled.View`
 display: flex;
 flex-direction: row;
 gap: 8px;
+`
+
+const FilterIcon = styled.View`
+  margin-right: 16px;
 `
