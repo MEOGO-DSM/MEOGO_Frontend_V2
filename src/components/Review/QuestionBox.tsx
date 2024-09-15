@@ -1,14 +1,15 @@
 import styled from "styled-components/native"
 import { Font, color } from "../../styles"
-import { Bell, Answer, QIcon } from "../../assets"
+import { Bell, Answer } from "../../assets"
 import { useState } from "react"
+import { TouchableOpacity } from 'react-native'
 
 export const QuestionBox = () => {
-
+  
   const [clickBell, setClickBell] = useState<boolean>(false)
 
   return (
-    <Container>
+    <TouchableOpacity>
       <QuestionContent>
         <TagAndContentWrap>
           <Tag>
@@ -37,11 +38,9 @@ export const QuestionBox = () => {
           <Font text="답변하기" kind="medium16" color="gray600" />
         </ActiveWrap>
       </AskAndAnswerWrap>
-    </Container>
+    </TouchableOpacity>
   )
 }
-
-const Container = styled.View``
 
 const QuestionContent = styled.View`
 display: flex;
