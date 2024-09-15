@@ -133,7 +133,9 @@ const SettingIcon = styled.View`
   padding: 4px;
 `;
 
-const Input = styled.TextInput`
+const Input = styled.TextInput.attrs({
+  placeholderTextColor: color.gray300,
+})`
   width: 100%;
   position: absolute;
   bottom: 0;
@@ -142,4 +144,6 @@ const Input = styled.TextInput`
   border-top-width: 1px;
   border-top-color: ${color.gray400};
   background-color: ${color.white};
+  font-size: 16px;
+  font-weight: 500;
 `;
