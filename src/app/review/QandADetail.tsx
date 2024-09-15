@@ -4,6 +4,7 @@ import { TopBar } from "../../components";
 import { Arrow, Setting } from '../../assets';
 import styled from "styled-components/native";
 import { Font, color } from "../../styles";
+import AnswerBox from '../../components/Review/AnswerBox';
 
 export default function QandADetail() {
   return (
@@ -16,6 +17,7 @@ export default function QandADetail() {
         keyboardShouldPersistTaps="handled"
       >
         <Container>
+          
           <TopBar
             text="대덕소프트웨어마이스터고"
             leftIcon={<Arrow onPress={() => { }} />}
@@ -50,6 +52,10 @@ export default function QandADetail() {
               <Arrow size={16} color={color.gray500} rotate="bottom" />
             </SortWrap>
           </AnswerSortWrap>
+
+          <AnswerBox />
+          <AnswerBox />
+
         </Container>
       </ScrollView>
 
@@ -60,7 +66,7 @@ export default function QandADetail() {
 
 const Container = styled.View`
   flex: 1;
-  padding: 56px 0 24px;
+  padding: 56px 0 70px;
   gap: 4px;
   background-color: ${color.gray100};
 `;
