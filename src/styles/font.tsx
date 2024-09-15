@@ -97,6 +97,11 @@ const fonts: {[key: string]: TextStyle} = {
     lineHeight: 22,
     fontWeight: '400',
   },
+  semi16: {
+    fontSize: 16,
+    lineHeight: 20,
+    fontWeight: '600'
+  },
   medium16: {
     fontSize: 16,
     lineHeight: 20,

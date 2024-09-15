@@ -23,3 +23,5 @@ export * from "./Media"
 export * from './Home';
 export * from './Chat';
 export * from './My';
+export * from './Answer';
+export * from './QIcon';

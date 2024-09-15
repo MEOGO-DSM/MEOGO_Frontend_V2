@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components/native";
-import TopBar from "../../components/TopBar";
+import { TopBar } from "../../components/TopBar";
 import { TouchableOpacity } from "react-native";
 import { color } from "../../styles/color";
 import { Font } from "../../styles/font"
