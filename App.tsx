@@ -6,10 +6,9 @@
  */
 
 import React from 'react';
-import Login from './src/app/login/page';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import IdAndPassword from './src/app/signup/IdAndPassword';
+import Login from './src/app/Login/page';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Community from './src/app/community/page';
 import Post from './src/app/community/Post';
 import EditPost from './src/app/community/EditPost';
@@ -19,16 +18,16 @@ import Write from './src/app/review/Write';
 import KeywordReview from './src/app/review/KeywordReview';
 import Search from './src/app/search/page';
 import NavBar from './src/components/NavBar';
-import Signup from './src/app/signup/page';
-import QandADetail from './src/app/review/QandADetail'
+import Signup from './src/app/Signup/page';
+import QandADetail from './src/app/review/QandADetail';
 
 function App(): React.JSX.Element {
   const Stack = createNativeStackNavigator();
   return (
     <NavigationContainer>
       <Stack.Navigator
-        screenOptions={{ headerShown: false }}
-        initialRouteName="QandADetail">
+        screenOptions={{headerShown: false}}
+        initialRouteName="Search">
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Signup" component={Signup} />
         <Stack.Screen name="NavBar" component={NavBar} />
