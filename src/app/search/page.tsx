@@ -2,13 +2,12 @@ import React, {useState, useEffect} from 'react';
 import {Arrow, Search} from '../../assets';
 import styled from 'styled-components/native';
 import {useNavigation} from '@react-navigation/native';
-import {color} from '../../styles/color';
-import {Font} from '../../styles/font';
+import {color, Font} from '../../styles';
 import {schoolList} from '../dummy/schoolList';
-import SelectBox from '../../components/Review/SelectBox';
 import SchoolCard from '../../components/search/SchoolCard';
-import {TopBar, Input} from '../../components';
+import {TopBar, Input, Dropdown} from '../../components';
 import {searchSchool} from '../dummy/searchSchool';
+import {region} from '../../utils';
 
 const tagList = ['초등학교', '중학교', '고등학교', '대학교'];
 const selectList = ['전체 지역', '학교 유형', '세부 유형'];
@@ -38,6 +37,10 @@ function FindSchool() {
     setFilteredSchoolList(filtered);
   };
 
+  const handleSelect = (selectedItem: string) => {
+    console.log('필터 선택:', selectedItem);
+  };
+
   return (
     <Container>
       <TopBar
@@ -57,9 +60,21 @@ function FindSchool() {
       />
 
       <SelectContainer>
-        {selectList.map(value => (
-          <SelectBox text={value} />
-        ))}
+        <Dropdown
+          items={region}
+          defaultValue="전체 지역"
+          onSelect={handleSelect}
+        />
+        <Dropdown
+          items={region}
+          defaultValue="학교 유형"
+          onSelect={handleSelect}
+        />
+        <Dropdown
+          items={region}
+          defaultValue="세부 유형"
+          onSelect={handleSelect}
+        />
       </SelectContainer>
 
       <TagContainer>
@@ -82,8 +97,9 @@ function FindSchool() {
 
       {isSchoolData ? (
         <SchoolCardWrap>
-          {searchSchool.map(value => (
+          {searchSchool.map((value, index) => (
             <SchoolCard
+              key={index}
               schoolName={value.schoolName}
               address={value.address}
               score={value.score}
@@ -133,6 +149,7 @@ const SelectContainer = styled.View`
   gap: 6px;
   flex-direction: row;
   justify-content: flex-end;
+  width: 100%;
 `;
 
 const SchoolCardWrap = styled.ScrollView`
