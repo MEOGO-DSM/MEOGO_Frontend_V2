@@ -153,6 +153,7 @@ const SelectContainer = styled.View`
 `;
 
 const SchoolCardWrap = styled.ScrollView`
+  background-color: ${color.white};
   padding: 8px 20px;
 `;
 
