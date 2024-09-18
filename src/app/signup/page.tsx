@@ -17,11 +17,8 @@ function Signup() {
     control,
     handleSubmit,
     formState: {errors},
-<<<<<<< Updated upstream
-=======
     setValue,
     reset,
->>>>>>> Stashed changes
   } = useForm({
     defaultValues: {
       id: '',
@@ -50,11 +47,8 @@ function Signup() {
       errors={errors}
       onSelectSchool={(schoolName: string, school: number) => {
         setSelectedSchool(schoolName);
-<<<<<<< Updated upstream
-=======
         setValue('schoolName', schoolName);
         setValue('school', school);
->>>>>>> Stashed changes
         setPage(page + 1);
       }}
     />,
@@ -84,15 +78,10 @@ function Signup() {
     } else if (page < signupPage.length - 1) {
       setPage(page + 1);
     } else {
-<<<<<<< Updated upstream
-      navigation.push('Main');
-=======
       reset();
       setPage(0);
       navigation.push('Login');
->>>>>>> Stashed changes
     }
-    console.log('회원가입 데이터:', data);
   });
 
   return (

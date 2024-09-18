@@ -1,13 +1,18 @@
+import React from 'react';
 import Svg, {Path} from 'react-native-svg';
+import styled from 'styled-components/native';
 
 interface PropsType {
   size?: number;
   full?: boolean;
+  onPress?: () => void;
+  onPressIn?: () => void;
+  onPressOut?: () => void;
 }
 
-export const Star = ({size = 24, full}: PropsType) => {
+export const Star = ({size = 24, full, onPress, onPressIn, onPressOut}: PropsType) => {
   return (
-    <>
+    <StarContainer onPress={onPress} onPressIn={onPressIn} onPressOut={onPressOut}>
       {full ? (
         <Svg width={size} height={size} fill="none" viewBox="0 0 14 14">
           <Path
@@ -28,6 +33,8 @@ export const Star = ({size = 24, full}: PropsType) => {
           />
         </Svg>
       )}
-    </>
+    </StarContainer>
   );
 };
+
+const StarContainer = styled.TouchableOpacity``;

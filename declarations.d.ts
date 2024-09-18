@@ -4,3 +4,8 @@ declare module '*.tsx' {
   const content: React.FC<SvgProps>;
   export default content;
 }
+
+declare module "*.png" {
+  const value: any;
+  export = value;
+}

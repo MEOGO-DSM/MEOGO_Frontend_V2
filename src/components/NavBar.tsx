@@ -2,7 +2,7 @@ import React from 'react';
 import {View} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {NavigationContainer} from '@react-navigation/native';
-import Main from '../app/main/page';
+import Main from '../app/Main/page';
 import Community from '../app/community/page';
 import {Chat, Home, My} from '../assets';
 import {color} from '../styles/color';
@@ -55,6 +55,6 @@ export const NavBar = () => {
       />
     </Tab.Navigator>
   );
-}
+};
 
 export default NavBar;

@@ -14,6 +14,7 @@ interface InputProps {
   value?: string;
   noError?: boolean;
   multiline?: boolean;
+  readonly?: boolean;
   onChangeText?: (i: string) => void;
   onKeyPress?: (i: any) => void;
 }
@@ -27,6 +28,7 @@ export const Input = ({
   autoFocus,
   value,
   noError,
+  readonly,
   multiline,
   onChangeText,
   onKeyPress,
@@ -43,6 +45,7 @@ export const Input = ({
       )}
       <InputContainer focused={isFocused}>
         <InputBox
+          readOnly={readonly}
           value={value}
           autoFocus={autoFocus}
           secureTextEntry={password && !press}
@@ -86,6 +89,7 @@ const InputBox = styled.TextInput`
   font-weight: 500;
   flex: 1;
   padding: 8px 14px;
+  color: black;
 `;
 
 const InputContainer = styled.View<{focused: boolean}>`
