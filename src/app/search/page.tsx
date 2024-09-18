@@ -1,40 +1,35 @@
 import React, {useState, useEffect} from 'react';
 import {Arrow, Search} from '../../assets';
 import styled from 'styled-components/native';
-import {useNavigation} from '@react-navigation/native';
 import {color, Font} from '../../styles';
 import {schoolList} from '../dummy/schoolList';
 import SchoolCard from '../../components/search/SchoolCard';
 import {TopBar, Input, Dropdown} from '../../components';
 import {searchSchool} from '../dummy/searchSchool';
 import {region} from '../../utils';
-
-const tagList = ['초등학교', '중학교', '고등학교', '대학교'];
-const selectList = ['전체 지역', '학교 유형', '세부 유형'];
+import {fetchSchoolList} from '../../apis/school';
 
 function FindSchool() {
-  const navigation = useNavigation();
+  const tagList = ['초등학교', '중학교', '고등학교', '대학교'];
+
   const [pressed, setPressed] = useState<number>(0);
   const [filteredSchoolList, setFilteredSchoolList] = useState(schoolList);
   const [inputValue, setInputValue] = useState<string>('');
-  const isSchoolData = searchSchool.length;
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
-    if (inputValue) filterInputValue();
-  }, [inputValue]);
-
-  const filterInputValue = () => {
-    const filtered = schoolList.filter(i => i.name.includes(inputValue));
-    setFilteredSchoolList(filtered);
-  };
+    if (inputValue) {
+      fetchSchoolList(
+        tagList[pressed],
+        inputValue,
+        setLoading,
+        setFilteredSchoolList,
+      );
+    }
+  }, [inputValue, pressed]);
 
   const handleInputChange = (text: string) => {
     setInputValue(text);
-  };
-
-  const filterSchoolList = (tag: string) => {
-    const filtered = schoolList.filter(i => i.name.endsWith(tag));
-    setFilteredSchoolList(filtered);
   };
 
   const handleSelect = (selectedItem: string) => {
@@ -52,7 +47,7 @@ function FindSchool() {
               noError
               value={inputValue}
               onChangeText={handleInputChange}
-              placeholder="원하는 학교를 검색해주세요!"
+              placeholder="학교를 검색해주세요"
               icon={<Search color={`${color.gray400}`} />}
             />
           </SearchBox>
@@ -82,7 +77,6 @@ function FindSchool() {
           <TagBox
             onPress={() => {
               setPressed(index);
-              filterSchoolList(tag);
             }}
             press={pressed === index}
             key={index}>
@@ -95,18 +89,24 @@ function FindSchool() {
         ))}
       </TagContainer>
 
-      {isSchoolData ? (
-        <SchoolCardWrap>
-          {searchSchool.map((value, index) => (
+      {loading ? (
+        <NoSchoolWrap>
+          <Font text="로딩 중..." kind="medium16" color="gray400" />
+        </NoSchoolWrap>
+      ) : filteredSchoolList.length > 0 ? (
+        <SchoolCardWrap
+          data={filteredSchoolList}
+          keyExtractor={(item: any) => item.schoolName}
+          renderItem={({item, index}: any) => (
             <SchoolCard
               key={index}
-              schoolName={value.schoolName}
-              address={value.address}
-              score={value.score}
-              reviewCount={value.reviewCount}
+              schoolName={item.schoolName}
+              address={item.region}
+              score={0}
+              reviewCount={0}
             />
-          ))}
-        </SchoolCardWrap>
+          )}
+        />
       ) : (
         <NoSchoolWrap>
           <Font text="학교를 찾지 못했어요" kind="medium16" color="gray400" />
@@ -152,7 +152,7 @@ const SelectContainer = styled.View`
   width: 100%;
 `;
 
-const SchoolCardWrap = styled.ScrollView`
+const SchoolCardWrap = styled.FlatList`
   background-color: ${color.white};
   padding: 8px 20px;
 `;
