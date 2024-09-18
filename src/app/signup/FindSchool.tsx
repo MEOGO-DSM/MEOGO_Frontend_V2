@@ -3,35 +3,31 @@ import {Input} from '../../components';
 import {Search} from '../../assets';
 import styled from 'styled-components/native';
 import {color, Font} from '../../styles';
-import {schoolList} from '../dummy/schoolList';
 import SchoolList from '../../components/signup/SchoolList';
 import {SchoolListType, SignupProps} from '../../interfaces';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {fetchSchoolList} from '../../apis/school';
 
-const tagList = ['초등학교', '중학교', '고등학교', '대학교'];
-
 function FindSchool({onSelectSchool}: any) {
+const tagList = ['초등학교', '중학교', '고등학교', '대학교'];
   const [pressed, setPressed] = useState<number>(0);
-  const [filteredSchoolList, setFilteredSchoolList] = useState(schoolList);
+  const [filteredSchoolList, setFilteredSchoolList] = useState<any[]>([]);
   const [inputValue, setInputValue] = useState<string>('');
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
-    if (inputValue) filterInputValue();
-  }, [inputValue]);
-
-  const filterInputValue = () => {
-    const filtered = schoolList.filter(i => i.name.includes(inputValue));
-    setFilteredSchoolList(filtered);
-  };
+    if (inputValue) {
+      fetchSchoolList(
+        tagList[pressed],
+        inputValue,
+        setLoading,
+        setFilteredSchoolList,
+      );
+    }
+  }, [inputValue, pressed]);
 
   const handleInputChange = (text: string) => {
     setInputValue(text);
-  };
-
-  const filterSchoolList = (tag: string) => {
-    const filtered = schoolList.filter(i => i.name.endsWith(tag));
-    setFilteredSchoolList(filtered);
   };
 
   return (
@@ -47,10 +43,7 @@ function FindSchool({onSelectSchool}: any) {
       <TagContainer>
         {tagList.map((tag, index) => (
           <TagBox
-            onPress={() => {
-              setPressed(index);
-              filterSchoolList(tag);
-            }}
+            onPress={() => setPressed(index)}
             press={pressed === index}
             key={index}>
             <Font
@@ -62,21 +55,27 @@ function FindSchool({onSelectSchool}: any) {
         ))}
       </TagContainer>
 
-      {filteredSchoolList.length > 0 ? (
+      {loading ? (
+        <NotListBox>
+          <Font text="로딩 중..." kind="medium16" color="gray400" />
+        </NotListBox>
+      ) : filteredSchoolList.length > 0 ? (
         <ListBox
           data={filteredSchoolList}
+          keyExtractor={(item: any) => item.schoolName}
           renderItem={({item}: any) => (
             <SchoolList
               onPress={() => {
                 if (onSelectSchool) {
-                  onSelectSchool(item.name);
+                  onSelectSchool(item.schoolName, item.seq);
                 }
               }}
-              name={item.name}
-              location={item.location}
+              name={item.schoolName}
+              location={item.region || '지역 정보 없음'}
             />
           )}
-          contentContainerStyle={{paddingBottom: 100}}></ListBox>
+          contentContainerStyle={{paddingBottom: 100}}
+        />
       ) : (
         <NotListBox>
           <Font text="학교를 찾지 못했어요" kind="medium16" color="gray400" />

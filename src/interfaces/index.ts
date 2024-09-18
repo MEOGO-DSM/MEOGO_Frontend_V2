@@ -5,6 +5,7 @@ export interface SignupProps {
 }
 
 export interface SchoolListType {
+  id: number;
   name: string;
   location: string;
 }
