@@ -4,9 +4,9 @@ import {Star} from '../assets';
 import {Font} from '../styles/font';
 
 interface PropsType {
-  num: number;
-  size?: number
-  isText?: boolean
+  num?: number;
+  size?: number;
+  isText?: boolean;
 }
 
 function StarRating({num = 0, size = 14, isText = true}: PropsType) {

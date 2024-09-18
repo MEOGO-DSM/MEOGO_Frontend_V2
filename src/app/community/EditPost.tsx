@@ -1,15 +1,16 @@
 import React, {useState} from 'react';
 import styled from 'styled-components/native';
-import TopBar from '../../components/TopBar';
+import {TopBar} from '../../components/TopBar';
 import {Font} from '../../styles/font';
 import {color} from '../../styles/color';
 import ToggleButton from '../../components/ToggleButton';
 import {Image, Close} from '../../assets';
 import {useNavigation} from '@react-navigation/native';
 import {TouchableOpacity} from 'react-native';
+import {StackNavigationProp} from '@react-navigation/stack';
 
 function EditPost() {
-  const navigation = useNavigation();
+  const navigation = useNavigation<StackNavigationProp<any>>();
   const [pressed, setPressed] = useState<boolean>(false);
   const [title, setTitle] = useState<string>('');
   const [contentValue, setContentValue] = useState<string>('');

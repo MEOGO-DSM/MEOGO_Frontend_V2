@@ -4,22 +4,12 @@ import {Search} from '../../assets';
 import styled from 'styled-components/native';
 import {color, Font} from '../../styles';
 import SchoolList from '../../components/signup/SchoolList';
-<<<<<<< Updated upstream
 import {SchoolListType, SignupProps} from '../../interfaces';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {useNavigation} from '@react-navigation/native';
-
-const tagList = ['초등학교', '중학교', '고등학교', '대학교'];
-
-function FindSchool({control, errors, onSelectSchool}: SignupProps) {
-  const navigation = useNavigation<StackNavigationProp<any>>();
-=======
 import {fetchSchoolList} from '../../apis/school';
 
-const tagList = ['초등학교', '중학교', '고등학교', '대학교'];
-
 function FindSchool({onSelectSchool}: any) {
->>>>>>> Stashed changes
+const tagList = ['초등학교', '중학교', '고등학교', '대학교'];
   const [pressed, setPressed] = useState<number>(0);
   const [filteredSchoolList, setFilteredSchoolList] = useState<any[]>([]);
   const [inputValue, setInputValue] = useState<string>('');
