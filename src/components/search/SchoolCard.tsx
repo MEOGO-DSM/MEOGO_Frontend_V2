@@ -15,8 +15,8 @@ interface PropsType {
 export default function SchoolCard({
   schoolName,
   address,
-  score,
-  reviewCount,
+  score = 0,
+  reviewCount = 0,
 }: PropsType) {
   const [pressBookmark, setPressBookmark] = useState<boolean>(false);
 
