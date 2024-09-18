@@ -57,7 +57,6 @@ const DropdownList = styled.ScrollView`
   border: 1px solid ${color.gray300};
   border-radius: 6px;
   max-height: 200px;
-  flex-direction: column;
   z-index: 100;
 `;
 const DropdownContainer = styled.TouchableOpacity`
