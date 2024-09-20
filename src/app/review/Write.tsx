@@ -18,7 +18,6 @@ export default function Write() {
 
   const [rating, setRating] = useState<number>(0);
   const [hoverRating, setHoverRating] = useState<number>(0);
-  const [isError, setIsError] = useState<boolean>(false)
   const [contentValue, setContentValue] = useState<string>('');
   const [limit, setLimit] = useState<number>(0)
 
@@ -63,13 +62,13 @@ export default function Write() {
             return;
           }
 
-          const imageExist = imageFile.includes(response.assets[0].base64)
-          const newImageBase64 = response.assets[0].base64;
+          const imageExist = imageFile.includes(response.assets[0].uri)
+          const newImage = response.assets[0].uri;
 
-          if (!imageExist && newImageBase64) {
+          if (!imageExist && newImage) {
             setImageFile((prevImages) => [
               ...prevImages,
-              newImageBase64,
+              newImage,
             ]);
           } else {
             console.log('이미지 데이터가 없습니다');
@@ -90,7 +89,7 @@ export default function Write() {
             <Font
               text="다음"
               kind="semi18"
-              color={isError ? 'gray400' : 'black'}
+              color={rating && contentValue ? 'gray400' : 'black'}
             />
           </TouchableOpacity>
         }
@@ -132,7 +131,7 @@ export default function Write() {
               <ImgUploadBox onPress={() => onSelectImage()}>
                 <Media color="gray300" />
               </ImgUploadBox>
-              {imageFile && <AddImgContent photo={imageFile} />}
+              {imageFile && <AddImgContent photo={imageFile} onPhotosChange={() => {}} />}
             </UploadWrap>
           </ImgWrap>
         </ContentBox>
