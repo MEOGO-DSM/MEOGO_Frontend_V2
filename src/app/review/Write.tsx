@@ -62,9 +62,11 @@ export default function Write() {
             console.log('더 이상 이미지를 추가할 수 없습니다');
             return;
           }
+
+          const imageExist = imageFile.includes(response.assets[0].base64)
           const newImageBase64 = response.assets[0].base64;
 
-          if (newImageBase64) {
+          if (!imageExist && newImageBase64) {
             setImageFile((prevImages) => [
               ...prevImages,
               newImageBase64,
