@@ -5,7 +5,6 @@ import {color, Font} from '../../styles';
 import {schoolList} from '../dummy/schoolList';
 import SchoolCard from '../../components/search/SchoolCard';
 import {TopBar, Input, Dropdown} from '../../components';
-import {searchSchool} from '../dummy/searchSchool';
 import {region} from '../../utils';
 import {fetchSchoolList} from '../../apis/school';
 
@@ -13,9 +12,10 @@ function FindSchool() {
   const tagList = ['초등학교', '중학교', '고등학교', '대학교'];
 
   const [pressed, setPressed] = useState<number>(0);
-  const [filteredSchoolList, setFilteredSchoolList] = useState(schoolList);
+  const [filteredSchoolList, setFilteredSchoolList] = useState([]);
   const [inputValue, setInputValue] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
+  const [filter, setFilter] = useState<string>('');
 
   useEffect(() => {
     if (inputValue) {
@@ -33,6 +33,7 @@ function FindSchool() {
   };
 
   const handleSelect = (selectedItem: string) => {
+    setFilter(selectedItem);
     console.log('필터 선택:', selectedItem);
   };
 
@@ -96,7 +97,7 @@ function FindSchool() {
       ) : filteredSchoolList.length > 0 ? (
         <SchoolCardWrap
           data={filteredSchoolList}
-          keyExtractor={(item: any) => item.schoolName}
+          keyExtractor={(item: any) => item.seq}
           renderItem={({item, index}: any) => (
             <SchoolCard
               key={index}
