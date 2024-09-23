@@ -7,8 +7,8 @@
 
 import React from 'react';
 import Login from './src/app/login/page'
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Community from './src/app/community/page';
 import Post from './src/app/community/Post';
 import EditPost from './src/app/community/EditPost';
@@ -20,6 +20,7 @@ import Search from './src/app/search/page';
 import NavBar from './src/components/NavBar';
 import Signup from './src/app/signup/page';
 import QandADetail from './src/app/review/QandADetail';
+import Question from './src/app/review/Question';
 import QueryProvider from './src/utils/query/Provider';
 import ReduxProvider from './src/utils/store/Provider';
 

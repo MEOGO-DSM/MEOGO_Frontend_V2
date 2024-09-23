@@ -6,17 +6,16 @@ export const RequestStoragePermission = async (): Promise<boolean> => {
       PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
       {
         title: 'Storage Permission',
-        message: 'App needs access to your storage to upload photos.',
-        buttonNeutral: 'Ask Me Later',
-        buttonNegative: 'Cancel',
-        buttonPositive: 'OK',
+        message: '머고?" 앱에서 사용자의 사진에 접근하려고 합니다. 허용하시겠습니까?',
+        buttonNegative: '거부',
+        buttonPositive: '허용',
       },
     );
     if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-      console.log('You can use the storage');
+      console.log('저장공간 사용 가능');
       return true;
     } else {
-      console.log('Storage permission denied');
+      console.log('저장 권한 거부');
       return false;
     }
   } catch (err) {

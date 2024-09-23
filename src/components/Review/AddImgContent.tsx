@@ -1,20 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components/native";
 import { Close } from "../../assets";
 import { color } from "../../styles/color"
 
 interface PropsType {
-    photo?: string;
+    photo?: Array<string | undefined>;
+    onPhotosChange: (photos: Array<string | undefined>) => void;
 }
 
-export default function AddImgContent({ photo }: PropsType) {
+export default function AddImgContent({ photo = [], onPhotosChange }: PropsType) {
+    const [photos, setPhotos] = useState<Array<string | undefined>>(photo);
+
+    const deletePhoto = (index: number) => {
+        const updatedPhotos = photos.filter((_, i) => i !== index);
+        setPhotos(updatedPhotos);
+        onPhotosChange(updatedPhotos);
+    };
+
     return (
-        <Container>
-            <ImgContent source={{ uri: `data:image/jpeg;base64,${photo}` }} />
-            <CancelButton>
-                <Close size={16} />
-            </CancelButton>
-        </Container >
+        <>
+            {photo?.map((photo, index) => (
+                <Container key={index}>
+                    <ImgContent source={{ uri : photo }} />
+                    <CancelButton onPress={() => deletePhoto(index)}>
+                        <Close size={16} />
+                    </CancelButton>
+                </Container >
+            ))}
+        </>
     )
 }
 
@@ -33,7 +46,7 @@ width: 100%;
 height: 100%;
 `
 
-const CancelButton = styled.View`
+const CancelButton = styled.TouchableOpacity`
 position: absolute;
 top: 6px;
 right: 6px;

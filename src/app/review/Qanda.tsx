@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components/native';
 import { color } from '../../styles';
 import { Filter } from '../../assets';
@@ -7,6 +7,15 @@ import { QuestionBox } from '../../components/Review/QuestionBox';
 
 export default function QandA() {
   const tagList = ["학교생활질문", "그외", "입학관련질문"]
+  const [selected, setSelected] = useState<{ [key: string]: boolean }>({});
+  
+  const toggleTag = (tag: string) => {
+    setSelected(prevTags => ({
+      ...prevTags,
+      [tag]: !prevTags[tag],
+    }));
+  };
+
   return (
     <Container>
       <FilterWrap
@@ -19,7 +28,13 @@ export default function QandA() {
         </FilterIcon>
         <TagWrap>
           {tagList.map((value, index) => (
-            <NewMarkTag key={index} text={value} mark={true} />
+            <NewMarkTag
+              key={index}
+              onPress={() => toggleTag(value)}
+              text={value}
+              mark={true}
+              selected={!!selected[value]}
+            />
           ))}
         </TagWrap>
       </FilterWrap>
