@@ -40,9 +40,22 @@ export const Dropdown = ({ defaultValue, onSelect, items }: DropdownProps) => {
 
 const DropdownWrapper = styled.View`
   position: relative;
-  width: 100%;
+  width: 30%;
+  z-index: 10;
 `;
 
+const DropdownList = styled.ScrollView`
+  position: absolute;
+  top: 110%;
+  left: 0;
+  right: 0;
+  background-color: ${color.white};
+  border: 1px solid ${color.gray300};
+  border-radius: 6px;
+  max-height: 200px;
+  flex-direction: column;
+  z-index: 100;
+`;
 const DropdownContainer = styled.TouchableOpacity`
   border-radius: 6px;
   padding: 10px 12px;
@@ -51,20 +64,6 @@ const DropdownContainer = styled.TouchableOpacity`
   justify-content: space-between;
   align-items: center;
 `;
-
-const DropdownList = styled.ScrollView`
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  background-color: ${color.white};
-  border: 1px solid ${color.gray300};
-  border-radius: 6px;
-  max-height: 200px;
-  overflow: hidden;
-  z-index: 1000;
-`;
-
 const DropdownItem = styled.TouchableOpacity`
   padding: 12px;
   border-bottom-width: 1px;

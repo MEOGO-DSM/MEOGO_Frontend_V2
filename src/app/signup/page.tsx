@@ -18,13 +18,15 @@ function Signup() {
     handleSubmit,
     formState: {errors},
     setValue,
+    reset,
   } = useForm({
     defaultValues: {
       id: '',
       password: '',
       passwordCheck: '',
       name: '',
-      school: '',
+      school: 0,
+      schoolName: '',
     },
   });
 
@@ -43,9 +45,10 @@ function Signup() {
     <FindSchool
       control={control}
       errors={errors}
-      onSelectSchool={(schoolName: string) => {
+      onSelectSchool={(schoolName: string, school: number) => {
         setSelectedSchool(schoolName);
-        setValue('school', schoolName);
+        setValue('schoolName', schoolName);
+        setValue('school', school);
         setPage(page + 1);
       }}
     />,
@@ -54,17 +57,17 @@ function Signup() {
 
   useEffect(() => {
     Animated.timing(progressAnim, {
-      toValue: page * 20,
+      toValue: (page + 1) * 20,
       duration: 500,
       useNativeDriver: false,
     }).start();
   }, [page]);
 
   const prevPage = () => {
-    if (page > 0) {
-      setPage(page - 1);
-    } else {
+    if (page === 0) {
       navigation.goBack();
+    } else {
+      setPage(page - 1);
     }
   };
 
@@ -75,9 +78,10 @@ function Signup() {
     } else if (page < signupPage.length - 1) {
       setPage(page + 1);
     } else {
-      navigation.push('NavBar');
+      reset();
+      setPage(0);
+      navigation.push('Login');
     }
-    console.log('회원가입 데이터:', data);
   });
 
   return (
