@@ -1,25 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components/native";
 import { Font } from "../../styles/font"
 import { color } from "../../styles/color";
 import { yearlyPhoto } from "../dummy/yearlyPhoto"
+import { TouchableOpacity } from "react-native";
 
 export default function Photo() {
+    const [showImage, setShowImage] = useState<boolean>(false)
+
     return (
-        <Container>
-            {yearlyPhoto.map((value, index) => (
-                <Content key={index}>
-                    <YearWrap>
-                        <Font text={`${value.year}`} kind="medium20" />
-                    </YearWrap>
-                    <ImgContentWrap>
-                        {value.photo.map((value) => (
-                            <Img source={{ uri: value }} />
-                        ))}
-                    </ImgContentWrap>
-                </Content>
-            ))}
-        </Container>
+        <>
+            <Container>
+                {yearlyPhoto.map((value, index) => (
+                    <Content key={index}>
+                        <YearWrap>
+                            <Font text={`${value.year}`} kind="medium20" />
+                        </YearWrap>
+                        <ImgContentWrap>
+                            {value.photo.map((value) => (
+                                <TouchableOpacity onPress={() => setShowImage(true)}>
+                                    <Img source={{ uri: value }} />
+                                </TouchableOpacity>
+                            ))}
+                        </ImgContentWrap>
+                    </Content>
+                ))}
+            </Container>
+        </>
     )
 }
 
