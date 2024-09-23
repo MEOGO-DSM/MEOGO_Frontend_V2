@@ -12,9 +12,14 @@ import { ImagePickerResponse } from 'react-native-image-picker';
 import { RequestStoragePermission } from '../../utils/RequestStoragePermission';
 import * as ImagePicker from 'react-native-image-picker';
 import { StackNavigationProp } from '@react-navigation/stack';
+import { useSelector, useDispatch } from "react-redux";
+import { add } from "../../utils/store/modules/imageAddRemove"
+import { RootState } from '../../utils/store/store';
 
 export default function Write() {
   const navigation = useNavigation<StackNavigationProp<any>>()
+  const dispatch = useDispatch()
+  const image = useSelector((state: RootState) => state.imageAddRemove.image)
 
   const [rating, setRating] = useState<number>(0);
   const [hoverRating, setHoverRating] = useState<number>(0);
@@ -27,7 +32,7 @@ export default function Write() {
   }
 
   const [response, setResponse] = useState<ImagePickerResponse | null>(null);
-  const [imageFile, setImageFile] = useState<(string | undefined)[]>([]);
+  const [isPickingImage, setPickingImage] = useState<boolean>(false);
 
   const onSelectImage = async () => {
     // const hasPermission = await RequestStoragePermission()
@@ -37,15 +42,18 @@ export default function Write() {
       console.log('이미지를 선택하려면 저장 권한이 필요합니다')
       return;
     }
+    if (isPickingImage) return;
+    setPickingImage(true);
 
     ImagePicker.launchImageLibrary(
       {
         mediaType: 'photo',
         maxWidth: 100,
         maxHeight: 100,
-        includeBase64: true
       }, (response) => {
         console.log(response)
+        setPickingImage(false);
+
         if (response.didCancel) {
           console.log('이미지 선택을 취소했습니다.')
           return
@@ -57,22 +65,16 @@ export default function Write() {
         setResponse(response);
 
         if (response.assets && response.assets.length > 0) {
-          if (imageFile.length >= 4) {
-            console.log('더 이상 이미지를 추가할 수 없습니다');
-            return;
-          }
-
-          const imageExist = imageFile.includes(response.assets[0].uri)
           const newImage = response.assets[0].uri;
 
-          if (!imageExist && newImage) {
-            setImageFile((prevImages) => [
-              ...prevImages,
-              newImage,
-            ]);
+          if (newImage && image.length < 4 && !image.includes(newImage)) {
+            dispatch(add(newImage))
+            console.log("newImage:", newImage);
+            console.log("current images:", image);
           } else {
-            console.log('이미지 데이터가 없습니다');
+            console.log('더 이상 이미지를 추가할 수 없거나 이미 존재합니다')
           }
+
         } else {
           console.log('이미지를 선택하지 않았습니다');
         }
@@ -89,7 +91,7 @@ export default function Write() {
             <Font
               text="다음"
               kind="semi18"
-              color={rating && contentValue ? 'gray400' : 'black'}
+              color={rating && contentValue ? 'black' : 'gray400'}
             />
           </TouchableOpacity>
         }
@@ -131,7 +133,7 @@ export default function Write() {
               <ImgUploadBox onPress={() => onSelectImage()}>
                 <Media color="gray300" />
               </ImgUploadBox>
-              {imageFile && <AddImgContent photo={imageFile} onPhotosChange={() => {}} />}
+              {image && <AddImgContent />}
             </UploadWrap>
           </ImgWrap>
         </ContentBox>
