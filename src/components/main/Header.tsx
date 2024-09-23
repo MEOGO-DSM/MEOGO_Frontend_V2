@@ -1,18 +1,21 @@
 import React from 'react';
 import {Dimensions} from 'react-native';
 import styled from 'styled-components/native';
-import {color} from '../../styles/color';
+import {color} from '../../styles';
 import {Logo, Search, Bell} from '../../assets';
+import {useNavigation} from '@react-navigation/native';
+import {StackNavigationProp} from '@react-navigation/stack';
 
 function Header() {
   const screenWidth = Dimensions.get('window').width;
+  const navigation = useNavigation<StackNavigationProp<any>>();
   return (
     <Container width={screenWidth}>
       <IconBox>
         <Bell />
       </IconBox>
       <Logo size={40} />
-      <IconBox>
+      <IconBox onPress={() => navigation.navigate('Search')}>
         <Search />
       </IconBox>
     </Container>

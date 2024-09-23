@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import TopBar from '../../components/TopBar';
+import {TopBar} from '../../components/TopBar';
 import {Arrow, Menu} from '../../assets';
 import {useNavigation} from '@react-navigation/native';
 import {Font} from '../../styles/font';
