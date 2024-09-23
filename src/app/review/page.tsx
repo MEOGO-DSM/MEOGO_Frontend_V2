@@ -8,6 +8,7 @@ import { Font } from '../../styles/font';
 import ImgSlider from '../../components/Review/ImgSlider';
 import SchoolTag from '../../components/Review/SchoolTag';
 import ListWrap from './List';
+import ExpandImage from '../../components/Review/ExpandImage';
 
 function Review() {
   const tagData = ['특목고', '마이스터고'];
@@ -24,6 +25,7 @@ function Review() {
         }
       />
       <Container contentContainerStyle={{ gap: 6 }}>
+        <ExpandImage />
         <SchoolContentBox>
           <ImgSlider />
 
