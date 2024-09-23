@@ -1,7 +1,7 @@
 import { legacy_createStore as createStore, applyMiddleware } from 'redux';
 import { useDispatch } from 'react-redux'
 import logger from 'redux-logger';
-import rootReducer from './modules/counter'
+import rootReducer from './modules/index'
 
 const store = createStore(
   rootReducer,
