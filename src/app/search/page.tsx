@@ -7,6 +7,8 @@ import SchoolCard from '../../components/search/SchoolCard';
 import {TopBar, Input, Dropdown} from '../../components';
 import {region} from '../../utils';
 import {fetchSchoolList} from '../../apis/school';
+import {useNavigation} from '@react-navigation/native';
+import {StackNavigationProp} from '@react-navigation/stack';
 
 function FindSchool() {
   const tagList = ['초등학교', '중학교', '고등학교', '대학교'];
@@ -16,6 +18,7 @@ function FindSchool() {
   const [inputValue, setInputValue] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
   const [filter, setFilter] = useState<string>('');
+  const navigation = useNavigation<StackNavigationProp<any>>();
 
   useEffect(() => {
     if (inputValue) {
@@ -41,7 +44,7 @@ function FindSchool() {
     <Container>
       <TopBar
         padding={8}
-        leftIcon={<Arrow />}
+        leftIcon={<Arrow onPress={() => navigation.navigate('NavBar')} />}
         rightIcon={
           <SearchBox>
             <Input
