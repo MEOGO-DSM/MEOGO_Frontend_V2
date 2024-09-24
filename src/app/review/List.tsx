@@ -1,38 +1,43 @@
-import React, { useState } from 'react';
 import styled from 'styled-components/native';
-import { color } from '../../styles/color';
-import { Font } from '../../styles/font';
+import { View } from 'react-native';
+import { color, Font } from '../../styles';
 import Review from './Review';
 import QandA from './QandA';
 import SchoolInfo from './SchoolInfo';
 import Photo from './Photo';
-import { View } from 'react-native';
-
-const selectValue = [
-  { name: '리뷰', component: Review },
-  { name: 'Q&A', component: QandA },
-  { name: '학교 정보', component: SchoolInfo },
-  { name: '사진', component: Photo },
-];
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../utils/store/store';
+import { selectTab } from '../../utils/store/modules/tabReducer';
 
 export default function ListWrap() {
-  const [selectedListValue, setSelectedListValue] = useState<number>(0);
+  const dispatch = useDispatch();
+  const selectedListValue = useSelector((state: RootState) => state.tabReducer.selectedTab);
 
   const renderSelectedComponent = () => {
-    const SelectedComponent = selectValue[selectedListValue].component;
-    return <SelectedComponent />;
+    switch (selectedListValue) {
+      case 0:
+        return <Review />;
+      case 1:
+        return <QandA />;
+      case 2:
+        return <SchoolInfo />;
+      case 3:
+        return <Photo />;
+      default:
+        return null;
+    }
   };
 
   return (
     <>
       <ListContainer>
-        {selectValue.map((value, index) => (
+        {['리뷰', 'Q&A', '학교 정보', '사진'].map((title, index) => (
           <SelectBox
             key={index}
-            onPress={() => setSelectedListValue(index)}
+            onPress={() => dispatch(selectTab(index))}
             isSelected={selectedListValue === index}>
             <Font
-              text={value.name}
+              text={title}
               kind="semi18"
               color={selectedListValue === index ? 'black' : 'gray500'}
             />
