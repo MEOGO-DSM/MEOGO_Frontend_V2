@@ -1,32 +1,39 @@
-export const reviewValue = [
-    {
-        userName: "임다영",
-        score: 4,
-        contents: "오면 없던 종교도 믿게 됩니다.",
-        image: [
-            "https://blog.kakaocdn.net/dn/yyNcR/btqzklYVznB/OKDXk6MownzwNWjZwTsJ00/img.jpg",
-            "https://i.namu.wiki/i/x1Pun4wIItn-ipUfrrlbr2ccx5zu1up-rzlYDycXMaqldKhMXElx-wt693x9dXxles_PrrQcSYk2dQN9M9t6HQ.webp",
-            "https://tvstore-phinf.pstatic.net/20210622_99/1624331122672o6h8J_JPEG/00022.jpg",
-            "https://i.pinimg.com/736x/7c/69/0f/7c690f5d5c99b46120959d1488e17f7b.jpg"
-        ]
-    },
-    {
-        userName: "김어진",
-        score: 2,
-        contents: "여긴 일반고가 아니고, 입학하고서 2년 반 뒤까지 취업해야하는 학교입니다. 물론 선생님에게도 잘 보이면 좋지만, 회사에서 님 생기부를 볼까요. 일반 과목 열심히 배워서 일반 과목으로 취업할 거 아니면 선배 잡아서 전공 배우세요. 그리고 저희 학교 개발하러 오는 곳입니다. 디자인을 전공으로 하려면 디자인 관련 고등학교로 가세요. 너무 좁아서 디자인 조금만 잘해도 칭찬받는 곳입니다. 밖으로 나가서 다른 최소 2,3년차 디자이너랑 경쟁해서 취업 될 것 같고, 선배 없어도 취업할 것 같으면 와서 해도 돼요.",
-        image: [
-            "https://tvstore-phinf.pstatic.net/20210622_99/1624331122672o6h8J_JPEG/00022.jpg",
-            "https://i.pinimg.com/736x/7c/69/0f/7c690f5d5c99b46120959d1488e17f7b.jpg"
-        ]
-    },
-    {
-        userName: "김승원",
-        score: 4,
-        contents: "씹덕 많아요",
-        image: [
-            "https://i.namu.wiki/i/x1Pun4wIItn-ipUfrrlbr2ccx5zu1up-rzlYDycXMaqldKhMXElx-wt693x9dXxles_PrrQcSYk2dQN9M9t6HQ.webp",
-            "https://tvstore-phinf.pstatic.net/20210622_99/1624331122672o6h8J_JPEG/00022.jpg",
-            "https://i.pinimg.com/736x/7c/69/0f/7c690f5d5c99b46120959d1488e17f7b.jpg"
-        ]
-    }
-];
+export const reviewValue = {
+    "count": 3,
+    "reviews": [
+        {
+            "id": 10,
+            "content": "오면 없던 종교도 믿게 됩니다.",
+            "date": "24.09.14 4:11",
+            "user_name": "asdf",
+            "profile": "https://item.kakaocdn.net/do/d0abc6fe74e616536cf07626699bbc707154249a3890514a43687a85e6b6cc82",
+            "star": 3.0,
+            "image": [
+                "https://item.kakaocdn.net/do/d0abc6fe74e616536cf07626699bbc707154249a3890514a43687a85e6b6cc82",
+                "https://item.kakaocdn.net/do/d0abc6fe74e616536cf07626699bbc707154249a3890514a43687a85e6b6cc82"
+            ]
+        },
+        {
+            "id": 7,
+            "content": "아무말아무말",
+            "date": "24.10.12 2:07",
+            "user_name": "포로리",
+            "profile": "https://i.pinimg.com/736x/7c/69/0f/7c690f5d5c99b46120959d1488e17f7b.jpg",
+            "star": 5.0,
+            "image": [
+                "https://i.namu.wiki/i/x1Pun4wIItn-ipUfrrlbr2ccx5zu1up-rzlYDycXMaqldKhMXElx-wt693x9dXxles_PrrQcSYk2dQN9M9t6HQ.webp",
+                "https://tvstore-phinf.pstatic.net/20210622_99/1624331122672o6h8J_JPEG/00022.jpg",
+                "https://i.pinimg.com/736x/7c/69/0f/7c690f5d5c99b46120959d1488e17f7b.jpg"
+            ]
+        },
+        {
+            "id": 6,
+            "content": "확인용 아무말이나 적자 아무말 이렇게 글을 늘려나가는거",
+            "date": "24.11.12 14:05",
+            "user_name": "히히",
+            "profile": "https://i.pinimg.com/736x/7c/69/0f/7c690f5d5c99b46120959d1488e17f7b.jpg",
+            "star": 4.0,
+            "image": []
+        }
+    ]
+}

@@ -4,39 +4,44 @@ import { Setting } from "../../assets"
 import StarRating from "../StarRating";
 import { Font } from "../../styles/font"
 import { color } from "../../styles/color";
-import Profile from "../../assets/Profile.png"
+// import Profile from "../../assets/Profile.png"
 
-interface PropsType {
-    userName: string,
-    score: number,
-    contents: string,
-    image: string[]
+interface reviewBoxType {
+    id?: number,
+    content?: string,
+    date?: string,
+    user_name?: string,
+    profile?: string,
+    star?: number,
+    image?: Array<string | undefined>
 }
 
-export default function ReviewBox({ userName, score, contents, image }: PropsType) {
-    const wrapWidth = image.length > 2 ? '100%' : `${image.length * 160}px`;
+export default function ReviewBox({ id, content, date, user_name, profile, star, image }: reviewBoxType) {
+    const wrapWidth = image && image.length > 2 ? '100%' : image && `${image.length * 160}px`;
+
+    const dateTime = date?.substring(3)
 
     return (
-        <Container>
+        <Container key={id}>
             <ReviewInfoWrap>
                 <UserInfoWrap>
-                    <ProfileImg source={Profile} />
+                    <ProfileImg source={{ uri : profile }} />
                     <UserNameAndReview>
-                        <Font text={userName} kind="medium14" />
-                        <StarRating num={score} />
+                        <Font text={user_name} kind="medium14" />
+                        <StarRating num={star} />
                     </UserNameAndReview>
                 </UserInfoWrap>
                 <TimeAndSetting>
-                    <Font text="02.19 23:36" kind="medium12" color="gray400" />
+                    <Font text={dateTime} kind="medium12" color="gray400" />
                     <SettingWrap>
                         <Setting />
                     </SettingWrap>
                 </TimeAndSetting>
             </ReviewInfoWrap>
 
-            <Font text={contents} kind="medium14" />
+            <Font text={content} kind="medium14" />
 
-            {image.length > 0 &&
+            {image && image.length > 0 &&
                 <ImgWrap width={wrapWidth} >
                     <ImgSlider contentContainerStyle={{ columnGap: 2 }} horizontal={true}>
                         {image.map((imgSrc, index) => (

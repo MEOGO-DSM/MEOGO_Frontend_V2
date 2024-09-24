@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components/native";
 import { Font } from "../../styles/font"
 import { Filter } from "../../assets"
@@ -9,6 +9,16 @@ import ReviewBox from "../../components/Review/ReviewBox"
 import { reviewValue } from "../dummy/reviewValue";
 import { useNavigation } from "@react-navigation/native";
 
+interface reviewBoxType {
+    id?: number,
+    content?: string,
+    date?: string,
+    user_name?: string,
+    profile?: string,
+    star?: number,
+    image?: Array<string>
+}
+
 export default function ReviewWrap() {
 
     const navigation = useNavigation()
@@ -18,8 +28,6 @@ export default function ReviewWrap() {
         { value: "교내활동", ratio: 50 },
         { value: "교내시설", ratio: 90 },
     ]
-
-    const [reviewData, setReviewData] = useState<boolean>(true)
 
     return (
         <Container>
@@ -49,30 +57,33 @@ export default function ReviewWrap() {
                 <TopWrap>
                     <HandleWrap>
                         <Font text={`신입생을 위한 솔직한\n학교 리뷰를 작성해주세요!`} kind="regular12" color="gray500" />
-                        <WriteButton/>
+                        <WriteButton />
                     </HandleWrap>
                     <ReviewAndFilter>
                         <Reviews>
                             <Font text="리뷰" kind="bold20" />
-                            <Font text="138" kind="medium20" color="gray500" />
+                            <Font text={String(reviewValue.count)} kind="medium20" color="gray500" />
                         </Reviews>
                         <Filter size={24} color={color.gray500} />
                     </ReviewAndFilter>
                 </TopWrap>
 
-                {reviewData ? (<ReviewListWrap>
-                    {reviewValue.map((value, index) => (
-                        <ReviewBox
-                            key={index}
-                            userName={value.userName}
-                            score={value.score}
-                            contents={value.contents}
-                            image={value.image}
-                        />
-                    ))}
-                </ReviewListWrap>) : (<NoReviewWrap>
-                    <Font text="아직 리뷰가 없어요!" kind="medium16" />
-                </NoReviewWrap>)
+                {reviewValue ? <ReviewListWrap>
+                    {
+                        reviewValue.reviews.map((value) => (
+                            <ReviewBox
+                                key={value.id}
+                                content={value.content}
+                                date={value.date}
+                                user_name={value.user_name}
+                                profile={value.profile}
+                                star={value.star}
+                                image={value.image}
+                            />
+                        ))
+                    }
+                </ReviewListWrap> :
+                    <NoReviewWrap> <Font text="아직 리뷰가 없어요!" kind="medium16" /> </NoReviewWrap>
                 }
             </UserReviewWrap>
         </Container>
