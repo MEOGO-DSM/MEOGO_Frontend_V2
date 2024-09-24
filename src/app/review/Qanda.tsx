@@ -13,7 +13,16 @@ const tagList = ["학교생활질문", "그외", "입학관련질문"]
 export default function QAndA() {
 
   const dispatch = useDispatch()
-  const selectedTag = useSelector((state : RootState) => state.questionTagSelect.selectTag)
+  const selected = useSelector((state: RootState) => state.questionTagSelect.selectTag)
+
+  const handleTagClick = (value: string) => {
+    if (selected === value) {
+      dispatch(selectTag(null))
+    }
+    else {
+      dispatch(selectTag(value))
+    }
+  }
 
   return (
     <Container>
@@ -29,10 +38,10 @@ export default function QAndA() {
           {tagList.map((value, index) => (
             <NewMarkTag
               key={index}
-              onPress={() => dispatch(selectTag(value))}
+              onPress={() => handleTagClick(value)}
               text={value}
               mark={true}
-              selected={selectedTag === value}
+              selected={selected === value}
             />
           ))}
         </TagWrap>
