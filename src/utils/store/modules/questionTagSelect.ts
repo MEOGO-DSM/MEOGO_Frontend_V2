@@ -1,13 +1,13 @@
 export const SELECT_TAG = 'SELECT_TAG' as const
 
-export const selectTag = (tagName: string) => ({
+export const selectTag = (tagName: string | null) => ({
   type: SELECT_TAG,
-  tagName: tagName
+  tagName
 })
 
 interface SelectTagAction {
   type: typeof SELECT_TAG,
-  tagName: string
+  tagName: string | null
 }
 
 const initialState = {

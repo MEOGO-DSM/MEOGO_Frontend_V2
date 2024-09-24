@@ -25,7 +25,7 @@ function Review() {
         }
       />
       <Container contentContainerStyle={{ gap: 6 }}>
-        <ExpandImage />
+        {/* <ExpandImage /> */}
         <SchoolContentBox>
           <ImgSlider />
 

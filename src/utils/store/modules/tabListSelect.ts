@@ -14,7 +14,7 @@ const initialState = {
   selectedTab: 0,
 };
 
-const tabReducer = (state = initialState, action: SelectedTabAction) => {
+const tabListSelect = (state = initialState, action: SelectedTabAction) => {
   switch (action.type) {
     case SELECT_TAB:
       return { ...state, selectedTab: action.payload };
@@ -23,4 +23,4 @@ const tabReducer = (state = initialState, action: SelectedTabAction) => {
   }
 };
 
-export default tabReducer;
+export default tabListSelect;

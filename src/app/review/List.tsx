@@ -2,12 +2,12 @@ import styled from 'styled-components/native';
 import { View } from 'react-native';
 import { color, Font } from '../../styles';
 import Review from './Review';
-import QandA from './QAnda';
+import QAndA from './QAndA';
 import SchoolInfo from './SchoolInfo';
 import Photo from './Photo';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../utils/store/store';
-import { selectTab } from '../../utils/store/modules/tabReducer';
+import { selectTab } from '../../utils/store/modules/tabListSelect';
 
 export default function ListWrap() {
   const dispatch = useDispatch();
@@ -18,7 +18,7 @@ export default function ListWrap() {
       case 0:
         return <Review />;
       case 1:
-        return <QandA />;
+        return <QAndA />;
       case 2:
         return <SchoolInfo />;
       case 3:
