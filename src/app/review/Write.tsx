@@ -15,11 +15,13 @@ export default function Write() {
   const { onSelectImage } = useImagePicker();
 
   const navigation = useNavigation<StackNavigationProp<any>>();
-  
+
   const [rating, setRating] = useState<number>(0);
   const [hoverRating, setHoverRating] = useState<number>(0);
   const [contentValue, setContentValue] = useState<string>('');
   const [limit, setLimit] = useState<number>(0);
+
+  const isNextButtonActive = () => rating > 0 && (contentValue.length > 0 && contentValue.length <= 300)
 
   const handleChangeInput = (text: string) => {
     setContentValue(text);
@@ -30,13 +32,16 @@ export default function Write() {
     <>
       <TopBar
         text="리뷰 작성"
-        leftIcon={<Close onPress={() => navigation.navigate('Review')} />}
+        leftIcon={
+          <Close
+            onPress={() => navigation.navigate('Review', {setting: {star: rating, content: contentValue}})}
+          />}
         rightIcon={
-          <TouchableOpacity onPress={() => navigation.navigate('KeywordReview')}>
+          <TouchableOpacity onPress={() => navigation.push('KeywordReview', { rating, contentValue })}>
             <Font
               text="다음"
               kind="semi18"
-              color={rating && contentValue ? 'black' : 'gray400'}
+              color={isNextButtonActive() ? 'black' : 'gray400'}
             />
           </TouchableOpacity>
         }

@@ -8,17 +8,29 @@ import Tag from "../../components/Review/Tag";
 import { Arrow } from "../../assets/Arrow"
 import { useNavigation } from "@react-navigation/native";
 import { reviewKeywordValue } from "../dummy/reviewKeywordValue";
+import { reviewUpload } from '../../apis/reviewUpload';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../utils/store/store';
+import { useRoute } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+
+interface RouteParams {
+    rating: number;
+    contentValue: string;
+}
 
 export default function KeywordReview() {
 
-    const navigation = useNavigation()
-    const [selectedValue, setSelectedValue] = useState<string[]>([])
+    const navigation = useNavigation<StackNavigationProp<any>>()
+    const images = useSelector((state: RootState) => state.imageAddRemove.image)
+    const route = useRoute();
+    const { rating, contentValue } = route.params as RouteParams;
+
+    const [keyword, setKeyword] = useState<string[]>([])
 
     const handleTagPress = (tag: string) => {
-        console.log('Tag pressed:', tag);
-        setSelectedValue(prevState => {
-            const isSelected = prevState.includes(tag);
-            if (isSelected) {
+        setKeyword(prevState => {
+            if (prevState.includes(tag)) {
                 return prevState.filter(value => value !== tag);
             }
             if (prevState.length < 5) {
@@ -28,17 +40,26 @@ export default function KeywordReview() {
         });
     }
 
+    const handleSubmit = async () => {
+        const response = await reviewUpload(images, contentValue, rating, keyword)
+
+        if (response) {
+            console.log("리뷰가 성공적으로 작성되었습니다")
+            navigation.navigate('Review')
+        }
+    }
+
     return (
         <Container>
             <TopBar
                 text="키워드 리뷰"
-                leftIcon={<Arrow onPress={() => navigation.navigate('ReviewWrite')} />}
+                leftIcon={<Arrow onPress={() => {navigation.navigate('ReviewWrite')}} />}
                 rightIcon={
-                    <TouchableOpacity onPress={() => navigation.navigate('Review')}>
+                    <TouchableOpacity onPress={handleSubmit}>
                         <Font
                             text="등록"
                             kind="semi18"
-                            color={selectedValue.length === 0 ? "gray400" : "amber700" }
+                            color={keyword.length === 0 ? "gray400" : "amber700"}
                         />
                     </TouchableOpacity>
                 }
@@ -54,7 +75,7 @@ export default function KeywordReview() {
                         <Font text={section.title} kind="semi18" />
                         <TagWrap>
                             {section.content.map((tag, index) => (
-                                    <Tag key={index} text={tag} onPress={() => handleTagPress(tag)} selected={selectedValue.includes(tag)} />
+                                <Tag key={index} text={tag} onPress={() => handleTagPress(tag)} selected={keyword.includes(tag)} />
                             ))}
                         </TagWrap>
                     </KeyWordSectionBox>
