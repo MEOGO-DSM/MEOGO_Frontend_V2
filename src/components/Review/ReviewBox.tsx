@@ -4,7 +4,6 @@ import { Setting } from "../../assets"
 import StarRating from "../StarRating";
 import { Font } from "../../styles/font"
 import { color } from "../../styles/color";
-// import Profile from "../../assets/Profile.png"
 
 interface reviewBoxType {
     id?: number,
@@ -17,7 +16,7 @@ interface reviewBoxType {
 }
 
 export default function ReviewBox({ id, content, date, user_name, profile, star, image }: reviewBoxType) {
-    const wrapWidth = image && image.length > 2 ? '100%' : image && `${image.length * 160}px`;
+    const wrapWidth = image ? (image.length > 2 ? '100%' : `${image.length * 160}px`) : '0';
 
     const dateTime = date?.substring(3)
 

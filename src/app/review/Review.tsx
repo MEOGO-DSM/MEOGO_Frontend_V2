@@ -9,16 +9,6 @@ import ReviewBox from "../../components/Review/ReviewBox"
 import { reviewValue } from "../dummy/reviewValue";
 import { useNavigation } from "@react-navigation/native";
 
-interface reviewBoxType {
-    id?: number,
-    content?: string,
-    date?: string,
-    user_name?: string,
-    profile?: string,
-    star?: number,
-    image?: Array<string>
-}
-
 export default function ReviewWrap() {
 
     const navigation = useNavigation()
@@ -68,23 +58,22 @@ export default function ReviewWrap() {
                     </ReviewAndFilter>
                 </TopWrap>
 
-                {reviewValue ? <ReviewListWrap>
-                    {
-                        reviewValue.reviews.map((value) => (
-                            <ReviewBox
-                                key={value.id}
-                                content={value.content}
-                                date={value.date}
-                                user_name={value.user_name}
-                                profile={value.profile}
-                                star={value.star}
-                                image={value.image}
-                            />
-                        ))
-                    }
-                </ReviewListWrap> :
-                    <NoReviewWrap> <Font text="아직 리뷰가 없어요!" kind="medium16" /> </NoReviewWrap>
-                }
+                <ReviewListWrap>
+                    {reviewValue ? (
+                        reviewValue.reviews.length > 0 ? (
+                            reviewValue.reviews.map((value) => (
+                                <ReviewBox
+                                    key={value.id}
+                                    {...value}
+                                />
+                            ))
+                        ) : (
+                            <NoReviewWrap>
+                                <Font text="아직 리뷰가 없어요!" kind="medium16" />
+                            </NoReviewWrap>
+                        )
+                    ) : null}
+                </ReviewListWrap>
             </UserReviewWrap>
         </Container>
     )
