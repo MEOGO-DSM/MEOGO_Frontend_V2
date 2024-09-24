@@ -7,14 +7,7 @@ import { QuestionBox } from '../../components/Review/QuestionBox';
 
 export default function QandA() {
   const tagList = ["학교생활질문", "그외", "입학관련질문"]
-  const [selected, setSelected] = useState<{ [key: string]: boolean }>({});
-  
-  const toggleTag = (tag: string) => {
-    setSelected(prevTags => ({
-      ...prevTags,
-      [tag]: !prevTags[tag],
-    }));
-  };
+  const [selectedTag, setSelectedTag] = useState<string | null>(null);
 
   return (
     <Container>
@@ -30,10 +23,10 @@ export default function QandA() {
           {tagList.map((value, index) => (
             <NewMarkTag
               key={index}
-              onPress={() => toggleTag(value)}
+              onPress={() => setSelectedTag(value)}
               text={value}
               mark={true}
-              selected={!!selected[value]}
+              selected={selectedTag === value}
             />
           ))}
         </TagWrap>
