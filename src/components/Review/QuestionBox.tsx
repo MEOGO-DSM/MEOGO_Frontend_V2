@@ -3,13 +3,16 @@ import { Font, color } from "../../styles"
 import { Bell, Answer } from "../../assets"
 import { useState } from "react"
 import { TouchableOpacity } from 'react-native'
+import { useNavigation } from "@react-navigation/native"
+import { StackNavigationProp } from '@react-navigation/stack';
 
 export const QuestionBox = () => {
+  const navigation = useNavigation<StackNavigationProp<any>>()
   
   const [clickBell, setClickBell] = useState<boolean>(false)
 
   return (
-    <TouchableOpacity>
+    <TouchableOpacity onPress={() => navigation.navigate("QAndADetail")}>
       <QuestionContent>
         <TagAndContentWrap>
           <Tag>
