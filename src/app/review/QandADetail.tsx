@@ -6,7 +6,7 @@ import styled from "styled-components/native";
 import { Font, color } from "../../styles";
 import AnswerBox from '../../components/Review/AnswerBox';
 
-export default function QandADetail() {
+export default function QAndADetail() {
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'android' ? 'height' : 'padding'}

@@ -19,8 +19,7 @@ import KeywordReview from './src/app/review/KeywordReview';
 import Search from './src/app/search/page';
 import NavBar from './src/components/NavBar';
 import Signup from './src/app/signup/page';
-import QandADetail from './src/app/review/QandADetail';
-import Question from './src/app/review/Question';
+import QAndADetail from './src/app/review/QAndADetail';
 import QueryProvider from './src/utils/query/Provider';
 import ReduxProvider from './src/utils/store/Provider';
 
@@ -44,7 +43,7 @@ function App(): React.JSX.Element {
             <Stack.Screen name="ReviewWrite" component={Write} />
             <Stack.Screen name="Search" component={Search} />
             <Stack.Screen name="KeywordReview" component={KeywordReview} />
-            <Stack.Screen name="QandADetail" component={QandADetail} />
+            <Stack.Screen name="QAndADetail" component={QAndADetail} />
           </Stack.Navigator>
         </NavigationContainer>
       </ReduxProvider>

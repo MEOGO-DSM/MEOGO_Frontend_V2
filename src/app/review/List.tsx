@@ -2,7 +2,7 @@ import styled from 'styled-components/native';
 import { View } from 'react-native';
 import { color, Font } from '../../styles';
 import Review from './Review';
-import QandA from './QandA';
+import QandA from './QAnda';
 import SchoolInfo from './SchoolInfo';
 import Photo from './Photo';
 import { useDispatch, useSelector } from 'react-redux';

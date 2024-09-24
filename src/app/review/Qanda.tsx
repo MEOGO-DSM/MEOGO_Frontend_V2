@@ -5,7 +5,7 @@ import { Filter } from '../../assets';
 import { NewMarkTag } from '../../components/Review/NewMarkTag';
 import { QuestionBox } from '../../components/Review/QuestionBox';
 
-export default function QandA() {
+export default function QAndA() {
   const tagList = ["학교생활질문", "그외", "입학관련질문"]
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
 
