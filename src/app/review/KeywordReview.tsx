@@ -46,6 +46,8 @@ export default function KeywordReview() {
         if (response) {
             console.log("리뷰가 성공적으로 작성되었습니다")
             navigation.navigate('Review')
+        } else {
+            console.log('리뷰 작성이 실패하였습니다')
         }
     }
 
