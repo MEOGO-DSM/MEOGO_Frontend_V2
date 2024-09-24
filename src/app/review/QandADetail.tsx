@@ -7,18 +7,27 @@ import { Font, color } from "../../styles";
 import AnswerBox from '../../components/Review/AnswerBox';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../utils/store/store';
+import { selectTag } from '../../utils/store/modules/questionTagSelect'
 
 export default function QAndADetail() {
+  const dispatch = useDispatch()
 
   const navigation = useNavigation<StackNavigationProp<any>>()
+
+  const handleQuestionList = (value: string) => {
+    dispatch(selectTag(value))
+    navigation.navigate('QuestionTagGather')
+  }
 
   return (
     <>
       <TopBar
         text="대덕소프트웨어마이스터고"
-        leftIcon={<Arrow onPress={() => {navigation.navigate("Review")}} />}
+        leftIcon={<Arrow onPress={() => { navigation.navigate("Review") }} />}
       />
-      
+
       <KeyboardAvoidingView
         behavior={Platform.OS === 'android' ? 'height' : 'padding'}
         style={{ flex: 1, }}
@@ -44,7 +53,7 @@ export default function QAndADetail() {
                   <Font text="기숙사에서 몇명이 함께 방을 쓰나요? 그리고 룸메는 한번 정해지면 그대로 쭉 가는건가요? 그리고 룸메는 한번 정해지면 그대로 쭉 가는건가요?" kind="regular18" numberOfLines={3} />
                 </Content>
               </InfoAndContent>
-              <QuestionTypeWrap>
+              <QuestionTypeWrap onPress={() => handleQuestionList("학교생활질문")}>
                 <Font text="학교생활질문" kind="medium14" color="gray600" />
                 <Arrow size={18} color={color.gray600} rotate="right" />
               </QuestionTypeWrap>
@@ -111,7 +120,7 @@ const Content = styled.View`
   gap: 4px;
 `;
 
-const QuestionTypeWrap = styled.View`
+const QuestionTypeWrap = styled.TouchableOpacity`
   display: flex;
   flex-direction: row;
   align-items: center;
