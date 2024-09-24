@@ -1,13 +1,19 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components/native';
 import { color } from '../../styles';
 import { Filter } from '../../assets';
 import { NewMarkTag } from '../../components/Review/NewMarkTag';
 import { QuestionBox } from '../../components/Review/QuestionBox';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectTag } from '../../utils/store/modules/questionTagSelect';
+import { RootState } from '../../utils/store/store';
+
+const tagList = ["학교생활질문", "그외", "입학관련질문"]
 
 export default function QAndA() {
-  const tagList = ["학교생활질문", "그외", "입학관련질문"]
-  const [selectedTag, setSelectedTag] = useState<string | null>(null);
+
+  const dispatch = useDispatch()
+  const selectedTag = useSelector((state : RootState) => state.questionTagSelect.selectTag)
 
   return (
     <Container>
@@ -23,7 +29,7 @@ export default function QAndA() {
           {tagList.map((value, index) => (
             <NewMarkTag
               key={index}
-              onPress={() => setSelectedTag(value)}
+              onPress={() => dispatch(selectTag(value))}
               text={value}
               mark={true}
               selected={selectedTag === value}

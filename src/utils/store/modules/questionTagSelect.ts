@@ -1,0 +1,26 @@
+export const SELECT_TAG = 'SELECT_TAG' as const
+
+export const selectTag = (tagName: string) => ({
+  type: SELECT_TAG,
+  tagName: tagName
+})
+
+interface SelectTagAction {
+  type: typeof SELECT_TAG,
+  tagName: string
+}
+
+const initialState = {
+  selectTag: null
+}
+
+const questionTagSelect = (state = initialState, action: SelectTagAction) => {
+  switch(action.type) {
+    case SELECT_TAG: 
+      return { ...state, selectTag: action.tagName}
+    default: 
+      return state
+  }
+}
+
+export default questionTagSelect
