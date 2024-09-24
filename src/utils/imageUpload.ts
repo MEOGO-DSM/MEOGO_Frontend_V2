@@ -47,10 +47,8 @@ const useImagePicker = () => {
         if (response.assets && response.assets.length > 0) {
           const newImage = response.assets[0].uri;
 
-          if (newImage && image.length < 4 && !image.includes(newImage)) { //이미지 중복되서 올라감
+          if (newImage && image.length < 4) {
             dispatch(add(newImage));
-            console.log("newImage:", newImage);
-            console.log("current images:", image);
           } else {
             console.log('더 이상 이미지를 추가할 수 없거나 이미 존재합니다');
           }
