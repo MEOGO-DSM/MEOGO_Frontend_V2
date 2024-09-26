@@ -1,25 +1,35 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components/native";
 import { Font } from "../../styles/font"
 import { color } from "../../styles/color";
-import { yearlyPhoto } from "../dummy/yearlyPhoto"
+import { photo } from "../dummy/photo"
 import { TouchableOpacity } from "react-native";
+import { useDispatch } from "react-redux";
+import { show, isShow, currentIndex, currentYear } from "../../utils/store/modules/appearExpandPhoto";
 
 export default function Photo() {
-    const [showImage, setShowImage] = useState<boolean>(false)
+    const dispatch = useDispatch()
+
+    const handleClick = (image: string, year: number, index: number) => {
+        dispatch(show(image))
+        dispatch(isShow(true))
+
+        dispatch(currentIndex(index))
+        dispatch(currentYear(year))
+    }
 
     return (
         <>
             <Container>
-                {yearlyPhoto.map((value, index) => (
-                    <Content key={index}>
+                {photo.map((value) => (
+                    <Content>
                         <YearWrap>
                             <Font text={`${value.year}`} kind="medium20" />
                         </YearWrap>
                         <ImgContentWrap>
-                            {value.photo.map((value) => (
-                                <TouchableOpacity onPress={() => setShowImage(true)}>
-                                    <Img source={{ uri: value }} />
+                            {value.image.map((image, index) => (
+                                <TouchableOpacity onPress={() => handleClick(image, value.year, index)}>
+                                    <Img source={{ uri: image }} />
                                 </TouchableOpacity>
                             ))}
                         </ImgContentWrap>
