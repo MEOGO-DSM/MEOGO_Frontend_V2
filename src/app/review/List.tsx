@@ -3,7 +3,7 @@ import styled from 'styled-components/native';
 import { color } from '../../styles/color';
 import { Font } from '../../styles/font';
 import Review from './Review';
-import QandA from './QandA';
+import QandA from './Qanda';
 import SchoolInfo from './SchoolInfo';
 import Photo from './Photo';
 import { View } from 'react-native';
