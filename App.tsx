@@ -20,9 +20,9 @@ import Search from './src/app/search/page';
 import NavBar from './src/components/NavBar';
 import Signup from './src/app/signup/page';
 import QandADetail from './src/app/review/QandADetail';
-import Question from './src/app/review/Question';
 import QueryProvider from './src/utils/query/Provider';
 import ReduxProvider from './src/utils/store/Provider';
+import Notice from './src/app/notice/page'
 
 function App(): React.JSX.Element {
   const Stack = createNativeStackNavigator();
@@ -32,7 +32,7 @@ function App(): React.JSX.Element {
         <NavigationContainer>
           <Stack.Navigator
             screenOptions={{ headerShown: false }}
-            initialRouteName="Counter">
+            initialRouteName="Notice">
             <Stack.Screen name="Login" component={Login} />
             <Stack.Screen name="Signup" component={Signup} />
             <Stack.Screen name="NavBar" component={NavBar} />
@@ -45,6 +45,7 @@ function App(): React.JSX.Element {
             <Stack.Screen name="Search" component={Search} />
             <Stack.Screen name="KeywordReview" component={KeywordReview} />
             <Stack.Screen name="QandADetail" component={QandADetail} />
+            <Stack.Screen name="Notice" component={Notice} />
           </Stack.Navigator>
         </NavigationContainer>
       </ReduxProvider>
