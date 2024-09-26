@@ -3,48 +3,55 @@ import styled from "styled-components/native";
 import { Arrow, Close } from "../../assets"
 import { color } from "../../styles";
 import { Dimensions } from "react-native"
+import { useSelector } from "react-redux";
+import { RootState } from "../../utils/store/store";
+import { photo } from "../../app/dummy/photo";
+import { useDispatch } from "react-redux";
+import { isShow } from "../../utils/store/modules/appearExpandPhoto"
 
-interface PropsType {
-  photo?: Array<string | number>,
-  selected?: string,
-}
+export default function ExpandImage() {
 
-export default function ExpandImage({ photo, selected }: PropsType) {
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const dispatch = useDispatch()
 
   const height = Dimensions.get('window').height;
-  const image = "https://i.namu.wiki/i/t1UsC9Fl1UtAxwAsgtm2sRk3Ble2d1_PT3jasrYQW5MbxAyIDc2stvUVfnzyyUFEFRqc-Crhz_4lfZ73hrmbKw.webp"
+  const showImage = useSelector((state: RootState) => state.appearExpandPhoto.pickImage)
+  const isShowImage = useSelector((state: RootState) => state.appearExpandPhoto.appearImage)
+
+  const appearPickImage = showImage && isShowImage
 
   return (
-    <ImageShadow height={height}>
-      <Container>
-        <CancelWrap>
-          <Close color={color.white} onPress={() => { }} />
-        </CancelWrap>
-        <Content>
-          <LeftArrowWrap>
-            <Arrow size={32} color={color.white} rotate='left' />
-          </LeftArrowWrap>
-          <Image source={{ uri: image }} />
-          <RightArrowWrap>
-            <Arrow size={32} color={color.white} rotate='right' />
-          </RightArrowWrap>
-        </Content>
-      </Container>
-    </ImageShadow>
+    <>
+      {
+        appearPickImage &&
+
+        <ImageShadow height={height} onPress={() => dispatch(isShow(false))}>
+          <CancelWrap>
+            <Close color={color.white} onPress={() => dispatch(isShow(false))} />
+          </CancelWrap>
+          
+          <Content>
+            <LeftArrowWrap>
+              <Arrow size={32} color={color.white} rotate='left' />
+            </LeftArrowWrap>
+
+            <Image source={{ uri: showImage }} />
+            
+            <RightArrowWrap>
+              <Arrow size={32} color={color.white} rotate='right' />
+            </RightArrowWrap>
+          </Content>
+        </ImageShadow>
+      }
+    </>
   )
 }
 
-const ImageShadow = styled.View<{ height: number }>`
+const ImageShadow = styled.TouchableOpacity<{ height: number }>`
 position: absolute;
 width: 100%;
-height: ${({height}) => height}px;
+height: 100%;
 background-color: rgba(0, 0, 0, 0.2);
-z-index: 1000;
-`
-
-const Container = styled.View`
-flex: 1;
+z-index: 10000;
 `
 
 const CancelWrap = styled.View`
@@ -54,10 +61,14 @@ padding: 20px 16px;
 `
 
 const Content = styled.View`
+height: 85%;
+display: flex;
+justify-content: center;
+align-items: center;
 padding: 48px 20px;
 `
 
-const LeftArrowWrap = styled.View`
+const LeftArrowWrap = styled.TouchableOpacity`
 position: absolute;
 top: 50%;
 left: 0;
@@ -67,7 +78,7 @@ background-color: rgba(0, 0, 0, 0.2);
 z-index: 10;
 `
 
-const RightArrowWrap = styled.View`
+const RightArrowWrap = styled.TouchableOpacity`
 position: absolute;
 top: 50%;
 right: 0;
