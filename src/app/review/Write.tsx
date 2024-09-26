@@ -34,7 +34,7 @@ export default function Write() {
         text="리뷰 작성"
         leftIcon={
           <Close
-            onPress={() => navigation.navigate('Review', {setting: {star: rating, content: contentValue}})}
+            onPress={() => navigation.navigate('Review')}
           />}
         rightIcon={
           <TouchableOpacity onPress={() => navigation.push('KeywordReview', { rating, contentValue })}>

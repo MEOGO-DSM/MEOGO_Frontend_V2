@@ -16,6 +16,8 @@ function Review() {
 
   return (
     <>
+      <ExpandImage />
+
       <TopBar
         text="대덕소프트웨어마이스터고"
         leftIcon={
@@ -24,8 +26,8 @@ function Review() {
           </TouchableOpacity>
         }
       />
+      
       <Container contentContainerStyle={{ gap: 6 }}>
-        {/* <ExpandImage /> */}
         <SchoolContentBox>
           <ImgSlider />
 

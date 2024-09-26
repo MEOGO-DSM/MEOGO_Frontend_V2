@@ -8,7 +8,7 @@ import Tag from "../../components/Review/Tag";
 import { Arrow } from "../../assets/Arrow"
 import { useNavigation } from "@react-navigation/native";
 import { reviewKeywordValue } from "../dummy/reviewKeywordValue";
-import { reviewUpload } from '../../apis/reviewUpload';
+import { uploadReview } from '../../apis/Review/uploadReview';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../utils/store/store';
 import { useRoute } from '@react-navigation/native';
@@ -24,7 +24,7 @@ export default function KeywordReview() {
     const navigation = useNavigation<StackNavigationProp<any>>()
     const images = useSelector((state: RootState) => state.imageAddRemove.image)
     const route = useRoute();
-    const { rating, contentValue } = route.params as RouteParams;
+    const { rating , contentValue } = route.params as RouteParams;
 
     const [keyword, setKeyword] = useState<string[]>([])
 
@@ -41,7 +41,9 @@ export default function KeywordReview() {
     }
 
     const handleSubmit = async () => {
-        const response = await reviewUpload(images, contentValue, rating, keyword)
+        const response = await uploadReview(images, contentValue, rating, keyword)
+
+        console.log(route.params);
 
         if (response) {
             console.log("리뷰가 성공적으로 작성되었습니다")
@@ -77,14 +79,18 @@ export default function KeywordReview() {
                         <Font text={section.title} kind="semi18" />
                         <TagWrap>
                             {section.content.map((tag, index) => (
-                                <Tag key={index} text={tag} onPress={() => handleTagPress(tag)} selected={keyword.includes(tag)} />
+                                <Tag
+                                  key={index}
+                                  text={tag}
+                                  onPress={() => handleTagPress(tag)}
+                                  selected={keyword.includes(tag)}
+                                />
                             ))}
                         </TagWrap>
                     </KeyWordSectionBox>
                 ))}
 
             </Content>
-
         </Container>
     )
 }
