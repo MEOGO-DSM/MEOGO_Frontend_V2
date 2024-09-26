@@ -6,6 +6,20 @@ import { messageList } from "../dummy/messageList"
 
 export default function Notice() {
 
+  const shouldHideMark = (date: string) => {
+    const [datePart, timePart] = date.split(' ');
+    const [day, month, year] = datePart.split('.').map(Number);
+    const [hours, minutes] = timePart.split(':').map(Number);
+  
+    const inputDate = new Date(2000 + year, month - 1, day, hours, minutes);
+    const currentDate = new Date();
+  
+    const timeDifference = currentDate.getTime() - inputDate.getTime();
+    const twentyFourHours = 24 * 60 * 60 * 1000;
+  
+    return timeDifference >= twentyFourHours;
+  }
+  
   return (
     <>
       <TopBar
@@ -15,10 +29,10 @@ export default function Notice() {
       {
         messageList ? <Content>
           {
-            messageList.map((value) => (
-              <MessageBox>
+            messageList.map((value, index) => (
+              <MessageBox key={index}>
                 <Font text={value.text} kind="medium18" />
-                <CheckIcon></CheckIcon>
+                { !shouldHideMark(value.date) && <CheckIcon></CheckIcon> }
               </MessageBox>
             ))
           }
