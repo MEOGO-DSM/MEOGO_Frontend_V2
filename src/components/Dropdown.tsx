@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import styled from 'styled-components/native';
 import {Font, color} from '../styles';
 import {Arrow} from '../assets';
+import {useNavigation} from '@react-navigation/native';
+import {StackNavigationProp} from '@react-navigation/stack';
 
 interface DropdownProps {
   defaultValue: string;
@@ -12,6 +14,7 @@ interface DropdownProps {
 export const Dropdown = ({defaultValue, onSelect, items}: DropdownProps) => {
   const [value, setValue] = useState<string>(defaultValue || '');
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const navigation = useNavigation<StackNavigationProp<any>>();
 
   const handleDropdownClick = (item: string) => {
     setValue(item);
@@ -30,27 +33,30 @@ export const Dropdown = ({defaultValue, onSelect, items}: DropdownProps) => {
         />
       </DropdownContainer>
       {isOpen && (
-        <DropdownList>
-          {items.map((item, index) => (
-            <DropdownItem key={index} onPress={() => handleDropdownClick(item)}>
+        <DropdownList
+          data={items}
+          keyExtractor={(item: any) => item}
+          renderItem={({item}: any) => (
+            <DropdownItem onPress={() => handleDropdownClick(item)}>
               <Font text={item} kind="medium14" color="gray800" />
             </DropdownItem>
-          ))}
-        </DropdownList>
+          )}
+        />
       )}
     </DropdownWrapper>
   );
 };
 
 const DropdownWrapper = styled.View`
-  position: relative;
-  width: 30%;
-  z-index: 10;
+  /* position: relative;
+  width: 100px;
+  height: 300px;
+  z-index: 100; */
 `;
 
-const DropdownList = styled.ScrollView`
+const DropdownList = styled.FlatList`
   position: absolute;
-  top: 110%;
+  top: 40px;
   left: 0;
   right: 0;
   background-color: ${color.white};
@@ -59,6 +65,14 @@ const DropdownList = styled.ScrollView`
   max-height: 200px;
   z-index: 100;
 `;
+
+const DropdownItem = styled.TouchableOpacity`
+  padding: 12px;
+  border-bottom-width: 1px;
+  border-bottom-color: ${color.gray100};
+  background-color: ${color.white};
+  min-height: 40px;
+`;
 const DropdownContainer = styled.TouchableOpacity`
   border-radius: 6px;
   padding: 10px 12px;
@@ -66,10 +80,5 @@ const DropdownContainer = styled.TouchableOpacity`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-`;
-const DropdownItem = styled.TouchableOpacity`
-  padding: 12px;
-  border-bottom-width: 1px;
-  border-bottom-color: ${color.gray200};
-  background-color: ${color.white};
+  gap: 6px;
 `;

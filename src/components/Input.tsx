@@ -3,6 +3,7 @@ import styled from 'styled-components/native';
 import {Font} from '../styles/font';
 import {color} from '../styles/color';
 import {Eye, EyeOff} from '../assets';
+import {KeyboardType, ReturnKeyType} from 'react-native';
 
 interface InputProps {
   title?: string;
@@ -15,6 +16,9 @@ interface InputProps {
   noError?: boolean;
   multiline?: boolean;
   readonly?: boolean;
+  keyboardType?: KeyboardType;
+  returnKeyType?: ReturnKeyType;
+  onSubmitEditing?: (i: any) => void;
   onChangeText?: (i: string) => void;
   onKeyPress?: (i: any) => void;
 }
@@ -30,6 +34,9 @@ export const Input = ({
   noError,
   readonly,
   multiline,
+  keyboardType = 'default',
+  returnKeyType = 'done',
+  onSubmitEditing,
   onChangeText,
   onKeyPress,
 }: InputProps) => {
@@ -45,6 +52,9 @@ export const Input = ({
       )}
       <InputContainer focused={isFocused}>
         <InputBox
+          keyboardType={keyboardType}
+          returnKeyType={returnKeyType}
+          onSubmitEditing={onSubmitEditing}
           readOnly={readonly}
           value={value}
           autoFocus={autoFocus}
