@@ -2,10 +2,9 @@ import React, {useState, useEffect} from 'react';
 import {Arrow, Search} from '../../assets';
 import styled from 'styled-components/native';
 import {color, Font} from '../../styles';
-import {schoolList} from '../dummy/schoolList';
 import SchoolCard from '../../components/search/SchoolCard';
 import {TopBar, Input, Dropdown} from '../../components';
-import {region} from '../../utils';
+import {region, schoolData} from '../../utils';
 import {fetchSchoolList} from '../../apis/school';
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
@@ -65,12 +64,12 @@ function FindSchool() {
           onSelect={handleSelect}
         />
         <Dropdown
-          items={region}
+          items={schoolData.highSchoolType}
           defaultValue="학교 유형"
           onSelect={handleSelect}
         />
         <Dropdown
-          items={region}
+          items={schoolData.highSchoolDetail}
           defaultValue="세부 유형"
           onSelect={handleSelect}
         />
