@@ -23,21 +23,24 @@ export default function SchoolCard({
   return (
     <Container>
       <Content>
-        <Logo_Img size={48} />
-        <InfoWrap>
-          <SchoolInfoWrap>
-            <Font text={schoolName} kind="semi18" />
-            <Font text={address} kind="regular14" color="gray500" />
-          </SchoolInfoWrap>
-          <ReviewWrap>
-            <StarRating num={score} />
-            <Font
-              text={`${reviewCount}개의 리뷰`}
-              kind="medium12"
-              color="gray400"
-            />
-          </ReviewWrap>
-        </InfoWrap>
+        <SchoolBox>
+          <Logo_Img size={48} />
+          <InfoWrap>
+            <SchoolInfoWrap>
+              <Font text={schoolName} kind="semi18" />
+              <Font text={address} kind="regular14" color="gray500" />
+            </SchoolInfoWrap>
+            <ReviewWrap>
+              <StarRating num={score} />
+              <Font
+                text={`${reviewCount}개의 리뷰`}
+                kind="medium12"
+                color="gray400"
+              />
+            </ReviewWrap>
+          </InfoWrap>
+        </SchoolBox>
+
         <BookMarkBox onPress={() => setPressBookmark(!pressBookmark)}>
           <Bookmark
             size={24}
@@ -50,17 +53,26 @@ export default function SchoolCard({
 }
 
 const Container = styled.View`
-  padding: 20px 0;
   border-bottom-width: 1px;
   border-bottom-color: ${color.gray100};
+  width: 100%;
 `;
 
 const Content = styled.View`
   flex-direction: row;
   gap: 16px;
+  width: 100%;
+`;
+
+const SchoolBox = styled.View`
+  flex-direction: row;
+  gap: 16px;
+  align-items: center;
+  width: 100%;
 `;
 
 const InfoWrap = styled.View`
+  padding: 20px 0;
   flex: 1;
   gap: 4px;
 `;
@@ -75,5 +87,5 @@ const ReviewWrap = styled.View`
 `;
 
 const BookMarkBox = styled.TouchableOpacity`
-  padding: 4px;
+  padding: 20px;
 `;
