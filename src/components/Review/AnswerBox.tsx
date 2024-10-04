@@ -1,9 +1,12 @@
+import { useState } from 'react'
 import styled from "styled-components/native";
 import { Font, color } from "../../styles";
 import { Heart, Setting, Answer } from "../../assets"
 import ReplyBox from "./ReplyBox";
 
 export default function AnswerBox() {
+  const [pressHeart, setPressHeart] = useState<boolean>(false)
+
   return (
     <>
       <AnswerBoxWrap>
@@ -19,8 +22,11 @@ export default function AnswerBox() {
         </AnswerWrap>
 
         <HeartAndReply>
-          <ActiveWrap>
-            <Heart color={color.gray600} />
+          <ActiveWrap onPress={() => setPressHeart(!pressHeart)}>
+            <Heart
+              color={pressHeart ? color.amber600 : color.gray600}
+              fill={pressHeart? color.amber600 : 'none'}
+            />
             <Font text="4" kind="medium16" color="gray600" />
           </ActiveWrap>
           <ActiveWrap>
