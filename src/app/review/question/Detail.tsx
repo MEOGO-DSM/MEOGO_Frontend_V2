@@ -1,16 +1,16 @@
 import React from 'react';
 import { KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
-import { TopBar } from "../../components";
-import { Arrow, Setting } from '../../assets';
+import { TopBar } from "../../../components";
+import { Arrow, Setting } from '../../../assets';
 import styled from "styled-components/native";
-import { Font, color } from "../../styles";
-import AnswerBox from '../../components/Review/AnswerBox';
+import { Font, color } from "../../../styles";
+import AnswerBox from '../../../components/Review/AnswerBox';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { useDispatch } from 'react-redux';
-import { selectTag } from '../../utils/store/modules/questionTagSelect'
+import { selectTag } from '../../../utils/store/modules/questionTagSelect'
 
-export default function QAndADetail() {
+export default function Detail() {
 
   const dispatch = useDispatch()
 

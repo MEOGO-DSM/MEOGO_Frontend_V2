@@ -1,11 +1,11 @@
-import { TopBar } from "../../components"
-import { Arrow } from "../../assets"
+import { TopBar } from "../../../components"
+import { Arrow } from "../../../assets"
 import { useNavigation } from "@react-navigation/native"
 import { StackNavigationProp } from "@react-navigation/stack"
 import styled from "styled-components/native"
-import FilterTag from "../../components/Review/FilterTag"
-import { QuestionBox } from "../../components/Review/QuestionBox"
-import { color } from "../../styles"
+import FilterTag from "../../../components/Review/FilterTag"
+import { QuestionBox } from "../../../components/Review/QuestionBox"
+import { color } from "../../../styles"
 import { ScrollView } from "react-native"
 
 export default function QuestionTagGather() {

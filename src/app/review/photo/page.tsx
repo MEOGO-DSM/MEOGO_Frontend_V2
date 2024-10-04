@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components/native";
-import { Font } from "../../styles/font"
-import { color } from "../../styles/color";
-import { photo } from "../dummy/photo"
+import { Font } from "../../../styles/font"
+import { color } from "../../../styles/color";
+import { photo } from "../../dummy/photo"
 import { TouchableOpacity } from "react-native";
 import { useDispatch } from "react-redux";
-import { show, isShow, currentIndex, currentYear } from "../../utils/store/modules/appearExpandPhoto";
+import { show, isShow, currentIndex, currentYear } from "../../../utils/store/modules/appearExpandPhoto";
 
 export default function Photo() {
     const dispatch = useDispatch()

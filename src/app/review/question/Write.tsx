@@ -1,14 +1,14 @@
-import { TopBar } from "../../components"
-import { Close } from "../../assets"
+import { TopBar } from "../../../components"
+import { Close } from "../../../assets"
 import { TouchableOpacity } from 'react-native'
-import { Font, color } from '../../styles'
+import { Font, color } from '../../../styles'
 import { useState } from "react"
-import { Dropdown } from "../../components/Dropdown"
+import { Dropdown } from "../../../components/Dropdown"
 import styled from "styled-components/native"
 
 const category = ["학교생활질문", "그외", "입학질문"]
 
-export default function Question() {
+export default function Write() {
   const [isError, setIsError] = useState<boolean>(true)
   const [contentValue, setContentValue] = useState<string>('');
   const [limit, setLimit] = useState<number>(0)

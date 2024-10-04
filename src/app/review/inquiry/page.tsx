@@ -1,15 +1,15 @@
 import React from "react";
 import styled from "styled-components/native";
-import { Font } from "../../styles/font"
-import { Filter } from "../../assets"
-import WriteButton from "../../components/Review/WriteButton";
-import StarRating from "../../components/StarRating";
-import { color } from "../../styles/color";
-import ReviewBox from "../../components/Review/ReviewBox"
-import { reviewValue } from "../dummy/reviewValue";
+import { Font } from "../../../styles/font"
+import { Filter } from "../../../assets"
+import WriteButton from "../../../components/Review/WriteButton";
+import StarRating from "../../../components/StarRating";
+import { color } from "../../../styles/color";
+import ReviewBox from "../../../components/Review/ReviewBox"
+import { reviewValue } from "../../dummy/reviewValue";
 import { useNavigation } from "@react-navigation/native";
 
-export default function ReviewWrap() {
+export default function Review() {
 
     const navigation = useNavigation()
 

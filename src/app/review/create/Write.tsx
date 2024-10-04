@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import styled from 'styled-components/native';
-import { TopBar } from '../../components/TopBar';
-import { Close, Media } from '../../assets';
-import { Font } from '../../styles/font';
+import { TopBar } from '../../../components/TopBar';
+import { Close, Media } from '../../../assets';
+import { Font } from '../../../styles/font';
 import { TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { color } from '../../styles/color';
-import AddImgContent from '../../components/Review/AddImgContent';
-import { Star } from '../../assets';
+import { color } from '../../../styles/color';
+import AddImgContent from '../../../components/Review/AddImgContent';
+import { Star } from '../../../assets';
 import { StackNavigationProp } from '@react-navigation/stack';
-import useImagePicker from '../../utils/imageUpload'
+import useImagePicker from '../../../utils/imageUpload'
 
 export default function Write() {
   const { onSelectImage } = useImagePicker();

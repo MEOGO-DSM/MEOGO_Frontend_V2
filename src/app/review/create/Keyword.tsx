@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import styled from "styled-components/native";
-import { TopBar } from "../../components/TopBar";
+import { TopBar } from "../../../components/TopBar";
 import { TouchableOpacity } from "react-native";
-import { color } from "../../styles/color";
-import { Font } from "../../styles/font"
-import Tag from "../../components/Review/Tag";
-import { Arrow } from "../../assets/Arrow"
+import { color } from "../../../styles/color";
+import { Font } from "../../../styles/font"
+import Tag from "../../../components/Review/Tag";
+import { Arrow } from "../../../assets/Arrow"
 import { useNavigation } from "@react-navigation/native";
-import { reviewKeywordValue } from "../dummy/reviewKeywordValue";
-import { uploadReview } from '../../apis/Review/uploadReview';
+import { reviewKeywordValue } from "../../dummy/reviewKeywordValue";
+import { uploadReview } from '../../../apis/Review/uploadReview';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../utils/store/store';
+import { RootState } from '../../../utils/store/store';
 import { useRoute } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 
@@ -19,12 +19,12 @@ interface RouteParams {
     contentValue: string;
 }
 
-export default function KeywordReview() {
+export default function Keyword() {
 
     const navigation = useNavigation<StackNavigationProp<any>>()
     const images = useSelector((state: RootState) => state.imageAddRemove.image)
     const route = useRoute();
-    const { rating , contentValue } = route.params as RouteParams;
+    const { rating, contentValue } = route.params as RouteParams;
 
     const [keyword, setKeyword] = useState<string[]>([])
 
@@ -57,7 +57,7 @@ export default function KeywordReview() {
         <Container>
             <TopBar
                 text="키워드 리뷰"
-                leftIcon={<Arrow onPress={() => {navigation.navigate('ReviewWrite')}} />}
+                leftIcon={<Arrow onPress={() => { navigation.navigate('ReviewWrite') }} />}
                 rightIcon={
                     <TouchableOpacity onPress={handleSubmit}>
                         <Font
@@ -80,10 +80,10 @@ export default function KeywordReview() {
                         <TagWrap>
                             {section.content.map((tag, index) => (
                                 <Tag
-                                  key={index}
-                                  text={tag}
-                                  onPress={() => handleTagPress(tag)}
-                                  selected={keyword.includes(tag)}
+                                    key={index}
+                                    text={tag}
+                                    onPress={() => handleTagPress(tag)}
+                                    selected={keyword.includes(tag)}
                                 />
                             ))}
                         </TagWrap>

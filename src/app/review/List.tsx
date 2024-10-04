@@ -1,15 +1,15 @@
 import styled from 'styled-components/native';
 import { View } from 'react-native';
 import { color, Font } from '../../styles';
-import Review from './Review';
-import QAndA from './QAndA';
-import SchoolInfo from './SchoolInfo';
-import Photo from './Photo';
+import Review from './inquiry/page';
+import QAndA from './question/page';
+import SchoolInfo from './info/page';
+import Photo from './photo/page';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../utils/store/store';
 import { selectTab } from '../../utils/store/modules/tabListSelect';
 
-export default function ListWrap() {
+export default function List() {
   const dispatch = useDispatch();
   const selectedListValue = useSelector((state: RootState) => state.tabReducer.selectedTab);
 
