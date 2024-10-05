@@ -36,6 +36,7 @@ export default function Write() {
       <Container>
         <SelectWrap>
           <Dropdown
+            width={'100%'}
             defaultValue="카테고리"
             items={category}
             onSelect={() => { }}
