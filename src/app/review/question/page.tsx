@@ -4,15 +4,18 @@ import { color } from '../../../styles';
 import { QuestionBox } from '../../../components/Review/QuestionBox';
 import FilterTag from '../../../components/Review/FilterTag';
 import { Pen } from '../../../assets'
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
 
 export default function QAndA() {
+  const navigation = useNavigation<StackNavigationProp<any>>()
 
   return (
     <Container>
       <FilterTag />
       <QuestionBox />
       <QuestionBox />
-      <WriteButton>
+      <WriteButton onPress={() => navigation.navigate('QuestionWrite')}>
         <Pen color='white' />
       </WriteButton>
     </Container>

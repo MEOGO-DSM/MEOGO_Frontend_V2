@@ -21,6 +21,7 @@ import NavBar from './src/components/NavBar';
 import Signup from './src/app/signup/page';
 import QAndADetail from './src/app/review/question/Detail'
 import QuestionTagGather from './src/app/review/question/QuestionTagGather';
+import QuestionWrite from './src/app/review/question/Write'
 import QueryProvider from './src/utils/query/Provider';
 import ReduxProvider from './src/utils/store/Provider';
 import Test from './src/app/Test';
@@ -33,7 +34,7 @@ function App(): React.JSX.Element {
         <NavigationContainer>
           <Stack.Navigator
             screenOptions={{ headerShown: false }}
-            initialRouteName="Review">
+            initialRouteName="QuestionWrite">
             <Stack.Screen name="Login" component={Login} />
             <Stack.Screen name="Signup" component={Signup} />
             <Stack.Screen name="NavBar" component={NavBar} />
@@ -47,6 +48,7 @@ function App(): React.JSX.Element {
             <Stack.Screen name="KeywordReview" component={KeywordReview} />
             <Stack.Screen name="QAndADetail" component={QAndADetail} />
             <Stack.Screen name="QuestionTagGather" component={QuestionTagGather} />
+            <Stack.Screen name="QuestionWrite" component={QuestionWrite} />
             <Stack.Screen name="Test" component={Test} />
           </Stack.Navigator>
         </NavigationContainer>
