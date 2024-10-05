@@ -7,38 +7,33 @@ import StarRating from "../../../components/StarRating";
 import { color } from "../../../styles/color";
 import ReviewBox from "../../../components/Review/ReviewBox"
 import { reviewValue } from "../../dummy/reviewValue";
-import { useNavigation } from "@react-navigation/native";
+import { starAndRanking } from "../../dummy/starAndRanking";
 
 export default function Review() {
-
-    const navigation = useNavigation()
-
-    const Data = [
-        { value: "만족도", ratio: 100 },
-        { value: "교내활동", ratio: 50 },
-        { value: "교내시설", ratio: 90 },
-    ]
 
     return (
         <Container>
             <ReviewTotalWrap>
                 <ReviewValueContent>
                     <ScopeWrap>
-                        <Font text="4.0" kind="semi36" />
-                        <StarRating num={4} isText={false} />
+                        <Font text={String(starAndRanking.star)} kind="semi36" />
+                        <StarRating num={Math.floor(starAndRanking.star)} isText={false} />
                     </ScopeWrap>
                     <GraphWrap>
-                        {Data.map(({ value, ratio }, index) => (
-                            <DataWrap key={index}>
-                                <Font text={value} kind="medium12" />
-                                <DataBar>
-                                    <Bar width={ratio * 1.4} />
-                                </DataBar>
-                                <RatioBox>
-                                    <Font text={`${ratio}%`} kind="medium12" />
-                                </RatioBox>
-                            </DataWrap>
-                        ))}
+                        {Object.entries(starAndRanking).map(([key, value]) => {
+                            if (key === 'star') return null;
+                            return (
+                                <DataWrap key={key}>
+                                    <Font text={value.tag_name} kind="medium12" />
+                                    <DataBar>
+                                        <Bar width={value.percentage * 1.4} />
+                                    </DataBar>
+                                    <RatioBox>
+                                        <Font text={`${value.percentage}%`} kind="medium12" />
+                                    </RatioBox>
+                                </DataWrap>
+                            );
+                        })}
                     </GraphWrap>
                 </ReviewValueContent>
             </ReviewTotalWrap>
@@ -59,20 +54,15 @@ export default function Review() {
                 </TopWrap>
 
                 <ReviewListWrap>
-                    {reviewValue ? (
-                        reviewValue.reviews.length > 0 ? (
-                            reviewValue.reviews.map((value) => (
-                                <ReviewBox
-                                    key={value.id}
-                                    {...value}
-                                />
-                            ))
-                        ) : (
-                            <NoReviewWrap>
-                                <Font text="아직 리뷰가 없어요!" kind="medium16" />
-                            </NoReviewWrap>
-                        )
-                    ) : null}
+                    {reviewValue && reviewValue.reviews.length > 0 ? (
+                        reviewValue.reviews.map((value) => (
+                            <ReviewBox key={value.id} {...value} />
+                        ))
+                    ) : (
+                        <NoReviewWrap>
+                            <Font text="아직 리뷰가 없어요!" kind="medium16" />
+                        </NoReviewWrap>
+                    )}
                 </ReviewListWrap>
             </UserReviewWrap>
         </Container>
