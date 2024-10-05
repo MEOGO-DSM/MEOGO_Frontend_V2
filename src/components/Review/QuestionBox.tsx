@@ -6,28 +6,48 @@ import { TouchableOpacity } from 'react-native'
 import { useNavigation } from "@react-navigation/native"
 import { StackNavigationProp } from '@react-navigation/stack';
 
-export const QuestionBox = () => {
+interface PropsType {
+  id?: number,
+  content?: string,
+  date?: string,
+  questionType?: string,
+  accountId?: string
+}
+
+const tagMap: { [key: string]: string } = {
+  LIFE: '학교생활질문',
+  ENTRANCE: '입학관련질문',
+  FACILITIES: '시설관련질문',
+  DEFAULT: '그외',
+};
+
+
+export const QuestionBox = ({ id, content, date, questionType, accountId }: PropsType) => {
   const navigation = useNavigation<StackNavigationProp<any>>()
-  
+
   const [clickBell, setClickBell] = useState<boolean>(false)
 
+  const tagName = tagMap[questionType as keyof typeof tagMap] || tagMap.DEFAULT;
+
   return (
-    <TouchableOpacity onPress={() => navigation.navigate("QAndADetail")}>
+    <TouchableOpacity
+      key={id}
+      onPress={() => navigation.navigate("QAndADetail")}>
       <QuestionContent>
         <TagAndContentWrap>
           <Tag>
-            <Font text="학교생활질문" kind="medium14" color="gray500" />
+            <Font text={tagName} kind="medium14" color="gray500" />
           </Tag>
           <Content>
             <Font text="Q. " kind="semi18" color="amber700" />
             <QuestionWrap>
-              <Font text="기숙사에서 몇명이 함께 방을 쓰나요? 그리고 룸메는 한번 정해지면 그대로 쭉 가는건가요? 그리고 룸메는 한번 정해지면 그대로 쭉 가는건가요?" kind="regular18" numberOfLines={3} />
+              <Font text={content} kind="regular18" numberOfLines={3} />
             </QuestionWrap>
           </Content>
         </TagAndContentWrap>
         <UserIdAndTimeWrap>
-          <Font text="hamster0305" kind="medium14" color="gray400" />
-          <Font text="02.19 23:36" kind="regular14" color="gray400" />
+          <Font text={accountId} kind="medium14" color="gray400" />
+          <Font text={date && date.substr(3)} kind="regular14" color="gray400" />
         </UserIdAndTimeWrap>
       </QuestionContent>
 
