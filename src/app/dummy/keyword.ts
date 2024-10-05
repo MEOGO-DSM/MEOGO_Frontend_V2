@@ -1,4 +1,4 @@
-export const Keyword = [
+export const keyword = [
   {
       "keyword": "전체 만족",
       "category": "EDUCATION"
