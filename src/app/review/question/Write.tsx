@@ -6,6 +6,8 @@ import { useEffect, useState } from "react"
 import { Dropdown } from "../../../components/Dropdown"
 import styled from "styled-components/native"
 import { uploadQuestion } from "../../../apis/question/uploadQuestion"
+import { useNavigation } from "@react-navigation/native"
+import { StackNavigationProp } from "@react-navigation/stack"
 
 type QuestionType = 'LIFE' | 'ENTRANCE' | 'FACILITIES' | 'ETC';
 
@@ -19,6 +21,8 @@ const questionTypeMap: Record<string, QuestionType> = {
 };
 
 export default function Write() {
+
+  const navigation = useNavigation<StackNavigationProp<any>>()
 
   const school_id = 1;
 
@@ -54,13 +58,14 @@ export default function Write() {
     console.log(questionType, title, content);
 
     uploadQuestion(school_id, content, questionType)
+    navigation.navigate('Review')
   }
 
   return (
     <>
       <TopBar
         text="글쓰기"
-        leftIcon={<Close onPress={() => { }} />}
+        leftIcon={<Close onPress={() => navigation.navigate('Review')} />}
         rightIcon={
           <TouchableOpacity onPress={handleSubmit}>
             <Font
