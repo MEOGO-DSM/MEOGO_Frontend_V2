@@ -7,6 +7,7 @@ import FilterTag from "../../../components/Review/FilterTag"
 import { QuestionBox } from "../../../components/Review/QuestionBox"
 import { color } from "../../../styles"
 import { ScrollView } from "react-native"
+import { questionTag } from "../../dummy/questionTag"
 
 export default function QuestionTagGather() {
 
@@ -26,10 +27,17 @@ export default function QuestionTagGather() {
           contentContainerStyle={{ flexGrow: 1 }}
           keyboardShouldPersistTaps="handled"
         >
-          <QuestionBox />
-          <QuestionBox />
-          <QuestionBox />
-          <QuestionBox />
+          {
+            questionTag?.map(({ id, content, date, question_type, account_id }) => (
+              <QuestionBox
+                id={id}
+                content={content}
+                date={date}
+                questionType={question_type}
+                accountId={account_id}
+              />
+            ))
+          }
         </ScrollView>
       </Content>
     </>

@@ -5,6 +5,7 @@ import { useState } from "react"
 import { TouchableOpacity } from 'react-native'
 import { useNavigation } from "@react-navigation/native"
 import { StackNavigationProp } from '@react-navigation/stack';
+import { useQuestionTagName } from "../../utils/useQuestionTagName"
 
 interface PropsType {
   id?: number,
@@ -14,20 +15,12 @@ interface PropsType {
   accountId?: string
 }
 
-const tagMap: { [key: string]: string } = {
-  LIFE: '학교생활질문',
-  ENTRANCE: '입학관련질문',
-  FACILITIES: '시설관련질문',
-  DEFAULT: '그외',
-};
-
-
 export const QuestionBox = ({ id, content, date, questionType, accountId }: PropsType) => {
   const navigation = useNavigation<StackNavigationProp<any>>()
 
   const [clickBell, setClickBell] = useState<boolean>(false)
 
-  const tagName = tagMap[questionType as keyof typeof tagMap] || tagMap.DEFAULT;
+  const tagName = useQuestionTagName(questionType)
 
   return (
     <TouchableOpacity
