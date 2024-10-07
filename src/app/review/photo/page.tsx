@@ -5,30 +5,32 @@ import { color } from "../../../styles/color";
 import { photo } from "../../dummy/photo"
 import { TouchableOpacity } from "react-native";
 import { useDispatch } from "react-redux";
-import { show, isShow, currentIndex, currentYear } from "../../../utils/store/modules/appearExpandPhoto";
+import { show, isShow, imageArray } from "../../../utils/store/modules/appearPhoto"
 
 export default function Photo() {
     const dispatch = useDispatch()
+    const allPhotoLinks = photo.flatMap(item => item.image);
 
-    const handleClick = (image: string, year: number, index: number) => {
+    const handleImageClick = (image: string) => {
         dispatch(show(image))
         dispatch(isShow(true))
-
-        dispatch(currentIndex(index))
-        dispatch(currentYear(year))
+        dispatch(imageArray(allPhotoLinks))
     }
 
     return (
         <>
             <Container>
-                {photo.map((value) => (
+                {photo.map((value, yearIndex) => (
                     <Content>
                         <YearWrap>
                             <Font text={`${value.year}`} kind="medium20" />
                         </YearWrap>
                         <ImgContentWrap>
                             {value.image.map((image, index) => (
-                                <TouchableOpacity onPress={() => handleClick(image, value.year, index)}>
+                                <TouchableOpacity
+                                    key={index}
+                                    onPress={() => handleImageClick(image, index)}
+                                >
                                     <Img source={{ uri: image }} />
                                 </TouchableOpacity>
                             ))}
