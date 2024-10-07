@@ -2,13 +2,13 @@ import { combineReducers } from "redux";
 import imageAddRemove from "./imageAddRemove";
 import tabReducer from "./tabListSelect";
 import questionTagSelect from "./questionTagSelect";
-import appearImage from "./appearPhoto";
+import appearPhoto from "./appearPhoto";
 
 const rootReducer = combineReducers({
   imageAddRemove,
   tabReducer,
   questionTagSelect,
-  appearImage
+  appearPhoto
 }); 
 
 export default rootReducer;

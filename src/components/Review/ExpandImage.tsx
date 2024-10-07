@@ -5,13 +5,13 @@ import { Dimensions } from "react-native"
 import { useSelector } from "react-redux";
 import { RootState } from "../../utils/store/store";
 import { useDispatch } from "react-redux";
-import { isShow, nextImage, prevImage  } from "../../utils/store/modules/appearPhoto"
+import { isShow, nextImage, prevImage } from "../../utils/store/modules/appearPhoto"
 
 export default function ExpandImage() {
 
   const dispatch = useDispatch()
-  const showImage = useSelector((state: RootState) => state.appearImage.currentShowImage)
-  const isShowImage = useSelector((state: RootState) => state.appearImage.isAppearImage)
+  const showImage = useSelector((state: RootState) => state.appearPhoto.currentShowImage)
+  const isShowImage = useSelector((state: RootState) => state.appearPhoto.isAppearImage)
 
   const height = Dimensions.get('window').height;
 
@@ -25,7 +25,7 @@ export default function ExpandImage() {
           </CancelWrap>
 
           <Content>
-            <LeftArrowWrap onPress={() =>  dispatch(prevImage())}>
+            <LeftArrowWrap onPress={() => dispatch(prevImage())}>
               <Arrow size={32} color={color.white} rotate='left' />
             </LeftArrowWrap>
 

@@ -4,6 +4,9 @@ import { Setting } from "../../assets"
 import StarRating from "../StarRating";
 import { Font } from "../../styles/font"
 import { color } from "../../styles/color";
+import { useDispatch } from "react-redux";
+import { TouchableOpacity } from "react-native";
+import { show, isShow, imageArray, currentIndex } from "../../utils/store/modules/appearPhoto"
 
 interface reviewBoxType {
     id?: number,
@@ -12,19 +15,28 @@ interface reviewBoxType {
     user_name?: string,
     profile?: string,
     star?: number,
-    image?: Array<string | undefined>
+    image?: Array<string>
 }
 
-export default function ReviewBox({ id, content, date, user_name, profile, star, image }: reviewBoxType) {
+export default function ReviewBox({ id, content, date, user_name, profile, star, image = [] }: reviewBoxType) {
     const wrapWidth = image ? (image.length > 2 ? '100%' : `${image.length * 160}px`) : '0';
 
     const dateTime = date?.substring(3)
+
+    const dispatch = useDispatch();
+
+    const handleImageClick = (imgSrc: string, index: number) => {
+        dispatch(show(imgSrc));
+        dispatch(isShow(true));
+        dispatch(imageArray(image));
+        dispatch(currentIndex(index))
+    };
 
     return (
         <Container key={id}>
             <ReviewInfoWrap>
                 <UserInfoWrap>
-                    <ProfileImg source={{ uri : profile }} />
+                    <ProfileImg source={{ uri: profile }} />
                     <UserNameAndReview>
                         <Font text={user_name} kind="medium14" />
                         <StarRating num={star} />
@@ -44,7 +56,12 @@ export default function ReviewBox({ id, content, date, user_name, profile, star,
                 <ImgWrap width={wrapWidth} >
                     <ImgSlider contentContainerStyle={{ columnGap: 2 }} horizontal={true}>
                         {image.map((imgSrc, index) => (
-                            <Img key={index} source={{ uri: imgSrc }} />
+                            <TouchableOpacity onPress={() => handleImageClick(imgSrc, index)}>
+                                <Img
+                                    key={index}
+                                    source={{ uri: imgSrc }}
+                                />
+                            </TouchableOpacity>
                         ))}
                     </ImgSlider>
                 </ImgWrap>
