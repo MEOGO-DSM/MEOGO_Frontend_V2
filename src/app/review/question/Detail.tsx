@@ -9,6 +9,7 @@ import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { useDispatch } from 'react-redux';
 import { selectTag } from '../../../utils/store/modules/questionTagSelect'
+import { questionDetail } from '../../dummy/questionDetail';
 
 export default function Detail() {
 
@@ -36,13 +37,13 @@ export default function Detail() {
           contentContainerStyle={{ flexGrow: 1 }}
           keyboardShouldPersistTaps="handled"
         >
-          <Container>
+          <Container key={questionDetail.id}>
             <QuestionWrap>
               <InfoAndContent>
                 <InfoWrap>
                   <UserIdAndTime>
-                    <Font text="limda" kind="semi14" />
-                    <Font text="02.19 23:36" kind="medium12" color="gray400" />
+                    <Font text={questionDetail.account_id} kind="semi14" />
+                    <Font text={questionDetail.date && questionDetail.date.substring(4)} kind="medium12" color="gray400" />
                   </UserIdAndTime>
                   <SettingIcon>
                     <Setting color={color.gray500} rotate="horizontal" />
@@ -50,7 +51,7 @@ export default function Detail() {
                 </InfoWrap>
                 <Content>
                   <Font text="Q. " kind="semi18" color="amber700" />
-                  <Font text="기숙사에서 몇명이 함께 방을 쓰나요? 그리고 룸메는 한번 정해지면 그대로 쭉 가는건가요? 그리고 룸메는 한번 정해지면 그대로 쭉 가는건가요?" kind="regular18" numberOfLines={3} />
+                  <Font text={questionDetail.content} kind="regular18" numberOfLines={3} />
                 </Content>
               </InfoAndContent>
               <QuestionTypeWrap onPress={() => handleQuestionList("학교생활질문")}>
@@ -60,16 +61,25 @@ export default function Detail() {
             </QuestionWrap>
 
             <AnswerSortWrap>
-              <Font text="2개의 답변" kind="semi16" />
+              <Font text={`${questionDetail.comments.count}개의 답변`} kind="semi16" />
               <SortWrap>
                 <Font text="추천순" kind="medium14" color="gray500" />
                 <Arrow size={16} color={color.gray500} rotate="bottom" />
               </SortWrap>
             </AnswerSortWrap>
 
-            <AnswerBox />
-            <AnswerBox />
-
+            {
+              questionDetail.comments.comment_list.map(({ id, account_id, date, content, replies }) => (
+                <AnswerBox
+                  id={id}
+                  writerId={questionDetail.account_id}
+                  accountId={account_id}
+                  date={date}
+                  content={content}
+                  replies={replies}
+                />
+              ))
+            }
           </Container>
         </ScrollView>
 
@@ -111,6 +121,7 @@ const UserIdAndTime = styled.View`
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: center;
   gap: 12px;
 `;
 

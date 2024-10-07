@@ -40,7 +40,7 @@ export const QuestionBox = ({ id, content, date, questionType, accountId }: Prop
         </TagAndContentWrap>
         <UserIdAndTimeWrap>
           <Font text={accountId} kind="medium14" color="gray400" />
-          <Font text={date && date.substr(3)} kind="regular14" color="gray400" />
+          <Font text={date && date.substring(3)} kind="regular14" color="gray400" />
         </UserIdAndTimeWrap>
       </QuestionContent>
 
