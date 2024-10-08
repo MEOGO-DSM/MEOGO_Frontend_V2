@@ -7,7 +7,10 @@ const CURRENT_INDEX = 'CURRENT_INDEX' as const;
 
 export const show = (image: string) => ({ type: CURRENT_SHOW, image });
 export const isShow = (click: boolean) => ({ type: IS_SHOW, click });
-export const imageArray = (image: Array<string>) => ({ type: IMAGE_ARRAY, image });
+export const imageArray = (image: Array<{ year: number, image: string[] }>) => ({
+  type: IMAGE_ARRAY,
+  image
+});
 export const nextImage = () => ({ type: NEXT_IMAGE });
 export const prevImage = () => ({ type: PREV_IMAGE });
 export const currentIndex = (index: number) => ({ type: CURRENT_INDEX, index });
@@ -24,7 +27,7 @@ interface IsShowAction {
 
 interface ImageAction {
   type: typeof IMAGE_ARRAY;
-  image: Array<string>;
+  image: Array<{ year: number, image: string[] }>;
 }
 
 interface NextImageAction {
@@ -45,6 +48,7 @@ const initialState = {
   isAppearImage: false,
   photo: [] as Array<string>,
   currentShowImage: '',
+  currentYearIndex: 0,
 };
 
 type Action = CurrentShowAction | IsShowAction | ImageAction | NextImageAction | PrevImageAction | CurrentIndexAction;
@@ -59,7 +63,7 @@ const appearPhoto = (state = initialState, action: Action) => {
       return {
         ...state,
         photo: action.image,
-        currentShowImage: action.image[0],
+        currentShowImage: action.image[0].image[0],
         currentShowImageIndex: 0
       };
     }
