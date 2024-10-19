@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import Login from './src/app/login/page'
+import Login from './src/app/Login/page';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Community from './src/app/community/page';
@@ -18,11 +18,12 @@ import Write from './src/app/review/Write';
 import KeywordReview from './src/app/review/KeywordReview';
 import Search from './src/app/search/page';
 import NavBar from './src/components/NavBar';
-import Signup from './src/app/signup/page';
+import Signup from './src/app/Signup/page';
 import QandADetail from './src/app/review/QandADetail';
 import Question from './src/app/review/Question';
 import QueryProvider from './src/utils/query/Provider';
 import ReduxProvider from './src/utils/store/Provider';
+import MyPage from './src/app/mypage/page';
 
 function App(): React.JSX.Element {
   const Stack = createNativeStackNavigator();
@@ -31,8 +32,8 @@ function App(): React.JSX.Element {
       <ReduxProvider>
         <NavigationContainer>
           <Stack.Navigator
-            screenOptions={{ headerShown: false }}
-            initialRouteName="Counter">
+            screenOptions={{headerShown: false}}
+            initialRouteName="MyPage">
             <Stack.Screen name="Login" component={Login} />
             <Stack.Screen name="Signup" component={Signup} />
             <Stack.Screen name="NavBar" component={NavBar} />
@@ -45,6 +46,7 @@ function App(): React.JSX.Element {
             <Stack.Screen name="Search" component={Search} />
             <Stack.Screen name="KeywordReview" component={KeywordReview} />
             <Stack.Screen name="QandADetail" component={QandADetail} />
+            <Stack.Screen name="MyPage" component={MyPage} />
           </Stack.Navigator>
         </NavigationContainer>
       </ReduxProvider>
