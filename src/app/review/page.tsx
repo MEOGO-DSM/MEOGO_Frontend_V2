@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components/native';
-import { TopBar } from '../../components/TopBar';
-import { TouchableOpacity } from 'react-native';
-import { Arrow, Star, Bookmark, Link } from '../../assets';
-import { color } from '../../styles/color';
-import { Font } from '../../styles/font';
+import {TopBar} from '../../components/TopBar';
+import {TouchableOpacity} from 'react-native';
+import {Arrow, Star, Bookmark, Link} from '../../assets';
+import {color} from '../../styles/color';
+import {Font} from '../../styles/font';
 import ImgSlider from '../../components/Review/ImgSlider';
 import SchoolTag from '../../components/Review/SchoolTag';
 import ListWrap from './List';
@@ -24,7 +24,7 @@ function Review() {
           </TouchableOpacity>
         }
       />
-      <Container contentContainerStyle={{ gap: 6 }}>
+      <Container contentContainerStyle={{gap: 6}}>
         <ExpandImage />
         <SchoolContentBox>
           <ImgSlider />
@@ -60,7 +60,7 @@ function Review() {
                 onPress={() => setPressBookmark(!pressBookmark)}>
                 <Bookmark
                   size={24}
-                  color={pressBookmark ? `${color.gray700}` : 'none'}
+                  color={pressBookmark ? 'gray700' : 'transparent'}
                 />
                 <Font text="저장하기" kind="medium16" color="gray700" />
               </BookmarkLinkButton>

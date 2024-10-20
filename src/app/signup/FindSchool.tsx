@@ -9,7 +9,7 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import {fetchSchoolList} from '../../apis/school';
 
 function FindSchool({onSelectSchool}: any) {
-const tagList = ['초등학교', '중학교', '고등학교', '대학교'];
+  const tagList = ['초등학교', '중학교', '고등학교', '대학교'];
   const [pressed, setPressed] = useState<number>(0);
   const [filteredSchoolList, setFilteredSchoolList] = useState<any[]>([]);
   const [inputValue, setInputValue] = useState<string>('');
@@ -37,7 +37,7 @@ const tagList = ['초등학교', '중학교', '고등학교', '대학교'];
           value={inputValue}
           onChangeText={handleInputChange}
           placeholder="재학 중인 학교를 검색해주세요"
-          icon={<Search color={`${color.gray400}`} />}
+          icon={<Search color={color.gray400} />}
         />
       </SearchBox>
       <TagContainer>

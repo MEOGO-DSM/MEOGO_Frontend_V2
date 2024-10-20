@@ -1,18 +1,18 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components/native';
-import { color } from '../../styles/color';
-import { Font } from '../../styles/font';
+import {color} from '../../styles/color';
+import {Font} from '../../styles/font';
 import Review from './Review';
-import QandA from './QandA';
+import Qanda from './Qanda';
 import SchoolInfo from './SchoolInfo';
 import Photo from './Photo';
-import { View } from 'react-native';
+import {View} from 'react-native';
 
 const selectValue = [
-  { name: '리뷰', component: Review },
-  { name: 'Q&A', component: QandA },
-  { name: '학교 정보', component: SchoolInfo },
-  { name: '사진', component: Photo },
+  {name: '리뷰', component: Review},
+  {name: 'Q&A', component: Qanda},
+  {name: '학교 정보', component: SchoolInfo},
+  {name: '사진', component: Photo},
 ];
 
 export default function ListWrap() {
@@ -40,9 +40,7 @@ export default function ListWrap() {
         ))}
       </ListContainer>
 
-      <View>
-        {renderSelectedComponent()}
-      </View>
+      <View>{renderSelectedComponent()}</View>
     </>
   );
 }
@@ -53,7 +51,7 @@ const ListContainer = styled.View`
   justify-content: space-around;
 `;
 
-const SelectBox = styled.TouchableOpacity<{ isSelected: boolean }>`
+const SelectBox = styled.TouchableOpacity<{isSelected: boolean}>`
   border-bottom-width: ${props => (props.isSelected ? '2px' : '0')};
   border-bottom-color: ${color.black};
   padding: 16px 8px;

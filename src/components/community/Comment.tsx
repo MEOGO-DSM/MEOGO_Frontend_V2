@@ -19,7 +19,7 @@ function Comment({userName, date, contents}: PropsType) {
           <Font text="02.19 23:46" kind="medium12" color="gray400" />
         </Info>
         <More>
-          <Menu size={20} color={`${color.gray400}`} />
+          <Menu size={20} color={color.gray400} />
         </More>
       </InfoBox>
       <Font

@@ -1,40 +1,40 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components/native';
-import { TopBar } from '../../components/TopBar';
-import { Close, Media } from '../../assets';
-import { Font } from '../../styles/font';
-import { TouchableOpacity } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { color } from '../../styles/color';
+import {TopBar} from '../../components/TopBar';
+import {Close, Media} from '../../assets';
+import {Font} from '../../styles/font';
+import {TouchableOpacity} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+import {color} from '../../styles/color';
 import AddImgContent from '../../components/Review/AddImgContent';
-import { Star } from '../../assets';
-import { ImagePickerResponse } from 'react-native-image-picker';
-import { RequestStoragePermission } from '../../utils/RequestStoragePermission';
+import {Star} from '../../assets';
+import {ImagePickerResponse} from 'react-native-image-picker';
+import {RequestStoragePermission} from '../../utils/RequestStoragePermission';
 import * as ImagePicker from 'react-native-image-picker';
-import { StackNavigationProp } from '@react-navigation/stack';
+import {StackNavigationProp} from '@react-navigation/stack';
 
 export default function Write() {
-  const navigation = useNavigation<StackNavigationProp<any>>()
+  const navigation = useNavigation<StackNavigationProp<any>>();
 
   const [rating, setRating] = useState<number>(0);
   const [hoverRating, setHoverRating] = useState<number>(0);
   const [contentValue, setContentValue] = useState<string>('');
-  const [limit, setLimit] = useState<number>(0)
+  const [limit, setLimit] = useState<number>(0);
 
   const handleChangeInput = (text: string) => {
     setContentValue(text);
-    setLimit(text.length)
-  }
+    setLimit(text.length);
+  };
 
   const [response, setResponse] = useState<ImagePickerResponse | null>(null);
   const [imageFile, setImageFile] = useState<(string | undefined)[]>([]);
 
   const onSelectImage = async () => {
     // const hasPermission = await RequestStoragePermission()
-    const hasPermission = true
+    const hasPermission = true;
 
     if (!hasPermission) {
-      console.log('이미지를 선택하려면 저장 권한이 필요합니다')
+      console.log('이미지를 선택하려면 저장 권한이 필요합니다');
       return;
     }
 
@@ -43,16 +43,16 @@ export default function Write() {
         mediaType: 'photo',
         maxWidth: 100,
         maxHeight: 100,
-        includeBase64: true
-      }, (response) => {
-        console.log(response)
+        includeBase64: true,
+      },
+      response => {
+        console.log(response);
         if (response.didCancel) {
-          console.log('이미지 선택을 취소했습니다.')
-          return
-        }
-        else if (response.errorCode) {
-          console.log('이미지 에러' + response.errorCode)
-          return
+          console.log('이미지 선택을 취소했습니다.');
+          return;
+        } else if (response.errorCode) {
+          console.log('이미지 에러' + response.errorCode);
+          return;
         }
         setResponse(response);
 
@@ -62,22 +62,20 @@ export default function Write() {
             return;
           }
 
-          const imageExist = imageFile.includes(response.assets[0].uri)
+          const imageExist = imageFile.includes(response.assets[0].uri);
           const newImage = response.assets[0].uri;
 
           if (!imageExist && newImage) {
-            setImageFile((prevImages) => [
-              ...prevImages,
-              newImage,
-            ]);
+            setImageFile(prevImages => [...prevImages, newImage]);
           } else {
             console.log('이미지 데이터가 없습니다');
           }
         } else {
           console.log('이미지를 선택하지 않았습니다');
         }
-      })
-  }
+      },
+    );
+  };
 
   return (
     <>
@@ -85,7 +83,8 @@ export default function Write() {
         text="리뷰 작성"
         leftIcon={<Close onPress={() => navigation.navigate('Review')} />}
         rightIcon={
-          <TouchableOpacity onPress={() => navigation.navigate('KeywordReview')}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('KeywordReview')}>
             <Font
               text="다음"
               kind="semi18"
@@ -96,13 +95,11 @@ export default function Write() {
       />
       <Container>
         <ScoreWrap>
-          {[1, 2, 3, 4, 5].map((index) => (
-            <TouchableOpacity
-              key={index}
-            >
+          {[1, 2, 3, 4, 5].map(index => (
+            <TouchableOpacity key={index}>
               <Star
                 size={42}
-                full={(hoverRating >= index) || (!hoverRating && rating >= index)}
+                full={hoverRating >= index || (!hoverRating && rating >= index)}
                 onPress={() => setRating(index)}
                 onPressIn={() => setHoverRating(index)}
                 onPressOut={() => setHoverRating(0)}
@@ -117,27 +114,33 @@ export default function Write() {
               placeholder="본문을 입력하세요"
               placeholderTextColor={color.gray300}
               onChangeText={handleChangeInput}
-              value={contentValue}
-            >
-            </MainTextWrap>
+              value={contentValue}></MainTextWrap>
           </WriteWrap>
           <LimitText>
-            <Font text={`${limit}/300 자`} kind="medium14" color={`${limit > 300 ? "red" : "gray400"}`} />
+            <Font
+              text={`${limit}/300 자`}
+              kind="medium14"
+              color={`${limit > 300 ? 'red' : 'gray400'}`}
+            />
           </LimitText>
 
           <ImgWrap>
             <Font text="이미지" kind="semi20" />
-            <UploadWrap contentContainerStyle={{ columnGap: 8 }} horizontal={true} >
+            <UploadWrap
+              contentContainerStyle={{columnGap: 8}}
+              horizontal={true}>
               <ImgUploadBox onPress={() => onSelectImage()}>
-                <Media color="gray300" />
+                <Media color={color.gray300} />
               </ImgUploadBox>
-              {imageFile && <AddImgContent photo={imageFile} onPhotosChange={() => {}} />}
+              {imageFile && (
+                <AddImgContent photo={imageFile} onPhotosChange={() => {}} />
+              )}
             </UploadWrap>
           </ImgWrap>
         </ContentBox>
       </Container>
     </>
-  )
+  );
 }
 
 const Container = styled.View`

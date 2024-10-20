@@ -1,30 +1,30 @@
-import { TopBar } from "../../components"
-import { Close } from "../../assets"
-import { TouchableOpacity } from 'react-native'
-import { Font, color } from '../../styles'
-import { useState } from "react"
-import { Dropdown } from "../../components/Dropdown"
-import styled from "styled-components/native"
+import {TopBar} from '../../components';
+import {Close} from '../../assets';
+import {TouchableOpacity} from 'react-native';
+import {Font, color} from '../../styles';
+import {useState} from 'react';
+import {Dropdown} from '../../components/Dropdown';
+import styled from 'styled-components/native';
 
-const category = ["학교생활질문", "그외", "입학질문"]
+const category = ['학교생활질문', '그외', '입학질문'];
 
 export default function Question() {
-  const [isError, setIsError] = useState<boolean>(true)
+  const [isError, setIsError] = useState<boolean>(true);
   const [contentValue, setContentValue] = useState<string>('');
-  const [limit, setLimit] = useState<number>(0)
+  const [limit, setLimit] = useState<number>(0);
 
   const handleChangeInput = (text: string) => {
     setContentValue(text);
-    setLimit(text.length)
-  }
+    setLimit(text.length);
+  };
 
   return (
     <>
       <TopBar
         text="글쓰기"
-        leftIcon={<Close onPress={() => { }} />}
+        leftIcon={<Close onPress={() => {}} />}
         rightIcon={
-          <TouchableOpacity onPress={() => { }}>
+          <TouchableOpacity onPress={() => {}}>
             <Font
               text="게시"
               kind="semi18"
@@ -38,7 +38,7 @@ export default function Question() {
           <Dropdown
             defaultValue="카테고리"
             items={category}
-            onSelect={() => { }}
+            onSelect={() => {}}
           />
         </SelectWrap>
 
@@ -49,30 +49,35 @@ export default function Question() {
             placeholder="본문을 입력하세요"
             placeholderTextColor={color.gray300}
             onChangeText={handleChangeInput}
-            value={contentValue} />
+            value={contentValue}
+          />
           <LimitText>
-            <Font text={`${limit}/300 자`} kind="medium14" color={`${limit > 300 ? "red" : "gray400"}`} />
+            <Font
+              text={`${limit}/300 자`}
+              kind="medium14"
+              color={`${limit > 300 ? 'red' : 'gray400'}`}
+            />
           </LimitText>
         </WriteWrap>
       </Container>
     </>
-  )
+  );
 }
 
 const Container = styled.View`
-height: 100%;
-background-color: ${color.white};
-padding: 64px 0;
-`
+  height: 100%;
+  background-color: ${color.white};
+  padding: 64px 0;
+`;
 
 const SelectWrap = styled.View`
-padding: 4px 20px;
-`
+  padding: 4px 20px;
+`;
 
 const WriteWrap = styled.View`
-height: 100%;
-padding: 16px 20px;
-`
+  height: 100%;
+  padding: 16px 20px;
+`;
 
 const TitleTextInput = styled.TextInput.attrs({
   placeholderTextColor: color.gray300,

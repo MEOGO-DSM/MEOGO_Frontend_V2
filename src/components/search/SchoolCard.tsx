@@ -41,7 +41,7 @@ export default function SchoolCard({
         <BookMarkBox onPress={() => setPressBookmark(!pressBookmark)}>
           <Bookmark
             size={24}
-            color={pressBookmark ? `${color.gray700}` : 'none'}
+            color={pressBookmark ? 'gray700' : 'transparent'}
           />
         </BookMarkBox>
       </Content>

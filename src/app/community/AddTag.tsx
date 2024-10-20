@@ -84,7 +84,7 @@ function AddTag() {
           {tagList.map((i, j) => (
             <TagBox key={j} onPress={() => handleDeleteTag(j)}>
               <Font kind="medium14" text={i} />
-              <Close size={16} color={`${color.gray400}`} />
+              <Close size={16} color={color.gray400} />
             </TagBox>
           ))}
         </TagContainer>

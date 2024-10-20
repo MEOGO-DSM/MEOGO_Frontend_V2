@@ -1,26 +1,30 @@
 import React from 'react';
-import { KeyboardAvoidingView, Platform, TextInput, View, ScrollView, Keyboard } from 'react-native';
-import { TopBar } from "../../components";
-import { Arrow, Setting } from '../../assets';
-import styled from "styled-components/native";
-import { Font, color } from "../../styles";
+import {
+  KeyboardAvoidingView,
+  Platform,
+  TextInput,
+  View,
+  ScrollView,
+  Keyboard,
+} from 'react-native';
+import {TopBar} from '../../components';
+import {Arrow, Setting} from '../../assets';
+import styled from 'styled-components/native';
+import {Font, color} from '../../styles';
 import AnswerBox from '../../components/Review/AnswerBox';
 
 export default function QandADetail() {
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'android' ? 'height' : 'padding'}
-      style={{ flex: 1, }}
-    >
+      style={{flex: 1}}>
       <ScrollView
-        contentContainerStyle={{ flexGrow: 1 }}
-        keyboardShouldPersistTaps="handled"
-      >
+        contentContainerStyle={{flexGrow: 1}}
+        keyboardShouldPersistTaps="handled">
         <Container>
-          
           <TopBar
             text="대덕소프트웨어마이스터고"
-            leftIcon={<Arrow onPress={() => { }} />}
+            leftIcon={<Arrow onPress={() => {}} />}
           />
 
           <QuestionWrap>
@@ -31,12 +35,16 @@ export default function QandADetail() {
                   <Font text="02.19 23:36" kind="medium12" color="gray400" />
                 </UserIdAndTime>
                 <SettingIcon>
-                  <Setting color={color.gray500} rotate="horizontal" />
+                  <Setting color="gray500" rotate="horizontal" />
                 </SettingIcon>
               </InfoWrap>
               <Content>
                 <Font text="Q. " kind="semi18" color="amber700" />
-                <Font text="기숙사에서 몇명이 함께 방을 쓰나요? 그리고 룸메는 한번 정해지면 그대로 쭉 가는건가요? 그리고 룸메는 한번 정해지면 그대로 쭉 가는건가요?" kind="regular18" numberOfLines={3} />
+                <Font
+                  text="기숙사에서 몇명이 함께 방을 쓰나요? 그리고 룸메는 한번 정해지면 그대로 쭉 가는건가요? 그리고 룸메는 한번 정해지면 그대로 쭉 가는건가요?"
+                  kind="regular18"
+                  numberOfLines={3}
+                />
               </Content>
             </InfoAndContent>
             <QuestionTypeWrap>
@@ -49,13 +57,12 @@ export default function QandADetail() {
             <Font text="2개의 답변" kind="semi16" />
             <SortWrap>
               <Font text="추천순" kind="medium14" color="gray500" />
-              <Arrow size={16} color={color.gray500} rotate="bottom" />
+              <Arrow size={16} color="gray500" rotate="bottom" />
             </SortWrap>
           </AnswerSortWrap>
 
           <AnswerBox />
           <AnswerBox />
-
         </Container>
       </ScrollView>
 

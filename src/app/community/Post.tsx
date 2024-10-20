@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import TopBar from '../../components/TopBar';
+import {TopBar} from '../../components/TopBar';
 import {Arrow, Menu} from '../../assets';
 import {useNavigation} from '@react-navigation/native';
 import {Font} from '../../styles/font';
@@ -8,9 +8,10 @@ import {color} from '../../styles/color';
 import Tag from '../../components/Tag';
 import Comment from '../../components/community/Comment';
 import InputComment from './InputComment';
+import {StackNavigationProp} from '@react-navigation/stack';
 
 function Post() {
-  const navigation = useNavigation();
+  const navigation = useNavigation<StackNavigationProp<any>>();
 
   return (
     <>
@@ -25,7 +26,7 @@ function Post() {
               <Font text="익명" kind="semi14" />
               <Font text="02.19 23:36" kind="medium14" color="gray400" />
             </InfoBox>
-            <Menu color={`${color.gray500}`} />
+            <Menu color="gray500" />
           </TopBox>
           <ContentBox>
             <Font text="아진짜대마고" kind="semi24" />

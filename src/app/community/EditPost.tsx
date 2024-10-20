@@ -64,7 +64,7 @@ function EditPost() {
         </EditContentBox>
       </Container>
       <AddImgButton>
-        <Image color={`${color.white}`} />
+        <Image color="white" />
       </AddImgButton>
       <TextNum>
         <Font
