@@ -2,12 +2,20 @@ import React from 'react';
 import styled from "styled-components/native";
 import { Font, color } from '../../../styles';
 
-const Row = ({ title, content }) => (
+interface PropsType {
+  title?: string,
+  content?: React.ReactNode
+}
+
+const Row = ({ title, content }: PropsType) => (
   <RowWrap>
     <InfoTitle>
       <Font text={title} kind='medium14' color='gray400' />
     </InfoTitle>
-    <Font text={content} kind='medium14' color='gray400' />
+    {typeof content === 'string' ?
+      <Font text={content} kind='medium14' color='gray400' /> 
+      : content
+    }
   </RowWrap>
 );
 
