@@ -18,24 +18,9 @@ interface ApiResponse<T> {
   data: T;
 }
 
-// export const login = async (data: LoginData): Promise<ApiResponse<any>> => {
-//   try {
-//     const response = await axios.post<ApiResponse<any>>(``, data);
-//     return response.data;
-//   } catch (error: any) {
-//     if (axios.isAxiosError(error)) {
-//       console.error('axios 에러:', error.response?.data);
-//     }
-//     return {
-//       success: false,
-//       message: error.response?.data.message || '로그인 실패',
-//       data: null,
-//     };
-//   }
-// };
 const auth = '/user';
 
-export const postSignup = async (data: SignupData) => {
+export const signupHandler = async (data: SignupData) => {
   return await instance
     .post(`${auth}/signup`, {
       account_id: data.id,
@@ -49,4 +34,20 @@ export const postSignup = async (data: SignupData) => {
     });
 };
 
-export const postLogin = () => {};
+export const loginHandler = async (data: LoginData) => {
+  return await instance
+    .post(`${auth}/login`, {account_id: data.id, password: data.password})
+    .then()
+    .catch(err => {
+      console.error(err);
+    });
+};
+
+export const checkDuplicationId = async (data: any) => {
+  try {
+    const response = await instance.get(`/user/check`);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
