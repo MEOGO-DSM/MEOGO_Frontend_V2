@@ -1,12 +1,7 @@
 import Svg, {Path} from 'react-native-svg';
+import {SvgPropsType} from '../interfaces';
 
-interface PropsType {
-  size?: number;
-  color?: string;
-  onPress?: () => void;
-}
-
-export const Plus = ({color = '#000', size = 24, onPress}: PropsType) => {
+export const Plus = ({color = 'black', size = 24, onPress}: SvgPropsType) => {
   return (
     <Svg
       onPress={onPress}

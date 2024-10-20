@@ -1,15 +1,13 @@
 import Svg, {Path} from 'react-native-svg';
+import {SvgPropsType} from '../interfaces';
 
-interface PropsType {
-  size?: number;
-  color?: string;
+interface PropsType extends SvgPropsType {
   fill?: string;
-  onPress?: () => void;
 }
 
 export const Heart = ({
   size = 24,
-  color = '#000',
+  color = 'black',
   fill = 'none',
   onPress,
 }: PropsType) => {

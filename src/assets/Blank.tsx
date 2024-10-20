@@ -1,10 +1,7 @@
 import styled from 'styled-components/native';
+import {SvgPropsType} from '../interfaces';
 
-interface PropsType {
-  size?: number;
-}
-
-export const Blank = ({size = 24}: PropsType) => {
+export const Blank = ({size = 24}: SvgPropsType) => {
   return <Box size={size}></Box>;
 };
 

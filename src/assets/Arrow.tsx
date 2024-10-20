@@ -1,11 +1,8 @@
 import React from 'react';
 import Svg, {Path} from 'react-native-svg';
-import {ViewStyle, TouchableOpacity} from 'react-native';
+import {SvgPropsType} from '../interfaces';
 
-interface PropsType {
-  size?: number;
-  onPress?: () => void;
-  color?: string;
+interface PropsType extends SvgPropsType {
   rotate?: 'top' | 'left' | 'right' | 'bottom';
 }
 
@@ -19,7 +16,7 @@ const rotationAngles: {[key: string]: string} = {
 export const Arrow = ({
   size = 24,
   onPress,
-  color = '#000',
+  color = 'black',
   rotate = 'left',
 }: PropsType) => {
   const rotation = rotationAngles[rotate] || rotationAngles['left'];

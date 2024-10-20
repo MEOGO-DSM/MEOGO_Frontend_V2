@@ -1,17 +1,16 @@
 import Svg, {Path} from 'react-native-svg';
+import {SvgPropsType} from '../interfaces';
+import {color} from '../styles';
 
-interface PropsType {
-  size?: number;
-  color?: string;
-  onPress?: () => void;
-  full?: boolean;
+interface PropsType extends SvgPropsType {
+  fill?: string;
 }
 
 export const Bookmark = ({
   size = 24,
-  color = '#fff',
+  color = 'black',
   onPress,
-  full,
+  fill,
 }: PropsType) => {
   return (
     <Svg
@@ -21,8 +20,8 @@ export const Bookmark = ({
       fill="none"
       viewBox="0 0 20 20">
       <Path
-        fill={color}
-        stroke="#3F3F46"
+        fill={fill}
+        stroke={color}
         strokeWidth={1.5}
         strokeLinecap="round"
         strokeLinejoin="round"
