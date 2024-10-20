@@ -10,7 +10,10 @@
     "test": "jest"
   },
   "dependencies": {
+    "@notifee/react-native": "^9.1.2",
     "@react-native-community/viewpager": "^5.0.11",
+    "@react-native-firebase/app": "^21.0.0",
+    "@react-native-firebase/messaging": "^21.0.0",
     "@react-navigation/bottom-tabs": "^6.5.20",
     "@react-navigation/material-top-tabs": "^6.6.13",
     "@react-navigation/native": "^6.1.17",
