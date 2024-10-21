@@ -1,7 +1,7 @@
 import React from 'react';
 import {styled} from 'styled-components/native';
 import {Font, color} from '@/styles';
-import {Arrow, Blank, Edit, Gear, Logout} from '../../assets';
+import {Arrow, Edit, Gear} from '../../assets';
 import {ListCard} from './ListCard';
 import {TopBar} from '../../components';
 import {useNavigation} from '@react-navigation/native';
@@ -13,6 +13,15 @@ function MyPage() {
   const navigation = useNavigation<StackNavigationProp<any>>();
   return (
     <>
+      <TopBar
+        text="MY"
+        rightIcon={
+          <Gear
+            onPress={() => navigation.push('Setting')}
+            color={color.gray500}
+          />
+        }
+      />
       <Container contentContainerStyle={{rowGap: 36}}>
         <ProfileBox>
           <ImageBox>
@@ -57,16 +66,6 @@ function MyPage() {
             />
           </PostListBox>
         </CollectBox>
-        <SetBox>
-          <SetButton>
-            <Gear color={color.gray500} />
-            <Font color="gray700" text="설정" kind="medium16" />
-          </SetButton>
-          <SetButton red>
-            <Logout color={color.red} />
-            <Font color="red" text="로그아웃" kind="medium16" />
-          </SetButton>
-        </SetBox>
       </Container>
     </>
   );
@@ -75,7 +74,7 @@ function MyPage() {
 export default MyPage;
 
 const Container = styled.ScrollView`
-  padding: 48px 24px 24px;
+  padding: 56px 24px;
   background-color: ${color.white};
 `;
 
@@ -130,22 +129,5 @@ const CollectBox = styled.View`
 const PostListBox = styled.View`
   width: 100%;
   gap: 8px;
-  flex-direction: row;
-`;
-
-const SetBox = styled.View`
-  width: 100%;
-  gap: 10px;
-  padding-top: 24px;
-`;
-
-const SetButton = styled.TouchableOpacity<{red?: boolean}>`
-  width: 100%;
-  padding: 14px 16px;
-  border: 1px solid ${({red}) => (red ? color.red : color.gray200)};
-  border-radius: 8px;
-  background-color: ${color.white};
-  gap: 12px;
-  align-items: center;
   flex-direction: row;
 `;
