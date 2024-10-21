@@ -1,6 +1,6 @@
 import React from "react";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { WebView } from "react-native-webview"
+import styled from "styled-components/native";
+import { WebView } from "react-native-webview";
 
 const html = `
 <html>
@@ -8,8 +8,8 @@ const html = `
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=3cb5256f693a6697bdf4629d45d1c7ad&libraries=services,clusterer,drawing"></script> 
     </head>
-    <body >
-        <div id="map" style="width:400px;height:500px;"></div>
+    <body style="margin:0;padding:0;">
+        <div id="map" style="width:100%;height:180px;"></div>
         <script type="text/javascript">
             (function () {
                 const container = document.getElementById('map')
@@ -29,7 +29,7 @@ const html = `
 
 export default function Map() {
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <Container>
       <WebView
         source={{ html: html }}
         javaScriptEnabled={true}
@@ -39,6 +39,12 @@ export default function Map() {
         }}
         onLoad={() => console.log('WebView loaded')}
       />
-    </SafeAreaView>
-  )
-} 
+    </Container>
+  );
+}
+
+const Container = styled.View`
+  flex: 1;
+  border-radius: 8px;
+  overflow: hidden;
+`;

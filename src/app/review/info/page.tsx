@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from "styled-components/native";
 import { Font, color } from '../../../styles';
+import Map from './Map';
 
 interface PropsType {
   title?: string,
@@ -13,20 +14,23 @@ const Row = ({ title, content }: PropsType) => (
       <Font text={title} kind='medium14' color='gray400' />
     </InfoTitle>
     {typeof content === 'string' ?
-      <Font text={content} kind='medium14' color='gray400' /> 
+      <Font text={content} kind='medium14' color='gray400' />
       : content
     }
   </RowWrap>
 );
 
 export default function Info() {
+
   return (
     <Container>
       <SchoolNameAndAddress>
         <Font text='대덕소프트웨어마이스터고' kind='bold24' />
         <Font text='대전광역시 유성구 가정북로 76' kind='medium14' color='gray500' />
       </SchoolNameAndAddress>
-      <Map />
+      <MapWrap>
+        <Map />
+      </MapWrap>
       <SchoolInfo>
         <Row title='설립일자' content='1991년 9월 14일' />
         <Row title='전화번호' content='042-1234-5678' />
@@ -51,14 +55,13 @@ const Container = styled.View`
   background-color: ${color.white};
 `;
 
+const MapWrap = styled.View`
+  width: 100%;
+  height: 180px;
+`
+
 const SchoolNameAndAddress = styled.View`
   gap: 4px;
-`;
-
-const Map = styled.View`
-  height: 180px;
-  border-radius: 8px;
-  background-color: red;
 `;
 
 const SchoolInfo = styled.View`
