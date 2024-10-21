@@ -18,7 +18,7 @@ import Write from './src/app/review/Write';
 import KeywordReview from './src/app/review/KeywordReview';
 import Search from './src/app/search/page';
 import NavBar from './src/components/NavBar';
-import Signup from './src/app/Signup/page';
+import Signup from './src/app/signup/page';
 import QandADetail from './src/app/review/QandADetail';
 import Question from './src/app/review/Question';
 import QueryProvider from './src/utils/query/Provider';
@@ -27,6 +27,7 @@ import MyPage from './src/app/mypage/page';
 import BookmarkSchool from './src/app/mypage/BookmarkSchool';
 import WritePost from './src/app/mypage/WritePost';
 import LikePost from './src/app/mypage/LikePost';
+import Setting from '@/app/mypage/Setting';
 
 function App(): React.JSX.Element {
   const Stack = createNativeStackNavigator();
@@ -53,6 +54,7 @@ function App(): React.JSX.Element {
             <Stack.Screen name="BookmarkSchool" component={BookmarkSchool} />
             <Stack.Screen name="LikePost" component={LikePost} />
             <Stack.Screen name="WritePost" component={WritePost} />
+            <Stack.Screen name="Setting" component={Setting} />
           </Stack.Navigator>
         </NavigationContainer>
       </ReduxProvider>
