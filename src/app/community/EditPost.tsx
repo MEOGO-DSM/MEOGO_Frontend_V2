@@ -1,8 +1,7 @@
 import React, {useState} from 'react';
 import styled from 'styled-components/native';
 import {TopBar} from '../../components/TopBar';
-import {Font} from '../../styles/font';
-import {color} from '../../styles/color';
+import {Font, color} from '@/styles';
 import ToggleButton from '../../components/ToggleButton';
 import {Image, Close} from '../../assets';
 import {useNavigation} from '@react-navigation/native';

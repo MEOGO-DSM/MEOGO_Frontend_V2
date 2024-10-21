@@ -3,7 +3,7 @@ import {useNavigation} from '@react-navigation/native';
 import styled from 'styled-components/native';
 import {Logo} from '../../assets';
 import {Button, Input} from '../../components';
-import {Font, color} from '../../styles';
+import {Font, color} from '@/styles';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {Controller, useForm} from 'react-hook-form';
 import {Alert} from 'react-native';

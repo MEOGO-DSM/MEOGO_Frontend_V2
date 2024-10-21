@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import styled from 'styled-components/native';
-import {color} from '../../styles';
+import {color} from '@/styles';
 import {Filter} from '../../assets';
 import {NewMarkTag} from '../../components/Review/NewMarkTag';
 import {QuestionBox} from '../../components/Review/QuestionBox';

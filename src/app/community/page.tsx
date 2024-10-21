@@ -1,9 +1,8 @@
 import React, {useState} from 'react';
 import {Dimensions} from 'react-native';
 import styled from 'styled-components/native';
-import {Font} from '../../styles/font';
+import {Font, color} from '@/styles';
 import {Arrow, Blank, Edit} from '../../assets';
-import {color} from '../../styles/color';
 import {ContentCard} from '../../components/ContentCard';
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';

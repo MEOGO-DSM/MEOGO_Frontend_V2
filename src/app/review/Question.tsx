@@ -1,7 +1,7 @@
 import {TopBar} from '../../components';
 import {Close} from '../../assets';
 import {TouchableOpacity} from 'react-native';
-import {Font, color} from '../../styles';
+import {Font, color} from '@/styles';
 import {useState} from 'react';
 import {Dropdown} from '../../components/Dropdown';
 import styled from 'styled-components/native';

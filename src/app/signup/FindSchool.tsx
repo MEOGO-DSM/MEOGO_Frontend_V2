@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {Input} from '../../components';
 import {Search} from '../../assets';
 import styled from 'styled-components/native';
-import {color, Font} from '../../styles';
+import {color, Font} from '@/styles';
 import SchoolList from '../../components/signup/SchoolList';
 import {SchoolListType, SignupProps} from '../../interfaces';
 import {StackNavigationProp} from '@react-navigation/stack';

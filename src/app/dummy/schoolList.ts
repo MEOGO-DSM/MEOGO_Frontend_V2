@@ -1,6 +1,6 @@
 import {SchoolListType} from '../../interfaces';
 
-export const schoolList: SchoolListType[] = [
+export const schoolList = [
   {name: '대구대덕초등학교', location: '대구 남구'},
   {name: '대덕초등학교', location: '대전 유성구 궁동'},
   {name: '용인대덕초등학교', location: '경인 용인시 수지구'},

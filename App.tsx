@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import Login from './src/app/Login/page';
+import Login from './src/app/login/page';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Community from './src/app/community/page';
@@ -24,6 +24,9 @@ import Question from './src/app/review/Question';
 import QueryProvider from './src/utils/query/Provider';
 import ReduxProvider from './src/utils/store/Provider';
 import MyPage from './src/app/mypage/page';
+import BookmarkSchool from './src/app/mypage/BookmarkSchool';
+import WritePost from './src/app/mypage/WritePost';
+import LikePost from './src/app/mypage/LikePost';
 
 function App(): React.JSX.Element {
   const Stack = createNativeStackNavigator();
@@ -47,6 +50,9 @@ function App(): React.JSX.Element {
             <Stack.Screen name="KeywordReview" component={KeywordReview} />
             <Stack.Screen name="QandADetail" component={QandADetail} />
             <Stack.Screen name="MyPage" component={MyPage} />
+            <Stack.Screen name="BookmarkSchool" component={BookmarkSchool} />
+            <Stack.Screen name="LikePost" component={LikePost} />
+            <Stack.Screen name="WritePost" component={WritePost} />
           </Stack.Navigator>
         </NavigationContainer>
       </ReduxProvider>

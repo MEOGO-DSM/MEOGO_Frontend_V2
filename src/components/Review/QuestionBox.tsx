@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-import {Font, color} from '../../styles';
+import {Font, color} from '@/styles';
 import {Bell, Answer} from '../../assets';
 import {useState} from 'react';
 import {TouchableOpacity} from 'react-native';
@@ -26,7 +26,7 @@ export const QuestionBox = () => {
           </Content>
         </TagAndContentWrap>
         <UserIdAndTimeWrap>
-          <Font text="hamster0305" kind="medium14" color="gray400"/>
+          <Font text="hamster0305" kind="medium14" color="gray400" />
           <Font text="02.19 23:36" kind="regular14" color="gray400" />
         </UserIdAndTimeWrap>
       </QuestionContent>

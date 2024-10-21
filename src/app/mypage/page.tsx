@@ -1,13 +1,16 @@
 import React from 'react';
 import {styled} from 'styled-components/native';
-import {Font, color} from '../../styles';
+import {Font, color} from '@/styles';
 import {Arrow, Blank, Edit, Gear, Logout} from '../../assets';
 import {ListCard} from './ListCard';
 import {TopBar} from '../../components';
+import {useNavigation} from '@react-navigation/native';
+import {StackNavigationProp} from '@react-navigation/stack';
 
 interface MypageInfoTypes {}
 
 function MyPage() {
+  const navigation = useNavigation<StackNavigationProp<any>>();
   return (
     <>
       <Container contentContainerStyle={{rowGap: 36}}>
@@ -33,13 +36,25 @@ function MyPage() {
         </ProfileBox>
         <CollectBox>
           <Font text="내 학교" color="black" kind="semi18" />
-          <ListCard type="bookmarkSchool" count={0} />
+          <ListCard
+            onPress={() => navigation.push('BookmarkSchool')}
+            type="bookmarkSchool"
+            count={0}
+          />
         </CollectBox>
         <CollectBox>
           <Font text="내 게시물" color="black" kind="semi18" />
           <PostListBox>
-            <ListCard type="likePost" count={0} />
-            <ListCard type="writePost" count={0} />
+            <ListCard
+              onPress={() => navigation.push('LikePost')}
+              type="likePost"
+              count={0}
+            />
+            <ListCard
+              onPress={() => navigation.push('WritePost')}
+              type="writePost"
+              count={0}
+            />
           </PostListBox>
         </CollectBox>
         <SetBox>

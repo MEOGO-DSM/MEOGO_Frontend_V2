@@ -1,8 +1,7 @@
 import React, {useState} from 'react';
 import {styled} from 'styled-components/native';
-import {Font} from '../../styles/font';
+import {Font, color} from '@/styles';
 // import {Bookmark} from '../../assets';
-import {color} from '../../styles/color';
 // import StarRating from '../StarRating';
 
 interface PropsType {

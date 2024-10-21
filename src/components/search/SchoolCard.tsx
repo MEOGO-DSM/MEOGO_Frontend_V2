@@ -1,8 +1,7 @@
 import React, {useState} from 'react';
 import styled from 'styled-components/native';
 import {Logo_Img, Bookmark} from '../../assets';
-import {Font} from '../../styles/font';
-import {color} from '../../styles/color';
+import {Font, color} from '@/styles';
 import StarRating from '../StarRating';
 
 interface PropsType {
@@ -23,7 +22,10 @@ export default function SchoolCard({
   return (
     <Container>
       <Content>
-        <Logo_Img size={48} />
+        <ImageBox>
+          <Logo_Img size={28} />
+        </ImageBox>
+
         <InfoWrap>
           <SchoolInfoWrap>
             <Font text={schoolName} kind="semi18" />
@@ -41,7 +43,8 @@ export default function SchoolCard({
         <BookMarkBox onPress={() => setPressBookmark(!pressBookmark)}>
           <Bookmark
             size={24}
-            color={pressBookmark ? 'gray700' : 'transparent'}
+            color={color.gray700}
+            fill={pressBookmark ? color.gray700 : 'transparent'}
           />
         </BookMarkBox>
       </Content>
@@ -76,4 +79,14 @@ const ReviewWrap = styled.View`
 
 const BookMarkBox = styled.TouchableOpacity`
   padding: 4px;
+`;
+
+const ImageBox = styled.View`
+  border-radius: 6px;
+  border: 1px solid ${color.gray100};
+  width: 48px;
+  height: 48px;
+  background-color: ${color.gray50};
+  justify-content: center;
+  align-items: center;
 `;

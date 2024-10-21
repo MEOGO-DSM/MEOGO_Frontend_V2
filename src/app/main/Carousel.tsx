@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import {color, Font} from '../../styles';
+import {color, Font} from '@/styles';
 import {Arrow} from '../../assets';
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';

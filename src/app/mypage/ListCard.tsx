@@ -1,10 +1,11 @@
 import {styled} from 'styled-components/native';
-import {Font, color} from '../../styles';
+import {Font, color} from '@/styles';
 import {Bookmark, Edit, Heart, Menu} from '../../assets';
 
 interface CardProps {
   type: 'bookmarkSchool' | 'likePost' | 'writePost';
   count: number;
+  onPress: () => void;
 }
 
 interface CardInfo {
@@ -12,7 +13,7 @@ interface CardInfo {
   icon: JSX.Element;
 }
 
-export const ListCard = ({type, count = 0}: CardProps) => {
+export const ListCard = ({type, count = 0, onPress}: CardProps) => {
   const cardType: Record<CardProps['type'], CardInfo> = {
     bookmarkSchool: {
       title: '북마크한 학교',
@@ -31,7 +32,7 @@ export const ListCard = ({type, count = 0}: CardProps) => {
   const {title, icon} = cardType[type] || {title: '', icon: null};
 
   return (
-    <CardBox yellow={type === 'likePost'}>
+    <CardBox onPress={onPress} yellow={type === 'likePost'}>
       <TitleBox>
         {icon}
         <Title>
@@ -44,7 +45,7 @@ export const ListCard = ({type, count = 0}: CardProps) => {
   );
 };
 
-const CardBox = styled.View<{yellow: boolean}>`
+const CardBox = styled.TouchableOpacity<{yellow: boolean}>`
   flex-direction: row;
   justify-content: space-between;
   flex: 1;
