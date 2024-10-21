@@ -30,7 +30,7 @@ const html = `
 export default function Map() {
   return (
     <Container>
-      <WebView
+      <StyledWebView
         source={{ html: html }}
         javaScriptEnabled={true}
         onError={(syntheticEvent) => {
@@ -45,6 +45,10 @@ export default function Map() {
 
 const Container = styled.View`
   flex: 1;
+`;
+
+const StyledWebView = styled(WebView)`
   border-radius: 8px;
-  overflow: hidden;
+  background-color: transparent;
+  flex: 1;
 `;
