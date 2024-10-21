@@ -11,20 +11,19 @@ interface PropsType {
 
 function StarRating({num = 0, size = 14, isText = true}: PropsType) {
   const stars: React.ReactNode[] = [];
-  for (let i = 0; i < num; i++) {
+  const floorNum = Math.floor(num);
+  for (let i = 0; i < floorNum; i++) {
     stars.push(<Star key={`full-${i}`} size={size} full />);
   }
 
-  for (let i = 0; i < 5 - num; i++) {
+  for (let i = 0; i < 5 - floorNum; i++) {
     stars.push(<Star key={`empty-${i}`} size={size} />);
   }
 
   return (
     <StarContainer>
       <StarBox>{stars}</StarBox>
-      {isText && (
-        <Font text={num.toFixed(1)} kind="medium12" color="gray600" />
-      )}
+      {isText && <Font text={num.toFixed(1)} kind="medium12" color="gray600" />}
     </StarContainer>
   );
 }
