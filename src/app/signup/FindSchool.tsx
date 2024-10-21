@@ -62,7 +62,7 @@ function FindSchool({onSelectSchool}: any) {
       ) : filteredSchoolList.length > 0 ? (
         <ListBox
           data={filteredSchoolList}
-          keyExtractor={(item: any) => item.schoolName}
+          keyExtractor={(item: any) => `${item.schoolName} + ${item.seq}`}
           renderItem={({item}: any) => (
             <SchoolList
               onPress={() => {
