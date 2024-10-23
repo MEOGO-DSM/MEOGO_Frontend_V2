@@ -37,7 +37,7 @@ function App(): React.JSX.Element {
         <NavigationContainer>
           <Stack.Navigator
             screenOptions={{headerShown: false}}
-            initialRouteName="MyPage">
+            initialRouteName="Login">
             <Stack.Screen name="Login" component={Login} />
             <Stack.Screen name="Signup" component={Signup} />
             <Stack.Screen name="NavBar" component={NavBar} />

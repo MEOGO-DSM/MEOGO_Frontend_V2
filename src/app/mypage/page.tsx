@@ -16,10 +16,9 @@ function MyPage() {
       <TopBar
         text="MY"
         rightIcon={
-          <Gear
-            onPress={() => navigation.push('Setting')}
-            color={color.gray500}
-          />
+          <SettingButton onPress={() => navigation.push('Setting')}>
+            <Gear color={color.gray500} />
+          </SettingButton>
         }
       />
       <Container contentContainerStyle={{rowGap: 36}}>
@@ -46,7 +45,7 @@ function MyPage() {
         <CollectBox>
           <Font text="내 학교" color="black" kind="semi18" />
           <ListCard
-            onPress={() => navigation.push('BookmarkSchool')}
+            onPress={() => navigation.navigate('BookmarkSchool')}
             type="bookmarkSchool"
             count={0}
           />
@@ -55,12 +54,12 @@ function MyPage() {
           <Font text="내 게시물" color="black" kind="semi18" />
           <PostListBox>
             <ListCard
-              onPress={() => navigation.push('LikePost')}
+              onPress={() => navigation.navigate('LikePost')}
               type="likePost"
               count={0}
             />
             <ListCard
-              onPress={() => navigation.push('WritePost')}
+              onPress={() => navigation.navigate('WritePost')}
               type="writePost"
               count={0}
             />
@@ -131,3 +130,5 @@ const PostListBox = styled.View`
   gap: 8px;
   flex-direction: row;
 `;
+
+const SettingButton = styled.TouchableOpacity``;

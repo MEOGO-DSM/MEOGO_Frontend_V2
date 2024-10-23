@@ -80,7 +80,7 @@ function Signup() {
     } else {
       reset();
       setPage(0);
-      navigation.push('Login');
+      navigation.navigate('Login');
     }
   });
 
