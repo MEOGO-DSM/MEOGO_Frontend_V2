@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {Input} from '../../components';
 import {Search} from '../../assets';
 import styled from 'styled-components/native';
-import {color, Font} from '../../styles';
+import {color, Font} from '@/styles';
 import SchoolList from '../../components/signup/SchoolList';
 import {SchoolListType, SignupProps} from '../../interfaces';
 import {StackNavigationProp} from '@react-navigation/stack';
@@ -62,7 +62,7 @@ function FindSchool({onSelectSchool}: any) {
       ) : filteredSchoolList.length > 0 ? (
         <ListBox
           data={filteredSchoolList}
-          keyExtractor={(item: any) => item.schoolName}
+          keyExtractor={(item: any) => `${item.schoolName} + ${item.seq}`}
           renderItem={({item}: any) => (
             <SchoolList
               onPress={() => {

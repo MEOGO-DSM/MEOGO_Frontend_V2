@@ -1,16 +1,20 @@
-import { Font } from "../../styles/font";
-import { color } from "../../styles/color";
-import styled from "styled-components/native";
-import { TouchableOpacity } from "react-native";
+import {Font, color} from '@/styles';
+import styled from 'styled-components/native';
+import {TouchableOpacity} from 'react-native';
 
 interface PropsType {
   text?: string;
   mark?: boolean;
   selected?: boolean;
-  onPress?: () => void
+  onPress?: () => void;
 }
 
-export const NewMarkTag = ({ text, mark, selected = false, onPress }: PropsType) => {
+export const NewMarkTag = ({
+  text,
+  mark,
+  selected = false,
+  onPress,
+}: PropsType) => {
   return (
     <TouchableOpacity onPress={onPress}>
       <Container selected={selected}>
@@ -25,14 +29,15 @@ export const NewMarkTag = ({ text, mark, selected = false, onPress }: PropsType)
   );
 };
 
-const Container = styled.View<{ selected: boolean }>`
+const Container = styled.View<{selected: boolean}>`
   display: flex;
   flex-direction: row;
   padding: 8px 10px;
   gap: 10px;
   border-radius: 6px;
-  border: 1px solid ${({ selected }) => (selected ? color.amber300 : color.gray200)};
-  background-color: ${({ selected }) => (selected ? color.amber50 : color.white)};
+  border: 1px solid
+    ${({selected}) => (selected ? color.amber300 : color.gray200)};
+  background-color: ${({selected}) => (selected ? color.amber50 : color.white)};
 `;
 
 const NewMark = styled.View`

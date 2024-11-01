@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import {color} from '../../styles/color';
-import {Font} from '../../styles/font';
+import {color, Font} from '@/styles';
 
 export default function SchoolTag({text}: {text: string}) {
   return (

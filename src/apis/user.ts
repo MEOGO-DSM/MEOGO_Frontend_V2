@@ -1,4 +1,8 @@
 import {instance} from './axios';
+import {useNavigation} from '@react-navigation/native';
+import {StackNavigationProp} from '@react-navigation/stack';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {Alert} from 'react-native';
 
 interface SignupData {
   id: string;
@@ -18,35 +22,52 @@ interface ApiResponse<T> {
   data: T;
 }
 
-// export const login = async (data: LoginData): Promise<ApiResponse<any>> => {
-//   try {
-//     const response = await axios.post<ApiResponse<any>>(``, data);
-//     return response.data;
-//   } catch (error: any) {
-//     if (axios.isAxiosError(error)) {
-//       console.error('axios 에러:', error.response?.data);
-//     }
-//     return {
-//       success: false,
-//       message: error.response?.data.message || '로그인 실패',
-//       data: null,
-//     };
-//   }
-// };
-const auth = '/user';
+const navigation = useNavigation<StackNavigationProp<any>>();
 
-export const postSignup = async (data: SignupData) => {
-  return await instance
-    .post(`${auth}/signup`, {
+export const signupHandler = async (data: SignupData) => {
+  try {
+    const response = await instance.post(`/user/signup`, {
       account_id: data.id,
       name: data.name,
       password: data.password,
       enrolled_school: data.schoolId,
-    })
-    .then()
-    .catch(err => {
-      console.error(err);
     });
+  } catch (error) {
+    console.log(error);
+    Alert.alert('아이디 또는 비밀번호를 잘못 입력했습니다.');
+  }
 };
 
-export const postLogin = () => {};
+export const loginHandler = async (data: LoginData, navigation: any) => {
+  try {
+    const response = await instance.post(`/user/login`, {
+      account_id: data.id,
+      password: data.password,
+    });
+
+    await AsyncStorage.setItem('AccessToken', response.data.accessToken);
+    await AsyncStorage.setItem('RefreshToken', response.data.refreshToken);
+    navigation.navigate('NavBar');
+  } catch (error) {
+    console.error(error);
+    Alert.alert('로그인 오류', '로그인이 실패했습니다.');
+  }
+};
+
+export const checkDuplicationId = async (data: any) => {
+  try {
+    const response = await instance.get(`/user/check`);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const logoutHandler = async () => {
+  try {
+    AsyncStorage.clear();
+    navigation.navigate('Login');
+  } catch (error) {
+    console.error(error);
+  }
+};

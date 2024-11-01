@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-import {Font, color} from '../../styles';
+import {Font, color} from '@/styles';
 import {Heart, Setting, Answer} from '../../assets';
 import ReplyBox from './ReplyBox';
 

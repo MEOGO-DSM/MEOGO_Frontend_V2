@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import styled from 'styled-components/native';
-import {color} from '../../styles/color';
-import {Font} from '../../styles/font';
+import {color, Font} from '@/styles';
 import Review from './Review';
 import Qanda from './Qanda';
 import SchoolInfo from './SchoolInfo';

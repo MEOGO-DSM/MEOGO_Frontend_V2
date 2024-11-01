@@ -10,7 +10,7 @@ import {
 import {TopBar} from '../../components';
 import {Arrow, Setting} from '../../assets';
 import styled from 'styled-components/native';
-import {Font, color} from '../../styles';
+import {Font, color} from '@/styles';
 import AnswerBox from '../../components/Review/AnswerBox';
 
 export default function QandADetail() {

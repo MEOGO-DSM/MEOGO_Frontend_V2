@@ -3,10 +3,13 @@ import {useNavigation} from '@react-navigation/native';
 import styled from 'styled-components/native';
 import {Logo} from '../../assets';
 import {Button, Input} from '../../components';
-import {Font, color} from '../../styles';
+import {Font, color} from '@/styles';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {Controller, useForm} from 'react-hook-form';
 import {Alert} from 'react-native';
+import {loginHandler} from '@/apis/user';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {instance} from '@/apis/axios';
 
 function Login() {
   const navigation = useNavigation<StackNavigationProp<any>>();
@@ -21,11 +24,28 @@ function Login() {
     },
   });
 
-  const onLoginPress = (data: {id: string; password: string}) => {
-    if (data.id === 'hamster' && data.password === 'hamster@123') {
+  // const onLoginPress = (data: {id: string; password: string}) => {
+  //   loginHandler(data, navigation);
+  // };
+
+  const loginHandler = async (
+    data: {id: string; password: string},
+    navigation: any,
+  ) => {
+    try {
+      const deviceToken = await AsyncStorage.getItem('deviceToken'); // Assuming you store the token
+      const response = await instance.post(`/user/login`, {
+        account_id: data.id,
+        password: data.password,
+        device_token: deviceToken, // Include the device token in the payload
+      });
+
+      await AsyncStorage.setItem('AccessToken', response.data.accessToken);
+      await AsyncStorage.setItem('RefreshToken', response.data.refreshToken);
       navigation.navigate('NavBar');
-    } else {
-      Alert.alert('아이디 또는 비밀번호를 잘못 입력했습니다.');
+    } catch (error) {
+      console.error('로그인 에러:', error);
+      Alert.alert('로그인 오류', '로그인이 실패했습니다.');
     }
   };
 
@@ -65,7 +85,7 @@ function Login() {
           />
         </InputBox>
         <ButtonBox>
-          <Button onPress={handleSubmit(onLoginPress)} text="로그인" />
+          <Button onPress={handleSubmit(loginHandler)} text="로그인" />
           <GotoSignupBox>
             <Font kind="medium14" text="계정이 없으신가요?" color="gray500" />
             <MoveSignup onPress={() => navigation.navigate('Signup')}>

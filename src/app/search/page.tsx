@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {Arrow, Search} from '../../assets';
 import styled from 'styled-components/native';
 import {useNavigation} from '@react-navigation/native';
-import {color, Font} from '../../styles';
+import {color, Font} from '@/styles';
 import {schoolList} from '../dummy/schoolList';
 import SchoolCard from '../../components/search/SchoolCard';
 import {TopBar, Input, Dropdown} from '../../components';

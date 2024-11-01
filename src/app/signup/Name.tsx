@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Warn} from '../../assets';
 import styled from 'styled-components/native';
-import {color, Font} from '../../styles';
+import {color, Font} from '@/styles';
 import {Button, Input} from '../../components';
 import {useNavigation} from '@react-navigation/native';
 import {Dimensions} from 'react-native';

@@ -4,7 +4,7 @@ import {TopBar, Input} from '../../components';
 import {Arrow, Close, Plus} from '../../assets';
 import {TouchableOpacity} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import {color, Font} from '../../styles';
+import {color, Font} from '@/styles';
 import {StackNavigationProp} from '@react-navigation/stack';
 
 function AddTag() {

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import Header from '../../components/main/Header';
-import {color, Font} from '../../styles';
+import {color, Font} from '@/styles';
 import {Arrow} from '../../assets';
 import EventCard from '../../components/main/EventCard';
 import ReviewCard from '../../components/main/ReviewCard';

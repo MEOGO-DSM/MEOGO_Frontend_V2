@@ -5,7 +5,7 @@ import styled from 'styled-components/native';
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {Arrow, Warn} from '../../assets';
-import {Font, color} from '../../styles';
+import {Font, color} from '@/styles';
 import {Button, TopBar} from '../../components';
 import IdAndPassword from './IdAndPassword';
 import Name from './Name';
@@ -80,7 +80,7 @@ function Signup() {
     } else {
       reset();
       setPage(0);
-      navigation.push('Login');
+      navigation.navigate('Login');
     }
   });
 

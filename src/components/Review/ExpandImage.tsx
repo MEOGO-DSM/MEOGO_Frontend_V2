@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import styled from 'styled-components/native';
 import {Arrow, Close} from '../../assets';
-import {color} from '../../styles';
+import {color} from '@/styles';
 import {Dimensions} from 'react-native';
 
 interface PropsType {

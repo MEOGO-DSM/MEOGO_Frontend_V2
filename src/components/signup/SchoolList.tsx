@@ -1,8 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import {color} from '../../styles/color';
+import {color, Font} from '@/styles';
 import {Arrow, Logo_Img} from '../../assets';
-import {Font} from '../../styles/font';
 
 interface ListPropsType {
   img?: string;

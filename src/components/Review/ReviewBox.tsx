@@ -2,8 +2,7 @@ import React from 'react';
 import styled from 'styled-components/native';
 import {Setting} from '../../assets';
 import StarRating from '../StarRating';
-import {Font} from '../../styles/font';
-import {color} from '../../styles/color';
+import {Font, color} from '@/styles';
 import Profile from '../../assets/Profile.png';
 
 interface PropsType {

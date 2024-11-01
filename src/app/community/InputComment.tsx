@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Dimensions} from 'react-native';
 import styled from 'styled-components/native';
-import {color} from '../../styles/color';
+import {color} from '@/styles';
 import {Heart} from '../../assets';
 
 function InputComment() {

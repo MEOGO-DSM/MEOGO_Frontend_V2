@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import Login from './src/app/Login/page';
+import Login from './src/app/login/page';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Community from './src/app/community/page';
@@ -18,12 +18,16 @@ import Write from './src/app/review/Write';
 import KeywordReview from './src/app/review/KeywordReview';
 import Search from './src/app/search/page';
 import NavBar from './src/components/NavBar';
-import Signup from './src/app/Signup/page';
+import Signup from './src/app/signup/page';
 import QandADetail from './src/app/review/QandADetail';
 import Question from './src/app/review/Question';
 import QueryProvider from './src/utils/query/Provider';
 import ReduxProvider from './src/utils/store/Provider';
 import MyPage from './src/app/mypage/page';
+import BookmarkSchool from './src/app/mypage/BookmarkSchool';
+import WritePost from './src/app/mypage/WritePost';
+import LikePost from './src/app/mypage/LikePost';
+import Setting from '@/app/mypage/Setting';
 
 function App(): React.JSX.Element {
   const Stack = createNativeStackNavigator();
@@ -33,7 +37,7 @@ function App(): React.JSX.Element {
         <NavigationContainer>
           <Stack.Navigator
             screenOptions={{headerShown: false}}
-            initialRouteName="MyPage">
+            initialRouteName="Login">
             <Stack.Screen name="Login" component={Login} />
             <Stack.Screen name="Signup" component={Signup} />
             <Stack.Screen name="NavBar" component={NavBar} />
@@ -47,6 +51,10 @@ function App(): React.JSX.Element {
             <Stack.Screen name="KeywordReview" component={KeywordReview} />
             <Stack.Screen name="QandADetail" component={QandADetail} />
             <Stack.Screen name="MyPage" component={MyPage} />
+            <Stack.Screen name="BookmarkSchool" component={BookmarkSchool} />
+            <Stack.Screen name="LikePost" component={LikePost} />
+            <Stack.Screen name="WritePost" component={WritePost} />
+            <Stack.Screen name="Setting" component={Setting} />
           </Stack.Navigator>
         </NavigationContainer>
       </ReduxProvider>
