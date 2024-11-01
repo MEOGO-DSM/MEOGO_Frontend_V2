@@ -1,29 +1,48 @@
-import styled from 'styled-components/native';
-import {Font, color} from '../../styles';
-import {Heart, Setting, Answer} from '../../assets';
-import ReplyBox from './ReplyBox';
+import { useState } from 'react'
+import styled from "styled-components/native";
+import { Font, color } from "../../styles";
+import { Heart, Setting, Answer } from "../../assets"
+import ReplyBox from "./ReplyBox";
+import QuestionerTag from './QuestionerTag';
 
-export default function AnswerBox() {
+interface PropsType {
+  id?: number,
+  writerId?: string,
+  date?: string,
+  content?: string,
+  replies?: Array<any>
+  accountId?: string
+}
+
+export default function AnswerBox({ id, writerId, date, content, replies, accountId }: PropsType) {
+  const [pressHeart, setPressHeart] = useState<boolean>(false)
+
   return (
     <>
-      <AnswerBoxWrap>
+      <AnswerBoxWrap key={id}>
         <AnswerWrap>
           <UserIdAndSetting>
-            <Font text="hamster" kind="semi14" />
+            <UserIdWrap>
+              <Font text={accountId} kind="semi14" />
+              {
+                writerId === accountId &&
+                <QuestionerTag />
+              }
+            </UserIdWrap>
             <SettingIcon>
               <Setting size={20} color="gray500" />
             </SettingIcon>
           </UserIdAndSetting>
-          <Font
-            text="보통 2~3명이 한 방을 쓰고, 학기 단위로 룸메가 바뀝니다."
-            kind="regular18"
-          />
-          <Font text="02.19 23:36" kind="medium12" color="gray400" />
+          <Font text={content} kind="regular18" />
+          <Font text={date && date.substring(4)} kind="medium12" color="gray400" />
         </AnswerWrap>
 
         <HeartAndReply>
-          <ActiveWrap>
-            <Heart color={color.gray600} />
+          <ActiveWrap onPress={() => setPressHeart(!pressHeart)}>
+            <Heart
+              color={pressHeart ? color.amber600 : color.gray600}
+              fill={pressHeart ? color.amber600 : 'none'}
+            />
             <Font text="4" kind="medium16" color="gray600" />
           </ActiveWrap>
           <ActiveWrap>
@@ -33,8 +52,17 @@ export default function AnswerBox() {
         </HeartAndReply>
 
         <ReplyWrap>
-          <ReplyBox />
-          <ReplyBox />
+          {
+            replies?.map(({ id, account_id, date, content }) => (
+              <ReplyBox
+                id={id}
+                accountId={account_id}
+                date={date}
+                content={content}
+                writerId={writerId}
+              />
+            ))
+          }
         </ReplyWrap>
       </AnswerBoxWrap>
     </>
@@ -57,6 +85,13 @@ const UserIdAndSetting = styled.View`
   justify-content: space-between;
   align-items: center;
 `;
+
+const UserIdWrap = styled.View`
+display: flex;
+flex-direction: row;
+gap: 8px;
+align-items: center;
+`
 
 const HeartAndReply = styled.View`
   display: flex;

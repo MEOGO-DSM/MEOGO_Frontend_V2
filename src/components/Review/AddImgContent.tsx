@@ -1,28 +1,21 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components/native";
 import { Close } from "../../assets";
 import { color } from "../../styles/color"
+import { useSelector, useDispatch } from "react-redux";
+import { remove } from "../../utils/store/modules/imageAddRemove"
+import { RootState } from "../../utils/store/store";
 
-interface PropsType {
-    photo?: Array<string | undefined>;
-    onPhotosChange: (photos: Array<string | undefined>) => void;
-}
-
-export default function AddImgContent({ photo = [], onPhotosChange }: PropsType) {
-    const [photos, setPhotos] = useState<Array<string | undefined>>(photo);
-
-    const deletePhoto = (index: number) => {
-        const updatedPhotos = photos.filter((_, i) => i !== index);
-        setPhotos(updatedPhotos);
-        onPhotosChange(updatedPhotos);
-    };
+export default function AddImgContent() {
+    const dispatch = useDispatch()
+    const image = useSelector((state: RootState) => state.imageAddRemove.image)
 
     return (
         <>
-            {photo?.map((photo, index) => (
+            {image.map((value: string, index: number) => (
                 <Container key={index}>
-                    <ImgContent source={{ uri : photo }} />
-                    <CancelButton onPress={() => deletePhoto(index)}>
+                    <ImgContent source={{ uri: value }} />
+                    <CancelButton onPress={() => dispatch(remove(value))}>
                         <Close size={16} />
                     </CancelButton>
                 </Container >

@@ -1,52 +1,57 @@
-import {useState} from 'react';
-import styled from 'styled-components/native';
-import {Arrow, Close} from '../../assets';
-import {color} from '../../styles';
-import {Dimensions} from 'react-native';
+import styled from "styled-components/native";
+import { Arrow, Close } from "../../assets"
+import { color } from "../../styles";
+import { Dimensions } from "react-native"
+import { useSelector } from "react-redux";
+import { RootState } from "../../utils/store/store";
+import { useDispatch } from "react-redux";
+import { isShow, nextImage, prevImage } from "../../utils/store/modules/appearPhoto"
 
-interface PropsType {
-  photo?: Array<string | number>;
-  selected?: string;
-}
+export default function ExpandImage() {
 
-export default function ExpandImage({photo, selected}: PropsType) {
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const dispatch = useDispatch()
+  const showImage = useSelector((state: RootState) => state.appearPhoto.currentShowImage)
+  const isShowImage = useSelector((state: RootState) => state.appearPhoto.isAppearImage)
 
   const height = Dimensions.get('window').height;
-  const image =
-    'https://i.namu.wiki/i/t1UsC9Fl1UtAxwAsgtm2sRk3Ble2d1_PT3jasrYQW5MbxAyIDc2stvUVfnzyyUFEFRqc-Crhz_4lfZ73hrmbKw.webp';
 
   return (
-    <ImageShadow height={height}>
-      <Container>
-        <CancelWrap>
-          <Close color="white" onPress={() => {}} />
-        </CancelWrap>
-        <Content>
-          <LeftArrowWrap>
-            <Arrow size={32} color="white" rotate="left" />
-          </LeftArrowWrap>
-          <Image source={{uri: image}} />
-          <RightArrowWrap>
-            <Arrow size={32} color="white" rotate="right" />
-          </RightArrowWrap>
-        </Content>
-      </Container>
-    </ImageShadow>
-  );
+    <>
+      {
+        isShowImage &&
+        <ImageShadow height={height} onPress={() => dispatch(isShow(false))}>
+          <CancelWrap>
+            <Close color={color.white} onPress={() => dispatch(isShow(false))} />
+          </CancelWrap>
+
+          <Content>
+            <LeftArrowWrap onPress={() => dispatch(prevImage())}>
+              <Arrow size={32} color={color.white} rotate='left' />
+            </LeftArrowWrap>
+
+            <Image source={{ uri: showImage }} />
+
+            <RightArrowWrap onPress={() => dispatch(nextImage())}>
+              <Arrow size={32} color={color.white} rotate='right' />
+            </RightArrowWrap>
+          </Content>
+        </ImageShadow>
+      }
+    </>
+  )
 }
 
-const ImageShadow = styled.View<{height: number}>`
-  position: absolute;
-  width: 100%;
-  height: ${({height}) => height}px;
-  background-color: rgba(0, 0, 0, 0.2);
-  z-index: 1000;
-`;
+const ImageShadow = styled.TouchableOpacity<{ height: number }>`
+position: absolute;
+width: 100%;
+height: 100%;
+background-color: rgba(0, 0, 0, 0.2);
+z-index: 10000;
+`
 
 const Container = styled.View`
-  flex: 1;
-`;
+flex: 1;
+`
 
 const CancelWrap = styled.View`
   display: flex;
@@ -55,28 +60,32 @@ const CancelWrap = styled.View`
 `;
 
 const Content = styled.View`
-  padding: 48px 20px;
-`;
+height: 85%;
+display: flex;
+justify-content: center;
+align-items: center;
+padding: 48px 20px;
+`
 
-const LeftArrowWrap = styled.View`
-  position: absolute;
-  top: 50%;
-  left: 0;
-  padding: 16px 8px;
-  border-radius: 0 8px 8px 0;
-  background-color: rgba(0, 0, 0, 0.2);
-  z-index: 10;
-`;
+const LeftArrowWrap = styled.TouchableOpacity`
+position: absolute;
+top: 50%;
+left: 0;
+padding: 16px 8px;
+border-radius: 0 8px 8px 0;
+background-color: rgba(0, 0, 0, 0.2);
+z-index: 10;
+`
 
-const RightArrowWrap = styled.View`
-  position: absolute;
-  top: 50%;
-  right: 0;
-  padding: 16px 8px;
-  border-radius: 8px 0 0 8px;
-  background-color: rgba(0, 0, 0, 0.2);
-  z-index: 10;
-`;
+const RightArrowWrap = styled.TouchableOpacity`
+position: absolute;
+top: 50%;
+right: 0;
+padding: 16px 8px;
+border-radius: 8px 0 0 8px;
+background-color: rgba(0, 0, 0, 0.2);
+z-index: 10;
+`
 
 const Image = styled.Image`
   width: 100%;

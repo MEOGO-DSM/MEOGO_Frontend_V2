@@ -1,15 +1,13 @@
 import React, {useState} from 'react';
 import styled from 'styled-components/native';
-import {TopBar} from '../../components/TopBar';
-import {Close, Media} from '../../assets';
-import {Font} from '../../styles/font';
+import { TopBar } from '../../../components';
+import { Close, Media, Star } from '../../../assets';
+import { Font, color } from '../../../styles';
 import {TouchableOpacity} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import {color} from '../../styles/color';
-import AddImgContent from '../../components/Review/AddImgContent';
-import {Star} from '../../assets';
+import AddImgContent from '../../../components/Review/AddImgContent';
 import {ImagePickerResponse} from 'react-native-image-picker';
-import {RequestStoragePermission} from '../../utils/RequestStoragePermission';
+import { RequestStoragePermission } from '../../../utils/RequestStoragePermission';
 import * as ImagePicker from 'react-native-image-picker';
 import {StackNavigationProp} from '@react-navigation/stack';
 
@@ -20,6 +18,8 @@ export default function Write() {
   const [hoverRating, setHoverRating] = useState<number>(0);
   const [contentValue, setContentValue] = useState<string>('');
   const [limit, setLimit] = useState<number>(0);
+
+  const isNextButtonActive = () => rating > 0 && (contentValue.length > 0 && contentValue.length <= 300)
 
   const handleChangeInput = (text: string) => {
     setContentValue(text);
@@ -81,14 +81,17 @@ export default function Write() {
     <>
       <TopBar
         text="리뷰 작성"
-        leftIcon={<Close onPress={() => navigation.navigate('Review')} />}
+        leftIcon={
+          <Close
+            onPress={() => navigation.navigate('Review')}
+          />}
         rightIcon={
           <TouchableOpacity
             onPress={() => navigation.navigate('KeywordReview')}>
             <Font
               text="다음"
               kind="semi18"
-              color={rating && contentValue ? 'gray400' : 'black'}
+              color={isNextButtonActive() ? 'black' : 'gray400'}
             />
           </TouchableOpacity>
         }
@@ -123,7 +126,6 @@ export default function Write() {
               color={`${limit > 300 ? 'red' : 'gray400'}`}
             />
           </LimitText>
-
           <ImgWrap>
             <Font text="이미지" kind="semi20" />
             <UploadWrap
@@ -133,7 +135,7 @@ export default function Write() {
                 <Media color={color.gray300} />
               </ImgUploadBox>
               {imageFile && (
-                <AddImgContent photo={imageFile} onPhotosChange={() => {}} />
+                <AddImgContent />
               )}
             </UploadWrap>
           </ImgWrap>
@@ -151,7 +153,6 @@ const Container = styled.View`
 
 const ScoreWrap = styled.View`
   padding: 20px;
-  display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
@@ -186,7 +187,6 @@ const ImgWrap = styled.View`
 `;
 
 const UploadWrap = styled.ScrollView`
-  display: flex;
   flex-direction: row;
   gap: 8px;
 `;

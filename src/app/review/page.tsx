@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components/native';
 import {TopBar} from '../../components/TopBar';
 import {TouchableOpacity} from 'react-native';
@@ -9,13 +9,34 @@ import ImgSlider from '../../components/Review/ImgSlider';
 import SchoolTag from '../../components/Review/SchoolTag';
 import ListWrap from './List';
 import ExpandImage from '../../components/Review/ExpandImage';
+import { bookMarking, cancelBookmark } from '../../apis/bookmark';
+import { getSchoolInformation } from '../../apis/review/getSchoolInformation';
 
 function Review() {
   const tagData = ['특목고', '마이스터고'];
   const [pressBookmark, setPressBookmark] = useState<boolean>(false);
 
+  const handleClickBookmark = (schoolId: number) => {
+    setPressBookmark(!pressBookmark)
+    if (!pressBookmark) {
+      bookMarking(schoolId)
+      console.log("학교를 북마크 하였습니다.")
+    }
+    else {
+      cancelBookmark(schoolId)
+      console.log("학교 북마크를 취소하였습니다.")
+    }
+  }
+
+  useEffect(() => {
+    getSchoolInformation()
+
+  }, [])
+
   return (
     <>
+      <ExpandImage />
+
       <TopBar
         text="대덕소프트웨어마이스터고"
         leftIcon={
@@ -25,7 +46,6 @@ function Review() {
         }
       />
       <Container contentContainerStyle={{gap: 6}}>
-        <ExpandImage />
         <SchoolContentBox>
           <ImgSlider />
 
@@ -57,7 +77,7 @@ function Review() {
             </SchoolInfoWrap>
             <HandleWrap>
               <BookmarkLinkButton
-                onPress={() => setPressBookmark(!pressBookmark)}>
+                onPress={() => handleClickBookmark(1)}>
                 <Bookmark
                   size={24}
                   color={pressBookmark ? 'gray700' : 'transparent'}

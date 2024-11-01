@@ -4,12 +4,13 @@ import {Font, color} from '../styles';
 import {Arrow} from '../assets';
 
 interface DropdownProps {
+  width: string;
   defaultValue: string;
   onSelect: (value: string) => void;
   items: string[];
 }
 
-export const Dropdown = ({defaultValue, onSelect, items}: DropdownProps) => {
+export const Dropdown = ({ width = '30%', defaultValue, onSelect, items }: DropdownProps) => {
   const [value, setValue] = useState<string>(defaultValue || '');
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
@@ -20,7 +21,7 @@ export const Dropdown = ({defaultValue, onSelect, items}: DropdownProps) => {
   };
 
   return (
-    <DropdownWrapper>
+    <DropdownWrapper width={width}>
       <DropdownContainer onPress={() => setIsOpen(!isOpen)}>
         <Font text={value || defaultValue} kind="medium14" color="gray800" />
         <Arrow
@@ -42,9 +43,9 @@ export const Dropdown = ({defaultValue, onSelect, items}: DropdownProps) => {
   );
 };
 
-const DropdownWrapper = styled.View`
+const DropdownWrapper = styled.View<{width : string}>`
   position: relative;
-  width: 30%;
+  width: ${({ width }) => width};
   z-index: 10;
 `;
 

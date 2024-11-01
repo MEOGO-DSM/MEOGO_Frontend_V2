@@ -1,57 +1,73 @@
-import React from 'react';
-import styled from 'styled-components/native';
-import {Setting} from '../../assets';
-import StarRating from '../StarRating';
-import {Font} from '../../styles/font';
-import {color} from '../../styles/color';
-import Profile from '../../assets/Profile.png';
+import React from "react";
+import styled from "styled-components/native";
+import { Setting } from "../../assets"
+import StarRating from "../StarRating";
+import { Font } from "../../styles/font"
+import { color } from "../../styles/color";
+import { useDispatch } from "react-redux";
+import { TouchableOpacity } from "react-native";
+import { show, isShow, imageArray, currentIndex } from "../../utils/store/modules/appearPhoto"
 
-interface PropsType {
-  userName: string;
-  score: number;
-  contents: string;
-  image: string[];
+interface reviewBoxType {
+    id?: number,
+    content?: string,
+    date?: string,
+    user_name?: string,
+    profile?: string,
+    star?: number,
+    image?: Array<string>
 }
 
-export default function ReviewBox({
-  userName,
-  score,
-  contents,
-  image,
-}: PropsType) {
-  const wrapWidth = image.length > 2 ? '100%' : `${image.length * 160}px`;
+export default function ReviewBox({ id, content, date, user_name, profile, star, image = [] }: reviewBoxType) {
+    const wrapWidth = image ? (image.length > 2 ? '100%' : `${image.length * 160}px`) : '0';
 
-  return (
-    <Container>
-      <ReviewInfoWrap>
-        <UserInfoWrap>
-          <ProfileImg source={Profile} />
-          <UserNameAndReview>
-            <Font text={userName} kind="medium14" />
-            <StarRating num={score} />
-          </UserNameAndReview>
-        </UserInfoWrap>
-        <TimeAndSetting>
-          <Font text="02.19 23:36" kind="medium12" color="gray400" />
-          <SettingWrap>
-            <Setting />
-          </SettingWrap>
-        </TimeAndSetting>
-      </ReviewInfoWrap>
+    const dateTime = date?.substring(3)
 
-      <Font text={contents} kind="medium14" />
+    const dispatch = useDispatch();
 
-      {image.length > 0 && (
-        <ImgWrap width={wrapWidth}>
-          <ImgSlider contentContainerStyle={{columnGap: 2}} horizontal={true}>
-            {image.map((imgSrc, index) => (
-              <Img key={index} source={{uri: imgSrc}} />
-            ))}
-          </ImgSlider>
-        </ImgWrap>
-      )}
-    </Container>
-  );
+    const handleImageClick = (imgSrc: string, index: number) => {
+        dispatch(show(imgSrc));
+        dispatch(isShow(true));
+        dispatch(imageArray(image));
+        dispatch(currentIndex(index))
+    };
+
+    return (
+        <Container key={id}>
+            <ReviewInfoWrap>
+                <UserInfoWrap>
+                    <ProfileImg source={{ uri: profile }} />
+                    <UserNameAndReview>
+                        <Font text={user_name} kind="medium14" />
+                        <StarRating num={star} />
+                    </UserNameAndReview>
+                </UserInfoWrap>
+                <TimeAndSetting>
+                    <Font text={dateTime} kind="medium12" color="gray400" />
+                    <SettingWrap>
+                        <Setting />
+                    </SettingWrap>
+                </TimeAndSetting>
+            </ReviewInfoWrap>
+
+            <Font text={content} kind="medium14" />
+
+            {image && image.length > 0 &&
+                <ImgWrap width={wrapWidth} >
+                    <ImgSlider contentContainerStyle={{ columnGap: 2 }} horizontal={true}>
+                        {image.map((imgSrc, index) => (
+                            <TouchableOpacity onPress={() => handleImageClick(imgSrc, index)}>
+                                <Img
+                                    key={index}
+                                    source={{ uri: imgSrc }}
+                                />
+                            </TouchableOpacity>
+                        ))}
+                    </ImgSlider>
+                </ImgWrap>
+            }
+        </Container>
+    )
 }
 
 const Container = styled.View`

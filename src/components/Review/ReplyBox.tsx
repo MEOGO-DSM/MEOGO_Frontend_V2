@@ -1,17 +1,27 @@
-import styled from 'styled-components/native';
-import {Font, color} from '../../styles';
+import styled from "styled-components/native";
+import { Font } from "../../styles";
+import QuestionerTag from "./QuestionerTag";
 
-export default function ReplyBox() {
+interface PropsType {
+  id?: number,
+  accountId?: string,
+  date?: string,
+  content?: string,
+  writerId?: string
+}
+
+export default function ReplyBox({ id, accountId, date, content, writerId }: PropsType) {
   return (
-    <Container>
+    <Container key={id}>
       <UserInfoWrap>
-        <Font text="limda" kind="semi14" />
-        <QuestionerTag>
-          <Font text="질문자" kind="medium12" color="amber700" />
-        </QuestionerTag>
+        <Font text={accountId} kind="semi14" />
+        {
+          accountId === writerId &&
+          <QuestionerTag />
+        }
       </UserInfoWrap>
-      <Font text="룸메는 랜덤 배정인가요?" kind="regular18" />
-      <Font text="02.19 23:36" kind="medium12" color="gray400" />
+      <Font text={content} kind="regular18" />
+      <Font text={date && date.substring(4)} kind="medium12" color="gray400" />
     </Container>
   );
 }
@@ -23,13 +33,8 @@ const Container = styled.View`
 `;
 
 const UserInfoWrap = styled.View`
-  display: flex;
-  flex-direction: row;
-  gap: 8px;
-  align-items: center;
-`;
-
-const QuestionerTag = styled.View`
-  padding: 4px 6px;
-  background-color: ${color.amber50};
-`;
+display: flex;
+flex-direction: row;
+gap: 8px;
+align-items: center;
+`
