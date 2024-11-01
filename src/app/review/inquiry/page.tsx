@@ -1,12 +1,11 @@
 import React, {useState} from 'react';
 import styled from 'styled-components/native';
-import {Font} from '../../styles/font';
-import {Filter} from '../../assets';
-import WriteButton from '../../components/Review/WriteButton';
-import StarRating from '../../components/StarRating';
-import {color} from '../../styles/color';
-import ReviewBox from '../../components/Review/ReviewBox';
-import {reviewValue} from '../dummy/reviewValue';
+import { Font, color } from '../../../styles';
+import { Filter } from '../../../assets';
+import WriteButton from '../../../components/Review/WriteButton';
+import StarRating from '../../../components/StarRating';
+import ReviewBox from '../../../components/Review/ReviewBox';
+import { reviewValue } from '../../dummy/reviewValue';
 import {useNavigation} from '@react-navigation/native';
 
 export default function ReviewWrap() {
@@ -65,15 +64,17 @@ export default function ReviewWrap() {
 
         {reviewData ? (
           <ReviewListWrap>
-            {reviewValue.map((value, index) => (
-              <ReviewBox
-                key={index}
-                userName={value.userName}
-                score={value.score}
-                contents={value.contents}
-                image={value.image}
-              />
-            ))}
+            {
+              reviewValue.reviews.map((value, index) => (
+                <ReviewBox 
+                  key={index}
+                  user_name={value.user_name}
+                  star={value.star}
+                  content={value.content}
+                  image={value.image}
+                />
+              ))
+            }
           </ReviewListWrap>
         ) : (
           <NoReviewWrap>

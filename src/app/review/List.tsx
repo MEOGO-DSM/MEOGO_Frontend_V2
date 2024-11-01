@@ -9,7 +9,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../utils/store/store';
 import { selectTab } from '../../utils/store/modules/tabListSelect';
 
-const selectValue = [
 export default function List() {
   const dispatch = useDispatch();
   const selectedListValue = useSelector((state: RootState) => state.tabReducer.selectedTab);

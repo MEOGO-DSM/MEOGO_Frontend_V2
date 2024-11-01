@@ -1,10 +1,9 @@
 import React from 'react';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-
-import Main from '../app/Main/page';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Main from '../app/main/page';
 import Community from '../app/community/page';
-import {Chat, Home, My} from '../assets';
-import {color} from '../styles/color';
+import { Chat, Home, My } from '../assets';
+import { color } from '../styles/color';
 import MyPage from '../app/mypage/page';
 
 const Tab = createBottomTabNavigator();
@@ -27,7 +26,7 @@ export const NavBar = () => {
         options={{
           headerShown: false,
 
-          tabBarIcon: ({color}) => (
+          tabBarIcon: ({ color }) => (
             <Home size={32} color={color} fill={color} />
           ),
         }}
@@ -38,7 +37,7 @@ export const NavBar = () => {
         options={{
           headerShown: false,
 
-          tabBarIcon: ({color}) => (
+          tabBarIcon: ({ color }) => (
             <Chat size={32} color={color} fill={color} />
           ),
         }}
@@ -49,7 +48,7 @@ export const NavBar = () => {
         options={{
           headerShown: false,
 
-          tabBarIcon: ({color}) => <My size={32} color={color} />,
+          tabBarIcon: ({ color }) => <My size={32} color={color} />,
         }}
       />
     </Tab.Navigator>

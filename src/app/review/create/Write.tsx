@@ -1,21 +1,17 @@
 import React, {useState} from 'react';
 import styled from 'styled-components/native';
-import {TopBar} from '../../components/TopBar';
-import {Close, Media} from '../../assets';
-import {Font} from '../../styles/font';
+import { TopBar } from '../../../components';
+import { Close, Media, Star } from '../../../assets';
+import { Font, color } from '../../../styles';
 import {TouchableOpacity} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import {color} from '../../styles/color';
-import AddImgContent from '../../components/Review/AddImgContent';
-import {Star} from '../../assets';
+import AddImgContent from '../../../components/Review/AddImgContent';
 import {ImagePickerResponse} from 'react-native-image-picker';
-import {RequestStoragePermission} from '../../utils/RequestStoragePermission';
+import { RequestStoragePermission } from '../../../utils/RequestStoragePermission';
 import * as ImagePicker from 'react-native-image-picker';
 import {StackNavigationProp} from '@react-navigation/stack';
 
 export default function Write() {
-  const navigation = useNavigation<StackNavigationProp<any>>();
-
   const navigation = useNavigation<StackNavigationProp<any>>();
 
   const [rating, setRating] = useState<number>(0);
@@ -139,7 +135,7 @@ export default function Write() {
                 <Media color={color.gray300} />
               </ImgUploadBox>
               {imageFile && (
-                <AddImgContent photo={imageFile} onPhotosChange={() => {}} />
+                <AddImgContent />
               )}
             </UploadWrap>
           </ImgWrap>
