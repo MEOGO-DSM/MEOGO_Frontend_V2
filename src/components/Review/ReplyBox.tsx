@@ -23,14 +23,14 @@ export default function ReplyBox({ id, accountId, date, content, writerId }: Pro
       <Font text={content} kind="regular18" />
       <Font text={date && date.substring(4)} kind="medium12" color="gray400" />
     </Container>
-  )
+  );
 }
 
 const Container = styled.View`
-display: flex;
-gap: 8px;
-padding: 16px 20px;
-`
+  display: flex;
+  gap: 8px;
+  padding: 16px 20px;
+`;
 
 const UserInfoWrap = styled.View`
 display: flex;

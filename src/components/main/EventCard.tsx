@@ -16,7 +16,7 @@ function EventCard() {
           />
           <Font kind="bold20" color="white" text="내 학교 리뷰 쓰러가기" />
         </EventText>
-        <Arrow rotate="right" color={`${color.gray600}`} />
+        <Arrow rotate="right" color={color.gray600} />
       </EventBox>
     </EventContainer>
   );

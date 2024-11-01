@@ -24,6 +24,7 @@ import QuestionTagGather from './src/app/review/question/QuestionTagGather';
 import QuestionWrite from './src/app/review/question/Write'
 import QueryProvider from './src/utils/query/Provider';
 import ReduxProvider from './src/utils/store/Provider';
+import MyPage from './src/app/mypage/page';
 
 function App(): React.JSX.Element {
   const Stack = createNativeStackNavigator();

@@ -30,7 +30,7 @@ export const SchoolReviewCard = () => {
         )}
         <SeeMoreSchool onPress={() => navigation.navigate('')}>
           <Font text="리뷰 더보기" kind="medium18" color="gray500" />
-          <Arrow rotate="right" color={`${color.gray300}`} />
+          <Arrow rotate="right" color={color.gray300} />
         </SeeMoreSchool>
       </AroundSchoolList>
     </Container>

@@ -22,7 +22,9 @@ function StarRating({num = 0, size = 14, isText = true}: PropsType) {
   return (
     <StarContainer>
       <StarBox>{stars}</StarBox>
-      {isText && <Font text={num.toFixed(1)} kind="medium12" color="gray600" />}
+      {isText && (
+        <Font text={num.toFixed(1)} kind="medium12" color="gray600" />
+      )}
     </StarContainer>
   );
 }

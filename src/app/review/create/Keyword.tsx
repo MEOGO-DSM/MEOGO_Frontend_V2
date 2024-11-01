@@ -6,7 +6,7 @@ import { color, Font } from "../../../styles";
 import Tag from "../../../components/Review/Tag";
 import { Arrow } from "../../../assets/Arrow";
 import { useNavigation } from "@react-navigation/native";
-import { uploadReview } from '../../../apis/Review/uploadReview';
+import { uploadReview } from "../../../apis/review/uploadReview";
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../utils/store/store';
 import { useRoute } from '@react-navigation/native';

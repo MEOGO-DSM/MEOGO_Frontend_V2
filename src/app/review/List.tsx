@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../utils/store/store';
 import { selectTab } from '../../utils/store/modules/tabListSelect';
 
+const selectValue = [
 export default function List() {
   const dispatch = useDispatch();
   const selectedListValue = useSelector((state: RootState) => state.tabReducer.selectedTab);
@@ -45,9 +46,7 @@ export default function List() {
         ))}
       </ListContainer>
 
-      <View>
-        {renderSelectedComponent()}
-      </View>
+      <View>{renderSelectedComponent()}</View>
     </>
   );
 }
@@ -58,7 +57,7 @@ const ListContainer = styled.View`
   justify-content: space-around;
 `;
 
-const SelectBox = styled.TouchableOpacity<{ isSelected: boolean }>`
+const SelectBox = styled.TouchableOpacity<{isSelected: boolean}>`
   border-bottom-width: ${props => (props.isSelected ? '2px' : '0')};
   border-bottom-color: ${color.black};
   padding: 16px 8px;

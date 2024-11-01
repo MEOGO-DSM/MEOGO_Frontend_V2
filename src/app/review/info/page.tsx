@@ -57,7 +57,7 @@ const Container = styled.View`
 
 const MapWrap = styled.View`
   width: 100%;
-  height: 180px;
+  height: 500px;
 `
 
 const SchoolNameAndAddress = styled.View`

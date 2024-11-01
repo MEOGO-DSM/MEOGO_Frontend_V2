@@ -1,18 +1,20 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components/native';
-import { TopBar } from '../../../components/TopBar';
-import { Close, Media } from '../../../assets';
-import { Font } from '../../../styles/font';
-import { TouchableOpacity } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { color } from '../../../styles/color';
-import AddImgContent from '../../../components/Review/AddImgContent';
-import { Star } from '../../../assets';
-import { StackNavigationProp } from '@react-navigation/stack';
-import useImagePicker from '../../../utils/imageUpload'
+import {TopBar} from '../../components/TopBar';
+import {Close, Media} from '../../assets';
+import {Font} from '../../styles/font';
+import {TouchableOpacity} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+import {color} from '../../styles/color';
+import AddImgContent from '../../components/Review/AddImgContent';
+import {Star} from '../../assets';
+import {ImagePickerResponse} from 'react-native-image-picker';
+import {RequestStoragePermission} from '../../utils/RequestStoragePermission';
+import * as ImagePicker from 'react-native-image-picker';
+import {StackNavigationProp} from '@react-navigation/stack';
 
 export default function Write() {
-  const { onSelectImage } = useImagePicker();
+  const navigation = useNavigation<StackNavigationProp<any>>();
 
   const navigation = useNavigation<StackNavigationProp<any>>();
 
@@ -28,6 +30,57 @@ export default function Write() {
     setLimit(text.length);
   };
 
+  const [response, setResponse] = useState<ImagePickerResponse | null>(null);
+  const [imageFile, setImageFile] = useState<(string | undefined)[]>([]);
+
+  const onSelectImage = async () => {
+    // const hasPermission = await RequestStoragePermission()
+    const hasPermission = true;
+
+    if (!hasPermission) {
+      console.log('이미지를 선택하려면 저장 권한이 필요합니다');
+      return;
+    }
+
+    ImagePicker.launchImageLibrary(
+      {
+        mediaType: 'photo',
+        maxWidth: 100,
+        maxHeight: 100,
+        includeBase64: true,
+      },
+      response => {
+        console.log(response);
+        if (response.didCancel) {
+          console.log('이미지 선택을 취소했습니다.');
+          return;
+        } else if (response.errorCode) {
+          console.log('이미지 에러' + response.errorCode);
+          return;
+        }
+        setResponse(response);
+
+        if (response.assets && response.assets.length > 0) {
+          if (imageFile.length >= 4) {
+            console.log('더 이상 이미지를 추가할 수 없습니다');
+            return;
+          }
+
+          const imageExist = imageFile.includes(response.assets[0].uri);
+          const newImage = response.assets[0].uri;
+
+          if (!imageExist && newImage) {
+            setImageFile(prevImages => [...prevImages, newImage]);
+          } else {
+            console.log('이미지 데이터가 없습니다');
+          }
+        } else {
+          console.log('이미지를 선택하지 않았습니다');
+        }
+      },
+    );
+  };
+
   return (
     <>
       <TopBar
@@ -37,7 +90,8 @@ export default function Write() {
             onPress={() => navigation.navigate('Review')}
           />}
         rightIcon={
-          <TouchableOpacity onPress={() => navigation.push('KeywordReview', { rating, contentValue })}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('KeywordReview')}>
             <Font
               text="다음"
               kind="semi18"
@@ -48,11 +102,11 @@ export default function Write() {
       />
       <Container>
         <ScoreWrap>
-          {[1, 2, 3, 4, 5].map((index) => (
+          {[1, 2, 3, 4, 5].map(index => (
             <TouchableOpacity key={index}>
               <Star
                 size={42}
-                full={(hoverRating >= index) || (!hoverRating && rating >= index)}
+                full={hoverRating >= index || (!hoverRating && rating >= index)}
                 onPress={() => setRating(index)}
                 onPressIn={() => setHoverRating(index)}
                 onPressOut={() => setHoverRating(0)}
@@ -67,19 +121,26 @@ export default function Write() {
               placeholder="본문을 입력하세요"
               placeholderTextColor={color.gray300}
               onChangeText={handleChangeInput}
-              value={contentValue}
-            />
+              value={contentValue}></MainTextWrap>
           </WriteWrap>
           <LimitText>
-            <Font text={`${limit}/300 자`} kind="medium14" color={limit > 300 ? "red" : "gray400"} />
+            <Font
+              text={`${limit}/300 자`}
+              kind="medium14"
+              color={`${limit > 300 ? 'red' : 'gray400'}`}
+            />
           </LimitText>
           <ImgWrap>
             <Font text="이미지" kind="semi20" />
-            <UploadWrap contentContainerStyle={{ columnGap: 8 }} horizontal>
+            <UploadWrap
+              contentContainerStyle={{columnGap: 8}}
+              horizontal={true}>
               <ImgUploadBox onPress={() => onSelectImage()}>
-                <Media color="gray300" />
+                <Media color={color.gray300} />
               </ImgUploadBox>
-              <AddImgContent />
+              {imageFile && (
+                <AddImgContent photo={imageFile} onPhotosChange={() => {}} />
+              )}
             </UploadWrap>
           </ImgWrap>
         </ContentBox>

@@ -1,11 +1,7 @@
 import Svg, {Path} from 'react-native-svg';
+import {SvgPropsType} from '../interfaces';
 
-interface PropsType {
-  size?: number;
-  color?: string;
-}
-
-export const Answer = ({ size=24, color='#000'}: PropsType) => {
+export const Answer = ({size = 24, color = 'black'}: SvgPropsType) => {
   return (
     <Svg width={size} height={size} viewBox="0 0 24 24" fill="none">
       <Path
@@ -13,7 +9,8 @@ export const Answer = ({ size=24, color='#000'}: PropsType) => {
         stroke={color}
         strokeWidth="1.5"
         strokeLinecap="round"
-        strokeLinejoin="round" />
+        strokeLinejoin="round"
+      />
     </Svg>
-  )
-}
+  );
+};

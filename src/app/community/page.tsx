@@ -4,8 +4,9 @@ import styled from 'styled-components/native';
 import {Font} from '../../styles/font';
 import {Arrow, Blank, Edit} from '../../assets';
 import {color} from '../../styles/color';
-import ContentCard from '../../components/ContentCard';
+import {ContentCard} from '../../components/ContentCard';
 import {useNavigation} from '@react-navigation/native';
+import {StackNavigationProp} from '@react-navigation/stack';
 
 const commuList = ['전체 커뮤니티', '대덕소프트웨어마이스터고'];
 
@@ -13,7 +14,7 @@ function Community() {
   const [pressed, setPressed] = useState<boolean>(false);
   const [selected, setSelected] = useState<string>(commuList[0]);
 
-  const navigation = useNavigation();
+  const navigation = useNavigation<StackNavigationProp<any>>();
   const screenWidth = Dimensions.get('window').width;
 
   const handleSelect = (option: string) => {
@@ -26,10 +27,7 @@ function Community() {
       <TopBarBox width={screenWidth}>
         <TopBar onPress={() => setPressed(!pressed)}>
           <Font kind="medium18" text={selected} />
-          <Arrow
-            rotate={pressed ? 'top' : 'bottom'}
-            color={`${color.gray400}`}
-          />
+          <Arrow rotate={pressed ? 'top' : 'bottom'} color={color.gray400} />
         </TopBar>
         {pressed &&
           commuList
@@ -50,7 +48,7 @@ function Community() {
         <ContentCard />
       </Container>
       <EditPostButton onPress={() => navigation.navigate('EditPost')}>
-        <Edit color={`${color.white}`} />
+        <Edit color="white" />
       </EditPostButton>
     </>
   );

@@ -1,15 +1,13 @@
-import Svg, { Path } from 'react-native-svg';
+import Svg, {Path} from 'react-native-svg';
+import {SvgPropsType} from '../interfaces';
 
-interface PropsType {
-  size?: number;
-  color?: string;
+interface PropsType extends SvgPropsType {
   fill?: boolean;
-  onPress?: () => void;
 }
 
 export const Bell = ({
   size = 24,
-  color = '#000',
+  color = 'black',
   fill = false,
   onPress,
 }: PropsType) => {
@@ -19,8 +17,7 @@ export const Bell = ({
       height={size}
       onPress={onPress}
       viewBox="0 0 24 24"
-      fill={fill ? color : 'none'}
-    >
+      fill={fill ? color : 'none'}>
       <Path
         stroke={color}
         strokeLinecap="round"

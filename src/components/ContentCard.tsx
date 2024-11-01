@@ -67,7 +67,7 @@ export const ContentCard = ({
                 setPressed(!pressed);
               }}>
               <Heart
-                color={`${color.gray500}`}
+                color="gray500"
                 fill={pressed ? `${color.gray500}` : 'none'}
               />
             </IconBox>
@@ -76,7 +76,7 @@ export const ContentCard = ({
                 e.stopPropagation();
                 setMore(!more);
               }}>
-              <Menu color={`${color.gray500}`} />
+              <Menu color="gray500" />
             </IconBox>
             {more && (
               <MoreMessage>

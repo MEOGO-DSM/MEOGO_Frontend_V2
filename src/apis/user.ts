@@ -1,8 +1,7 @@
-import axios from 'axios';
+import {instance} from './axios';
 
 interface SignupData {
   id: string;
-  email: string;
   password: string;
   name: string;
   schoolId: number;
@@ -19,36 +18,35 @@ interface ApiResponse<T> {
   data: T;
 }
 
-export const login = async (data: LoginData): Promise<ApiResponse<any>> => {
-  try {
-    const response = await axios.post<ApiResponse<any>>(``, data);
-    return response.data;
-  } catch (error: any) {
-    if (axios.isAxiosError(error)) {
-      console.error('axios 에러:', error.response?.data);
-    }
-    return {
-      success: false,
-      message: error.response?.data.message || '로그인 실패',
-      data: null,
-    };
-  }
+// export const login = async (data: LoginData): Promise<ApiResponse<any>> => {
+//   try {
+//     const response = await axios.post<ApiResponse<any>>(``, data);
+//     return response.data;
+//   } catch (error: any) {
+//     if (axios.isAxiosError(error)) {
+//       console.error('axios 에러:', error.response?.data);
+//     }
+//     return {
+//       success: false,
+//       message: error.response?.data.message || '로그인 실패',
+//       data: null,
+//     };
+//   }
+// };
+const auth = '/user';
+
+export const postSignup = async (data: SignupData) => {
+  return await instance
+    .post(`${auth}/signup`, {
+      account_id: data.id,
+      name: data.name,
+      password: data.password,
+      enrolled_school: data.schoolId,
+    })
+    .then()
+    .catch(err => {
+      console.error(err);
+    });
 };
 
-export const signup = async (data: SignupData): Promise<ApiResponse<any>> => {
-  try {
-    const response = await axios.post<ApiResponse<any>>(``, data);
-    return response.data;
-  } catch (error: any) {
-    if (axios.isAxiosError(error)) {
-      console.error('axios 에러:', error.response?.data);
-    } else {
-      console.error('에러:', error);
-    }
-    return {
-      success: false,
-      message: error.response?.data.message || '회원가입 실패',
-      data: null,
-    };
-  }
-};
+export const postLogin = () => {};

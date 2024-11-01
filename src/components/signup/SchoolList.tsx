@@ -19,7 +19,7 @@ function SchoolList({img, name, location, onPress}: ListPropsType) {
         <Font text={name} kind="semi18" color="black" />
         <Font text={location} kind="regular14" color="gray500" />
       </InfoBox>
-      <Arrow rotate="right" color={`${color.gray300}`} />
+      <Arrow rotate="right" color={color.gray300} />
     </Container>
   );
 }

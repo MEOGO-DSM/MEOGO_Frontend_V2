@@ -1,14 +1,9 @@
 import React from 'react';
 import Svg, {Path} from 'react-native-svg';
 import styled from 'styled-components/native';
+import {SvgPropsType} from '../interfaces';
 
-interface PropsType {
-  size?: number;
-  color?: string;
-  onPress?: () => void;
-}
-
-export const Close = ({size = 24, color = '#000', onPress}: PropsType) => {
+export const Close = ({size = 24, color = 'black', onPress}: SvgPropsType) => {
   return (
     <StyledSvg
       width={size}
@@ -30,4 +25,3 @@ export const Close = ({size = 24, color = '#000', onPress}: PropsType) => {
 const StyledSvg = styled(Svg)`
   z-index: 1;
 `;
-

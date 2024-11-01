@@ -1,11 +1,7 @@
 import Svg, {Path} from 'react-native-svg';
+import {SvgPropsType} from '../interfaces';
 
-interface PropsType {
-  size?: number;
-  onPress?: () => void;
-}
-
-export const Eye = ({size = 24, onPress}: PropsType) => {
+export const Eye = ({size = 24, onPress}: SvgPropsType) => {
   return (
     <Svg
       width={size}

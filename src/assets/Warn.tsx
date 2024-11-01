@@ -1,10 +1,7 @@
 import {Svg, Path} from 'react-native-svg';
+import {SvgPropsType} from '../interfaces';
 
-interface PropsType {
-  size?: number;
-}
-
-export const Warn = ({size = 24}: PropsType) => {
+export const Warn = ({size = 24}: SvgPropsType) => {
   return (
     <Svg width={size} height={size} fill="none" viewBox="0 0 37 36">
       <Path

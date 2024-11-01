@@ -34,7 +34,7 @@ export const QuestionBox = ({ id, content, date, questionType, accountId }: Prop
           <Content>
             <Font text="Q. " kind="semi18" color="amber700" />
             <QuestionWrap>
-              <Font text={content} kind="regular18" numberOfLines={3} />
+              <Font text="기숙사에서 몇명이 함께 방을 쓰나요? 그리고 룸메는 한번 정해지면 그대로 쭉 가는건가요? 그리고 룸메는 한번 정해지면 그대로 쭉 가는건가요?" kind="regular18" numberOfLines={3} />
             </QuestionWrap>
           </Content>
         </TagAndContentWrap>
@@ -55,58 +55,58 @@ export const QuestionBox = ({ id, content, date, questionType, accountId }: Prop
         </ActiveWrap>
       </AskAndAnswerWrap>
     </TouchableOpacity>
-  )
-}
+  );
+};
 
 const QuestionContent = styled.View`
-display: flex;
-flex-direction: column;
-gap: 20px;
-padding: 16px 20px;
-`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 16px 20px;
+`;
 
 const TagAndContentWrap = styled.View`
-display: flex;
-flex-direction: column;
-gap: 16px;
-`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+`;
 
 const Tag = styled.View`
-padding: 4px 8px;
-background-color: ${color.gray100};
-border-radius: 6px;
-align-self: flex-start;
-`
+  padding: 4px 8px;
+  background-color: ${color.gray100};
+  border-radius: 6px;
+  align-self: flex-start;
+`;
 
 const Content = styled.View`
-width: 100%;
-display: flex;
-flex-direction: row;
-`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+`;
 
 const UserIdAndTimeWrap = styled.View`
-display: flex;
-flex-direction: row;
-justify-content: space-between;
-`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`;
 
 const AskAndAnswerWrap = styled.View`
-display: flex;
-flex-direction: row;
-padding: 0 20px;
-gap: 20px;
-border: 1px solid ${color.gray100};
-`
+  display: flex;
+  flex-direction: row;
+  padding: 0 20px;
+  gap: 20px;
+  border: 1px solid ${color.gray100};
+`;
 
 const ActiveWrap = styled.TouchableOpacity`
-display: flex;
-flex-direction: row;
-align-items: center;
-padding: 16px 0;
-gap: 8px;
-`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 16px 0;
+  gap: 8px;
+`;
 
 const QuestionWrap = styled.View`
-flex: 1;
-overflow: hidden;
-`
+  flex: 1;
+  overflow: hidden;
+`;

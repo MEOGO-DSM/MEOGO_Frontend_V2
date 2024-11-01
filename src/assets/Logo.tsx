@@ -1,10 +1,7 @@
 import Svg, {Path, Rect} from 'react-native-svg';
+import {SvgPropsType} from '../interfaces';
 
-interface PropsType {
-  size?: number;
-}
-
-export const Logo = ({size = 64}: PropsType) => {
+export const Logo = ({size = 64}: SvgPropsType) => {
   return (
     <Svg width={size} height={size} fill="none" viewBox="0 0 65 65">
       <Rect

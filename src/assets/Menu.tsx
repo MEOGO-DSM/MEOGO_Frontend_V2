@@ -1,14 +1,19 @@
 import Svg, {Path} from 'react-native-svg';
+import {SvgPropsType} from '../interfaces';
 
-interface PropsType {
-  size?: number;
-  color?: string;
-  onPress?: () => void;
+interface PropsType extends SvgPropsType {
+  vertical?: boolean;
 }
 
-export const Menu = ({size = 24, color = '#000', onPress}: PropsType) => {
+export const Menu = ({
+  size = 24,
+  color = 'black',
+  vertical,
+  onPress,
+}: PropsType) => {
   return (
     <Svg
+      style={{transform: [{rotate: vertical ? '90deg' : '0deg'}]}}
       onPress={onPress}
       width={size}
       height={size}

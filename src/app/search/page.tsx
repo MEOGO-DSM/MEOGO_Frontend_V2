@@ -53,7 +53,7 @@ function FindSchool() {
               value={inputValue}
               onChangeText={handleInputChange}
               placeholder="원하는 학교를 검색해주세요!"
-              icon={<Search color={`${color.gray400}`} />}
+              icon={<Search color={color.gray400} />}
             />
           </SearchBox>
         }

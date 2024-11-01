@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components/native';
-import { Font, color } from '../styles';
-import { Arrow } from '../assets';
+import {Font, color} from '../styles';
+import {Arrow} from '../assets';
 
 interface DropdownProps {
   width: string;
@@ -24,7 +24,11 @@ export const Dropdown = ({ width = '30%', defaultValue, onSelect, items }: Dropd
     <DropdownWrapper width={width}>
       <DropdownContainer onPress={() => setIsOpen(!isOpen)}>
         <Font text={value || defaultValue} kind="medium14" color="gray800" />
-        <Arrow color={color.gray400} size={14} rotate={isOpen ? 'top' : 'bottom'} />
+        <Arrow
+          color={color.gray400}
+          size={14}
+          rotate={isOpen ? 'top' : 'bottom'}
+        />
       </DropdownContainer>
       {isOpen && (
         <DropdownList>

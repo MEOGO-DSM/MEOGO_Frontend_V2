@@ -49,11 +49,15 @@ background-color: rgba(0, 0, 0, 0.2);
 z-index: 10000;
 `
 
-const CancelWrap = styled.View`
-display: flex;
-align-items: flex-end;
-padding: 20px 16px;
+const Container = styled.View`
+flex: 1;
 `
+
+const CancelWrap = styled.View`
+  display: flex;
+  align-items: flex-end;
+  padding: 20px 16px;
+`;
 
 const Content = styled.View`
 height: 85%;
@@ -84,9 +88,9 @@ z-index: 10;
 `
 
 const Image = styled.Image`
-width: 100%;
-height: 400px;
-display: flex;
-justify-content: center;
-align-items: center;
-`
+  width: 100%;
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;

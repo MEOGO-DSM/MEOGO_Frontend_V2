@@ -39,7 +39,7 @@ function Main() {
               <MoreContentButton
                 onPress={() => navigation.navigate('Community')}>
                 <Font kind="medium16" text="인기글 더보기" />
-                <Arrow rotate="right" size={16} color={`${color.gray400}`} />
+                <Arrow rotate="right" size={16} color={color.gray400} />
               </MoreContentButton>
             </MoreContentBox>
           </ContentsList>

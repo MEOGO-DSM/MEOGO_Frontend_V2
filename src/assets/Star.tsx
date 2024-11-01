@@ -1,18 +1,26 @@
 import React from 'react';
 import Svg, {Path} from 'react-native-svg';
 import styled from 'styled-components/native';
+import {SvgPropsType} from '../interfaces';
 
-interface PropsType {
-  size?: number;
+interface PropsType extends SvgPropsType {
   full?: boolean;
-  onPress?: () => void;
   onPressIn?: () => void;
   onPressOut?: () => void;
 }
 
-export const Star = ({size = 24, full, onPress, onPressIn, onPressOut}: PropsType) => {
+export const Star = ({
+  size = 24,
+  full,
+  onPress,
+  onPressIn,
+  onPressOut,
+}: PropsType) => {
   return (
-    <StarContainer onPress={onPress} onPressIn={onPressIn} onPressOut={onPressOut}>
+    <StarContainer
+      onPress={onPress}
+      onPressIn={onPressIn}
+      onPressOut={onPressOut}>
       {full ? (
         <Svg width={size} height={size} fill="none" viewBox="0 0 14 14">
           <Path
