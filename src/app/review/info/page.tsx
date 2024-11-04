@@ -28,9 +28,7 @@ export default function Info() {
         <Font text='대덕소프트웨어마이스터고' kind='bold24' />
         <Font text='대전광역시 유성구 가정북로 76' kind='medium14' color='gray500' />
       </SchoolNameAndAddress>
-      <MapWrap>
-        <Map />
-      </MapWrap>
+      <Map />
       <SchoolInfo>
         <Row title='설립일자' content='1991년 9월 14일' />
         <Row title='전화번호' content='042-1234-5678' />
@@ -54,11 +52,6 @@ const Container = styled.View`
   gap: 8px;
   background-color: ${color.white};
 `;
-
-const MapWrap = styled.View`
-  width: 100%;
-  height: 180px;
-`
 
 const SchoolNameAndAddress = styled.View`
   gap: 4px;

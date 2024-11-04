@@ -38,9 +38,17 @@ export default function Map() {
             level: 1
           };
           let map = new kakao.maps.Map(mapContainer, mapOption);
+          
+          let content = '<div class="label"><img src="https://github.com/user-attachments/assets/0d7524c6-7be1-4955-aad1-2899ad125261" width="100" height="105" /></div>'
+        
           let markerPosition = new kakao.maps.LatLng(${lat}, ${lng}); 
-          let marker = new kakao.maps.Marker({ position: markerPosition });
-          marker.setMap(map);  
+          
+          let customOverlay = new kakao.maps.CustomOverlay({
+            position: markerPosition,
+            content: content
+          }); 
+          customOverlay.setMap(map);
+
         </script>
       </body>
     </html>
@@ -51,7 +59,7 @@ export default function Map() {
     try {
       const response = await fetch(`https://api.vworld.kr/req/address?service=address&request=getCoord&key=ED469AD5-7F76-3031-AB0C-06BCF40B4F14&type=ROAD&address=대전광역시 유성구 가정북로 76`);
       const data = await response.json();
-      
+
       if (data?.response?.status === "OK") {
         const point = data.response.result.point;
         setAddressData(point);
@@ -59,7 +67,7 @@ export default function Map() {
         console.warn("주소 데이터 오류:", data?.response?.error?.text || "오류 메시지가 제공되지 않았습니다");
       }
     } catch (error) {
-     console.log("주소를 가져오는 데 실패했습니다:", error);
+      console.log("주소를 가져오는 데 실패했습니다:", error);
     } finally {
       setLoading(false);
     }
@@ -82,11 +90,12 @@ export default function Map() {
 }
 
 const Container = styled.View`
-  flex: 1;
+width: 100%;
+height: 180px;
+border-radius: 8px;
+overflow: hidden;
 `;
 
 const StyledWebView = styled(WebView)`
-  border-radius: 8px;
-  background-color: transparent;
   flex: 1;
 `;
