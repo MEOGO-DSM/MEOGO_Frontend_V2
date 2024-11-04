@@ -3,7 +3,7 @@ import { instance } from "./axios";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from '@react-navigation/stack';
 import { AxiosError } from "axios";
-import { ReviewFormData } from "../interfaces/review";
+import { ReviewFormData } from "../interfaces";
 
 const path = '/review';
 const navigation = useNavigation<StackNavigationProp<any>>();
@@ -69,7 +69,9 @@ export const deleteReview = () => {
       console.log("리뷰가 삭제되었습니다")
     },
     onError: (err: AxiosError) => {
+      console.log(err)
       console.log("리뷰를 삭제하는 과정에서 오류가 발생하였습니다")
     }
   })
 }
+
