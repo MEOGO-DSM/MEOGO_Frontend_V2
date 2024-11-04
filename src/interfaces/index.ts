@@ -63,3 +63,10 @@ export interface SchoolRankAndRating {
     percentage: number
   },
 }
+
+type CategoryType = "EDUCATION" | "ACTIVITY" | "FACILITY"
+
+export interface Keyword {
+  keyword: string,
+  category: CategoryType
+}

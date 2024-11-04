@@ -7,7 +7,8 @@ import {
   ReviewFormData,
   SchoolReviewList,
   SchoolReviewImage,
-  SchoolRankAndRating
+  SchoolRankAndRating,
+  Keyword
 } from "../interfaces";
 
 const path = '/review';
@@ -117,6 +118,20 @@ export const getSchoolRankAndRating = (school_id: string) => {
     queryKey: ["SchoolRankAndRating", school_id],
     queryFn: async (school_id) => {
       const { data } = await instance.get(`${path}/query/result?school_id=${school_id}`)
+      return data
+    }
+  })
+}
+
+/**
+ * 키워드
+ */
+
+export const getKeyword = () => {
+  return useQuery<Keyword, AxiosError>({
+    queryKey: ["Keyword"],
+    queryFn: async () => {
+      const {data} = await instance.get(`${path}/keyword`)
       return data
     }
   })
