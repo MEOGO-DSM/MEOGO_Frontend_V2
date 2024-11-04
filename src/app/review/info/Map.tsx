@@ -1,119 +1,81 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components/native";
 import { WebView } from "react-native-webview";
 
-const statusMessage = "검색 중..."; // You can set the initial status here
-const html = `
-<html>
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=3cb5256f693a6697bdf4629d45d1c7ad&libraries=services,clusterer,drawing"></script> 
-    </head>
-    <body>
-        <div id="map" style="width:100%;height:180px;"></div>
-        <p id="status-message">${statusMessage}</p> <!-- Placeholder for status -->
-        <script type="text/javascript">
-            (function () {
-                const container = document.getElementById('map');
-                const options = { 
-                    center: new kakao.maps.LatLng(33.450701, 126.570667),
-                    level: 3
-                };
-                
-                const map = new kakao.maps.Map(container, options);
-                const geocoder = new kakao.maps.services.Geocoder();
-                const statusElement = document.getElementById('status-message'); // Get status element
-
-                geocoder.addressSearch('대전광역시 유성구 가정북로 76', function(result, status) {
-                    if (status === kakao.maps.services.Status.OK) {
-                        const coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-                        const marker = new kakao.maps.Marker({
-                            map: map,
-                            position: coords
-                        });
-                        map.setCenter(coords);
-
-                        // Update status message
-                        statusElement.innerText = 'Address found!';
-                    } else {
-                        const coords = new kakao.maps.LatLng(36.351673, 127.386739);
-                        const marker = new kakao.maps.Marker({
-                            map: map,
-                            position: coords
-                        });
-                        map.setCenter(coords);
-
-                        // Update status message
-                        statusElement.innerText = 'Address not found, showing default location.';
-                    }
-                });
-            })();
-        </script>       
-    </body>
-</html>    
-`;
-
-// const html = `
-// <html>
-//     <head>
-//         <meta name="viewport" content="width=device-width, initial-scale=1">
-//         <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=3cb5256f693a6697bdf4629d45d1c7ad&libraries=services,clusterer,drawing"></script> 
-//     </head>
-//         <div id="map" style="width:100%;height:180px;"></div>
-//         <p>`${status}`</p>
-//         <script type="text/javascript">
-//             (function () {
-//                 const container = document.getElementById('map')
-//                 const options = { 
-//                     center: new kakao.maps.LatLng(33.450701, 126.570667),
-//                     level: 3
-//                 };
-                
-//                 const map = new kakao.maps.Map(container, options);
-
-//                 const geocoder = new kakao.maps.services.Geocoder();
-
-//                 geocoder.addressSearch('대전광역시 유성구 가정북로 76', function(result, status) {
-
-//                    if (status === kakao.maps.services.Status.OK) {
-              
-//                       const coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-              
-//                       const marker = new kakao.maps.Marker({
-//                           map: map,
-//                           position: coords
-//                       });
-              
-//                       map.setCenter(coords);
-//                   } 
-//                   else {
-//                       const coords = new kakao.maps.LatLng(36.351673, 127.386739)
-
-//                       const marker = new kakao.maps.Marker({
-//                         map: map,
-//                         position: coords
-//                     });
-            
-//                     map.setCenter(coords);
-//                   }
-//               });    
-//             })();
-//         </script>       
-//     </body>
-// </html>    
-// `;
+const defaultLat = 36.351673;
+const defaultLng = 127.386739;
 
 export default function Map() {
+  const [loading, setLoading] = useState<boolean>(false);
+  const [addressData, setAddressData] = useState<{ x: number; y: number } | null>(null);
+  const [mapHtml, setMapHtml] = useState<string>("");
+
+  useEffect(() => {
+    fetchAddress();
+  }, []);
+
+  useEffect(() => {
+    if (addressData) {
+      setMapHtml(generateMapHtml(addressData.y, addressData.x));
+    } else {
+      setMapHtml(generateMapHtml(defaultLat, defaultLng));
+    }
+  }, [addressData]);
+
+  const generateMapHtml = (lat: number, lng: number) => `
+    <html>
+      <head>
+        <meta charset="utf-8">
+        <title>Map Marker</title>
+      </head>
+      <body>
+        <div id="map" style="width:100%;height:100%;"></div>
+        <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=3cb5256f693a6697bdf4629d45d1c7ad"></script>
+        <script>
+          let mapContainer = document.getElementById('map'),
+          mapOption = { 
+            center: new kakao.maps.LatLng(${lat}, ${lng}),
+            level: 1
+          };
+          let map = new kakao.maps.Map(mapContainer, mapOption);
+          let markerPosition = new kakao.maps.LatLng(${lat}, ${lng}); 
+          let marker = new kakao.maps.Marker({ position: markerPosition });
+          marker.setMap(map);  
+        </script>
+      </body>
+    </html>
+  `;
+
+  const fetchAddress = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch(`https://api.vworld.kr/req/address?service=address&request=getCoord&key=ED469AD5-7F76-3031-AB0C-06BCF40B4F14&type=ROAD&address=대전광역시 유성구 가정북로 76`);
+      const data = await response.json();
+      
+      if (data?.response?.status === "OK") {
+        const point = data.response.result.point;
+        setAddressData(point);
+      } else {
+        console.warn("주소 데이터 오류:", data?.response?.error?.text || "오류 메시지가 제공되지 않았습니다");
+      }
+    } catch (error) {
+     console.log("주소를 가져오는 데 실패했습니다:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <Container>
       <StyledWebView
-        source={{ html: html }}
+        source={{ html: mapHtml }}
         javaScriptEnabled={true}
+        originWhitelist={['*']}
         onError={(syntheticEvent) => {
           const { nativeEvent } = syntheticEvent;
-          console.warn('WebView error: ', nativeEvent);
+          console.warn('웹 뷰를 불러올 수 없습니다.', nativeEvent);
         }}
-        onLoad={() => console.log('WebView loaded')}
+        onLoad={() => console.log('지도를 불러오고 있습니다.')}
       />
     </Container>
   );
