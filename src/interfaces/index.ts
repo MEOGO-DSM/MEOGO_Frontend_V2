@@ -27,3 +27,39 @@ export interface ReviewFormData {
   },
   image: Array<string>
 }
+
+export interface SchoolReviewList {
+  count: number,
+  reviews: [
+    {
+      id: number,
+      content: string,
+      date: string,
+      user_name: string,
+      profile: string,
+      star: number,
+      image: Array<string>
+    }
+  ]
+}
+
+export interface SchoolReviewImage {
+  year: number,
+  image: string
+}
+
+export interface SchoolRankAndRating {
+  star: number,
+  tag1: {
+    tag_name: string,
+    percentage: number
+  },
+  tag2: {
+    tag_name: string,
+    percentage: number
+  },
+  tag3: {
+    tag_name: string,
+    percentage: number
+  },
+}

@@ -1,9 +1,14 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { instance } from "./axios";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from '@react-navigation/stack';
 import { AxiosError } from "axios";
-import { ReviewFormData } from "../interfaces";
+import {
+  ReviewFormData,
+  SchoolReviewList,
+  SchoolReviewImage,
+  SchoolRankAndRating
+} from "../interfaces";
 
 const path = '/review';
 const navigation = useNavigation<StackNavigationProp<any>>();
@@ -71,6 +76,48 @@ export const deleteReview = () => {
     onError: (err: AxiosError) => {
       console.log(err)
       console.log("리뷰를 삭제하는 과정에서 오류가 발생하였습니다")
+    }
+  })
+}
+
+/**
+ * 학교 별 리뷰 조회
+ */
+
+export const getSchoolReviews = (school_id: string) => {
+  return useQuery<SchoolReviewList, AxiosError>({
+    queryKey: ["SchoolReview", school_id],
+    queryFn: async (school_id) => {
+      const { data } = await instance.get(`${path}/query?school_id=${school_id}`)
+      return data
+    }
+  })
+}
+
+/**
+ * 학교 별 리뷰 사진 조회
+ */
+
+export const getSchoolImage = (school_id: string) => {
+  return useQuery<SchoolReviewImage, AxiosError>({
+    queryKey: ["SchoolImage", school_id],
+    queryFn: async (school_id) => {
+      const { data } = await instance.get(`${path}/pic?school_id=${school_id}`)
+      return data
+    }
+  })
+}
+
+/**
+ * 학교 별 순위 & 평점
+ */
+
+export const getSchoolRankAndRating = (school_id: string) => {
+  return useQuery<SchoolRankAndRating, AxiosError>({
+    queryKey: ["SchoolRankAndRating", school_id],
+    queryFn: async (school_id) => {
+      const { data } = await instance.get(`${path}/query/result?school_id=${school_id}`)
+      return data
     }
   })
 }
