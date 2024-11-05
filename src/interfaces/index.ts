@@ -64,9 +64,50 @@ export interface SchoolRankAndRating {
   },
 }
 
-type CategoryType = "EDUCATION" | "ACTIVITY" | "FACILITY"
+export type CategoryType = "EDUCATION" | "ACTIVITY" | "FACILITY"
+
+export type QuestionType = "LIFE" | "ENTRANCE" | "FACILITIES" | "ETC"
 
 export interface Keyword {
   keyword: string,
   category: CategoryType
+}
+
+export interface Question {
+  school_id: number,
+  content: string,
+  question_type: QuestionType
+}
+
+export interface ModifyQuestion {
+  content: string,
+  question_type: QuestionType
+}
+
+export interface QuestionList {
+  id: number,
+  content: string,
+  date: string,
+  question_type: QuestionType,
+  account_id: string
+}
+
+export interface QuestionDetail {
+  id: number,
+  account_id: string,
+  date: string,
+  content: string,
+  tag: QuestionType,
+  comments: {
+    count: number,
+    comment_list: Comment
+  }
+}
+
+export interface Comment {
+  id: number,
+  account_id: string,
+  date: string,
+  content: string,
+  replies: Array<{} | null>
 }
