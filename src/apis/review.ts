@@ -137,3 +137,16 @@ export const getKeyword = () => {
   })
 }
 
+/**
+ * 리뷰 작성 여부
+ */
+
+export const isReviewSubmitted = (school_id: string) => {
+  return useQuery<boolean, AxiosError, {school_id: string}>({
+    queryKey: [],
+    queryFn: async () => {
+      const { data } = await instance.get(`${path}/match?${school_id}`)
+      return data
+    }
+  })
+}
