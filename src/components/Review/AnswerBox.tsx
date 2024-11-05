@@ -11,7 +11,7 @@ export default function AnswerBox() {
           <UserIdAndSetting>
             <Font text="hamster" kind="semi14" />
             <SettingIcon>
-              <Setting size={20} color="gray500" />
+              <Setting size={20} color={color.gray500} />
             </SettingIcon>
           </UserIdAndSetting>
           <Font

@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import Login from './src/app/Login/page';
+import Login from './src/app/login/page';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Community from './src/app/community/page';
@@ -18,7 +18,7 @@ import Write from './src/app/review/Write';
 import KeywordReview from './src/app/review/KeywordReview';
 import Search from './src/app/search/page';
 import NavBar from './src/components/NavBar';
-import Signup from './src/app/Signup/page';
+import Signup from './src/app/signup/page';
 import QandADetail from './src/app/review/QandADetail';
 import Question from './src/app/review/Question';
 import QueryProvider from './src/utils/query/Provider';
@@ -33,7 +33,7 @@ function App(): React.JSX.Element {
         <NavigationContainer>
           <Stack.Navigator
             screenOptions={{headerShown: false}}
-            initialRouteName="MyPage">
+            initialRouteName="Community">
             <Stack.Screen name="Login" component={Login} />
             <Stack.Screen name="Signup" component={Signup} />
             <Stack.Screen name="NavBar" component={NavBar} />

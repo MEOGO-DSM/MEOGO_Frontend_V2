@@ -23,7 +23,7 @@ export default function Qanda() {
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={{alignItems: 'center', paddingHorizontal: 16}}>
         <FilterIcon>
-          <Filter color="gray500" />
+          <Filter color={color.gray500} />
         </FilterIcon>
         <TagWrap>
           {tagList.map((value, index) => (

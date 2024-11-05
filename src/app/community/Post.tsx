@@ -26,7 +26,7 @@ function Post() {
               <Font text="익명" kind="semi14" />
               <Font text="02.19 23:36" kind="medium14" color="gray400" />
             </InfoBox>
-            <Menu color="gray500" />
+            <Menu color={color.gray500} />
           </TopBox>
           <ContentBox>
             <Font text="아진짜대마고" kind="semi24" />

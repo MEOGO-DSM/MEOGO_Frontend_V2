@@ -59,7 +59,7 @@ export default function ReviewWrap() {
               <Font text="리뷰" kind="bold20" />
               <Font text="138" kind="medium20" color="gray500" />
             </Reviews>
-            <Filter size={24} color="gray500" />
+            <Filter size={24} color={color.gray500} />
           </ReviewAndFilter>
         </TopWrap>
 

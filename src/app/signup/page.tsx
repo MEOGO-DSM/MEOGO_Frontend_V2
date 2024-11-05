@@ -11,6 +11,7 @@ import IdAndPassword from './IdAndPassword';
 import Name from './Name';
 import FindSchool from './FindSchool';
 import School from './School';
+import { instance } from '../../apis/axios';
 
 function Signup() {
   const {
@@ -65,7 +66,7 @@ function Signup() {
 
   const prevPage = () => {
     if (page === 0) {
-      navigation.goBack();
+      navigation.navigate("Login");
     } else {
       setPage(page - 1);
     }
@@ -80,9 +81,28 @@ function Signup() {
     } else {
       reset();
       setPage(0);
-      navigation.push('Login');
+      signupHandler(data)
     }
   });
+
+  const signupHandler = async (data: any) => {
+    return await instance
+      .post(`user/signup`, {
+        account_id: data.id,
+        name: data.name,
+        password: data.password,
+        enrolled_school: data.schoolId,
+      })
+      .then(response => {
+        console.log(response)
+        navigation.navigate('Login');
+        return response
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+  
 
   return (
     <Container>

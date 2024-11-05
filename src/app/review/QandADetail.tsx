@@ -35,7 +35,7 @@ export default function QandADetail() {
                   <Font text="02.19 23:36" kind="medium12" color="gray400" />
                 </UserIdAndTime>
                 <SettingIcon>
-                  <Setting color="gray500" rotate="horizontal" />
+                  <Setting color={color.gray500} rotate="horizontal" />
                 </SettingIcon>
               </InfoWrap>
               <Content>
@@ -57,7 +57,7 @@ export default function QandADetail() {
             <Font text="2개의 답변" kind="semi16" />
             <SortWrap>
               <Font text="추천순" kind="medium14" color="gray500" />
-              <Arrow size={16} color="gray500" rotate="bottom" />
+              <Arrow size={16} color={color.gray500} rotate="bottom" />
             </SortWrap>
           </AnswerSortWrap>
 
