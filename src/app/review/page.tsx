@@ -9,29 +9,14 @@ import ImgSlider from '../../components/Review/ImgSlider';
 import SchoolTag from '../../components/Review/SchoolTag';
 import ListWrap from './List';
 import ExpandImage from '../../components/Review/ExpandImage';
-import { bookMarking, cancelBookmark } from '../../apis/bookmark';
-import { getSchoolInformation } from '../../apis/review/getSchoolInformation';
+import useBookMarker from '../../utils/bookMarker';
 
 function Review() {
+  const schoolId = 1
   const tagData = ['특목고', '마이스터고'];
   const [pressBookmark, setPressBookmark] = useState<boolean>(false);
 
-  const handleClickBookmark = (schoolId: number) => {
-    setPressBookmark(!pressBookmark)
-    if (!pressBookmark) {
-      bookMarking(schoolId)
-      console.log("학교를 북마크 하였습니다.")
-    }
-    else {
-      cancelBookmark(schoolId)
-      console.log("학교 북마크를 취소하였습니다.")
-    }
-  }
-
-  useEffect(() => {
-    getSchoolInformation()
-
-  }, [])
+  const { pressBookMarker, handleToggleBookMarker } = useBookMarker(schoolId);
 
   return (
     <>
@@ -76,8 +61,7 @@ function Review() {
               </ScoreAndSatisfaction>
             </SchoolInfoWrap>
             <HandleWrap>
-              <BookmarkLinkButton
-                onPress={() => handleClickBookmark(1)}>
+              <BookmarkLinkButton onPress={handleToggleBookMarker}>
                 <Bookmark
                   size={24}
                   color={pressBookmark ? 'gray700' : 'transparent'}

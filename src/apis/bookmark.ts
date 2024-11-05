@@ -8,15 +8,15 @@ const path = '/bookmark'
  * 북마크 지정
  */
 export const addBookmarker = () => {
-  return useMutation<void, AxiosError, {school_id: string}>({
-    mutationFn: async (school_id) => {
-      return instance.post(`${path}?school_id=${school_id}`)
+  return useMutation<void, AxiosError, number>({
+    mutationFn: async (schoolId) => {
+      return instance.post(`${path}?school_id=${schoolId}`)
     },
     onSuccess: () => {
       console.log("북마크 지정")
     },
     onError: (err: AxiosError) => {
-      console.log(err)
+      console.log("북마크 지정 오류", err)
     }
   })
 }
@@ -26,15 +26,15 @@ export const addBookmarker = () => {
  */
 
 export const deleteBookmarker = () => {
-  return useMutation<void, AxiosError, {school_id: string}>({
-    mutationFn: async (school_id) => {
-      return instance.delete(`${path}?school_id=${school_id}`)
+  return useMutation<void, AxiosError, number>({
+    mutationFn: async (schoolId) => {
+      return instance.delete(`${path}?school_id=${schoolId}`)
     },
     onSuccess: () => {
       console.log("북마크 취소")
     },
     onError: (err: AxiosError) => {
-      console.log(err)
+      console.log("북마크 취소 오류", err)
     }
   })
 }
