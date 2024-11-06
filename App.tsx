@@ -39,7 +39,6 @@ function App(): React.JSX.Element {
 =======
             screenOptions={{headerShown: false}}
             initialRouteName="Signup">
->>>>>>> Stashed changes
             <Stack.Screen name="Login" component={Login} />
             <Stack.Screen name="Signup" component={Signup} />
             <Stack.Screen name="NavBar" component={NavBar} />
