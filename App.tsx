@@ -33,8 +33,13 @@ function App(): React.JSX.Element {
       <ReduxProvider>
         <NavigationContainer>
           <Stack.Navigator
+<<<<<<< Updated upstream
             screenOptions={{ headerShown: false }}
             initialRouteName="Review">
+=======
+            screenOptions={{headerShown: false}}
+            initialRouteName="Signup">
+>>>>>>> Stashed changes
             <Stack.Screen name="Login" component={Login} />
             <Stack.Screen name="Signup" component={Signup} />
             <Stack.Screen name="NavBar" component={NavBar} />
