@@ -1,4 +1,5 @@
-import {instance} from './axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {instance, setCookie, storeData} from './axios';
 
 interface SignupData {
   id: string;
@@ -18,24 +19,9 @@ interface ApiResponse<T> {
   data: T;
 }
 
-// export const login = async (data: LoginData): Promise<ApiResponse<any>> => {
-//   try {
-//     const response = await axios.post<ApiResponse<any>>(``, data);
-//     return response.data;
-//   } catch (error: any) {
-//     if (axios.isAxiosError(error)) {
-//       console.error('axios 에러:', error.response?.data);
-//     }
-//     return {
-//       success: false,
-//       message: error.response?.data.message || '로그인 실패',
-//       data: null,
-//     };
-//   }
-// };
 const auth = '/user';
 
-export const postSignup = async (data: SignupData) => {
+export const signupHandler = async (data: SignupData) => {
   return await instance
     .post(`${auth}/signup`, {
       account_id: data.id,
@@ -45,8 +31,23 @@ export const postSignup = async (data: SignupData) => {
     })
     .then()
     .catch(err => {
-      console.error(err);
+      console.log(err);
     });
 };
 
-export const postLogin = () => {};
+const deviceToken = "dJ48Spz9okiRjoDS6eOXfr:APA91bECH6FfjznuD_jtGM06oCKjLQ3oyNRbnQRfE7ahYEhwBXKs2uy1R430A7Kk2dXd8dhdJ_b8n5DBYuA2vkqCHAHkkOEVp3XKZfC954-b15Tk6YNhLETi0UB-ZGrzDljTSyjBOh4u"
+
+export const loginHandler = async (data: LoginData) => {
+  return await instance.post(`user/signin`, {
+    account_id: data.id, 
+    password: data.password,
+    device_token: deviceToken
+  })
+  .then(response => {
+    console.log(response)
+    return response
+  })
+  .catch(err => {
+    console.log(err);
+  });
+};
