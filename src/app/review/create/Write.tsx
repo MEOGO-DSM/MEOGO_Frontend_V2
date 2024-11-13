@@ -127,9 +127,7 @@ export default function Write() {
                 <Media color={color.gray300} />
               </ImgUploadBox>
 
-              {imageFiles && imageFiles.length > 0 && (
-                <AddImgContent />
-              )}
+              { imageFiles && <AddImgContent /> }
             </UploadWrap>
           </ImgWrap>
         </ContentBox>
