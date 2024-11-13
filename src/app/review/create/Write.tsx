@@ -1,18 +1,22 @@
-import React, {useState} from 'react';
+import { useState } from 'react';
 import styled from 'styled-components/native';
 import { TopBar } from '../../../components';
 import { Close, Media, Star } from '../../../assets';
 import { Font, color } from '../../../styles';
-import {TouchableOpacity} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
+import { TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import AddImgContent from '../../../components/Review/AddImgContent';
-import {ImagePickerResponse} from 'react-native-image-picker';
-import { RequestStoragePermission } from '../../../utils/RequestStoragePermission';
-import * as ImagePicker from 'react-native-image-picker';
-import {StackNavigationProp} from '@react-navigation/stack';
+// import { RequestStoragePermission } from '../../../utils/RequestStoragePermission';
+import { launchImageLibrary } from 'react-native-image-picker';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { useDispatch, useSelector } from 'react-redux';
+import { add } from '../../../utils/store/modules/imageAddRemove';
 
 export default function Write() {
   const navigation = useNavigation<StackNavigationProp<any>>();
+
+  const dispatch = useDispatch()
+  const imageFiles = useSelector((state: any) => state.imageAddRemove.image)
 
   const [rating, setRating] = useState<number>(0);
   const [hoverRating, setHoverRating] = useState<number>(0);
@@ -26,11 +30,7 @@ export default function Write() {
     setLimit(text.length);
   };
 
-  const [response, setResponse] = useState<ImagePickerResponse | null>(null);
-  const [imageFile, setImageFile] = useState<(string | undefined)[]>([]);
-
   const onSelectImage = async () => {
-    // const hasPermission = await RequestStoragePermission()
     const hasPermission = true;
 
     if (!hasPermission) {
@@ -38,7 +38,7 @@ export default function Write() {
       return;
     }
 
-    ImagePicker.launchImageLibrary(
+    launchImageLibrary(
       {
         mediaType: 'photo',
         maxWidth: 100,
@@ -46,7 +46,6 @@ export default function Write() {
         includeBase64: true,
       },
       response => {
-        console.log(response);
         if (response.didCancel) {
           console.log('이미지 선택을 취소했습니다.');
           return;
@@ -54,24 +53,17 @@ export default function Write() {
           console.log('이미지 에러' + response.errorCode);
           return;
         }
-        setResponse(response);
 
-        if (response.assets && response.assets.length > 0) {
-          if (imageFile.length >= 4) {
+        if (response.assets) {
+          if (imageFiles?.length >= 4) {
             console.log('더 이상 이미지를 추가할 수 없습니다');
             return;
           }
 
-          const imageExist = imageFile.includes(response.assets[0].uri);
           const newImage = response.assets[0].uri;
-
-          if (!imageExist && newImage) {
-            setImageFile(prevImages => [...prevImages, newImage]);
-          } else {
-            console.log('이미지 데이터가 없습니다');
+          if (newImage && !imageFiles?.includes(newImage)) {
+            dispatch(add(newImage));
           }
-        } else {
-          console.log('이미지를 선택하지 않았습니다');
         }
       },
     );
@@ -129,12 +121,13 @@ export default function Write() {
           <ImgWrap>
             <Font text="이미지" kind="semi20" />
             <UploadWrap
-              contentContainerStyle={{columnGap: 8}}
+              contentContainerStyle={{ columnGap: 8 }}
               horizontal={true}>
               <ImgUploadBox onPress={() => onSelectImage()}>
                 <Media color={color.gray300} />
               </ImgUploadBox>
-              {imageFile && (
+
+              {imageFiles && imageFiles.length > 0 && (
                 <AddImgContent />
               )}
             </UploadWrap>

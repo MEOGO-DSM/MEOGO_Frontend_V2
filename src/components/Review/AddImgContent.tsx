@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components/native";
 import { Close } from "../../assets";
 import { color } from "../../styles/color"
@@ -7,8 +6,8 @@ import { remove } from "../../utils/store/modules/imageAddRemove"
 import { RootState } from "../../utils/store/store";
 
 export default function AddImgContent() {
-    const dispatch = useDispatch()
-    const image = useSelector((state: RootState) => state.imageAddRemove.image)
+    const dispatch = useDispatch();
+    const image = useSelector((state: RootState) => state.imageAddRemove.image);
 
     return (
         <>
