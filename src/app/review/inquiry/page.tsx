@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import { useState } from 'react';
 import styled from 'styled-components/native';
 import { Font, color } from '../../../styles';
 import { Filter } from '../../../assets';
@@ -6,15 +6,20 @@ import WriteButton from '../../../components/Review/WriteButton';
 import StarRating from '../../../components/StarRating';
 import ReviewBox from '../../../components/Review/ReviewBox';
 import { reviewValue } from '../../dummy/reviewValue';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
+import { getSchoolRankAndRating, getSchoolReviews } from '../../../apis/review';
+import { useQuery } from '@tanstack/react-query';
+
+const school_id = ''
 
 export default function ReviewWrap() {
-  const navigation = useNavigation();
 
-  const Data = [
-    {value: '만족도', ratio: 100},
-    {value: '교내활동', ratio: 50},
-    {value: '교내시설', ratio: 90},
+  const { data: RankAndRatingData } = getSchoolRankAndRating(school_id);
+  const starData = (RankAndRatingData?.star ?? 0).toFixed(1);
+  const tags = [
+    RankAndRatingData?.tag1,
+    RankAndRatingData?.tag2,
+    RankAndRatingData?.tag3,
   ];
 
   const [reviewData, setReviewData] = useState<boolean>(true);
@@ -24,18 +29,19 @@ export default function ReviewWrap() {
       <ReviewTotalWrap>
         <ReviewValueContent>
           <ScopeWrap>
-            <Font text="4.0" kind="semi36" />
-            <StarRating num={4} isText={false} />
+            <Font text={starData} kind="semi36" />
+            <StarRating num={parseFloat(starData)} isText={false} />
           </ScopeWrap>
-          <GraphWrap>
-            {Data.map(({value, ratio}, index) => (
+         
+         <GraphWrap>
+            {tags.map((tag, index) => (
               <DataWrap key={index}>
-                <Font text={value} kind="medium12" />
+                <Font text={tag?.tag_name} kind="medium12" />
                 <DataBar>
-                  <Bar width={ratio * 1.4} />
+                  <Bar width={tag?.percentage && 0 ? tag.percentage * 1.4 : 0} />
                 </DataBar>
                 <RatioBox>
-                  <Font text={`${ratio}%`} kind="medium12" />
+                  <Font text={`${tag?.percentage ?? 0}%`} kind="medium12" color='gray500' />
                 </RatioBox>
               </DataWrap>
             ))}
@@ -66,7 +72,7 @@ export default function ReviewWrap() {
           <ReviewListWrap>
             {
               reviewValue.reviews.map((value, index) => (
-                <ReviewBox 
+                <ReviewBox
                   key={index}
                   user_name={value.user_name}
                   star={value.star}
@@ -129,9 +135,9 @@ const DataBar = styled.View`
   overflow: hidden;
 `;
 
-const Bar = styled.View<{width: number}>`
+const Bar = styled.View<{ width: number }>`
   height: 5px;
-  width: ${({width}) => width}px;
+  width: ${({ width }) => width}px;
   background-color: ${color.amber500};
 `;
 
