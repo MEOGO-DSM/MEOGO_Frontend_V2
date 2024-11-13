@@ -14,7 +14,6 @@ import useBookMarker from '../../utils/bookMarker';
 function Review() {
   const schoolId = 1
   const tagData = ['특목고', '마이스터고'];
-  const [pressBookmark, setPressBookmark] = useState<boolean>(false);
 
   const { pressBookMarker, handleToggleBookMarker } = useBookMarker(schoolId);
 
@@ -64,7 +63,8 @@ function Review() {
               <BookmarkLinkButton onPress={handleToggleBookMarker}>
                 <Bookmark
                   size={24}
-                  color={pressBookmark ? 'gray700' : 'transparent'}
+                  color={color.gray700}
+                  fill={pressBookMarker ? color.gray700 : "none"}
                 />
                 <Font text="저장하기" kind="medium16" color="gray700" />
               </BookmarkLinkButton>

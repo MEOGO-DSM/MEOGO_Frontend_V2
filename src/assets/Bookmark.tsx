@@ -1,6 +1,5 @@
 import Svg, {Path} from 'react-native-svg';
 import {SvgPropsType} from '../interfaces';
-import {color} from '../styles';
 
 interface PropsType extends SvgPropsType {
   fill?: string;
@@ -10,7 +9,7 @@ export const Bookmark = ({
   size = 24,
   color = 'black',
   onPress,
-  fill,
+  fill='none',
 }: PropsType) => {
   return (
     <Svg
