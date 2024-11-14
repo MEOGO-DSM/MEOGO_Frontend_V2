@@ -1,4 +1,4 @@
-export const keyword = [
+export const keywordDummy = [
   {
       "keyword": "전체 만족",
       "category": "EDUCATION"
@@ -106,5 +106,9 @@ export const keyword = [
   {
       "keyword": "시설 관리",
       "category": "FACILITY"
+  },
+  {
+    "keyword" : "사랑해",
+    "category" : "Love you"
   }
 ]

@@ -1,60 +1,39 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import styled from "styled-components/native";
 import { TopBar } from "../../../components/TopBar";
 import { TouchableOpacity } from "react-native";
 import { color, Font } from "../../../styles";
 import Tag from "../../../components/Review/Tag";
 import { Arrow } from "../../../assets/Arrow";
-import { useNavigation } from "@react-navigation/native";
-import { uploadReview } from "../../../apis/review/uploadReview";
+import { useNavigation, useRoute } from "@react-navigation/native";
+import { createReview, getKeyword } from "../../../apis/review"
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../utils/store/store';
-import { useRoute } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { keyword } from "../../dummy/keyword";
-
-interface RouteParams {
-    rating: number;
-    contentValue: string;
-}
-
-interface KeywordType {
-    keyword: string;
-    category: "EDUCATION" | "ACTIVITY" | "FACILITY";
-}
-
-interface CategoriesType {
-    교육: KeywordType[];
-    활동: KeywordType[];
-    시설: KeywordType[];
-}
-
-const categories: CategoriesType = {
-    교육: [],
-    활동: [],
-    시설: [],
-};
-
-const categoryMapping: { [key: string]: keyof CategoriesType } = {
-    "EDUCATION": "교육",
-    "ACTIVITY": "활동",
-    "FACILITY": "시설",
-};
-
-keyword.forEach(item => {
-    const categoryKey = categoryMapping[item.category];
-    if (categoryKey) {
-        categories[categoryKey].push(item);
-    }
-});
+import { keywordDummy } from "../../dummy/keyword";
+import { CategorizedKeywords } from "../../../interfaces";
 
 const Keyword = () => {
     const navigation = useNavigation<StackNavigationProp<any>>();
-    const images = useSelector((state: RootState) => state.imageAddRemove.image);
-    const route = useRoute();
-    const { rating, contentValue } = route.params as RouteParams;
+    // const images = useSelector((state: RootState) => state.imageAddRemove.image);
+    // const route = useRoute();
+    // const { rating, contentValue } = route.params as RouteParams;
+
+    const { data: KeywordData, isLoading, isError } = getKeyword()
 
     const [selectedKeywords, setSelectedKeywords] = useState<string[]>([]);
+
+    const categorizedKeywords = keywordDummy.reduce<CategorizedKeywords>((acc: any, item) => {
+        if (!acc[item.category]) {
+            acc[item.category] = [];
+        }
+        acc[item.category].push(item.keyword);
+        return acc;
+    }, {
+        EDUCATION: [],
+        ACTIVITY: [],
+        FACILITY: []
+    });
 
     const handleTagPress = (tag: string) => {
         setSelectedKeywords(prevState => {
@@ -69,14 +48,8 @@ const Keyword = () => {
         });
     };
 
-    const handleSubmit = async () => {
-        const response = await uploadReview(images, contentValue, rating, selectedKeywords);
-        if (response) {
-            console.log("리뷰가 성공적으로 작성되었습니다");
-            navigation.navigate('Review');
-        } else {
-            console.log('리뷰 작성이 실패하였습니다');
-        }
+    const handleSubmit = () => {
+      createReview();
     };
 
     return (
@@ -99,16 +72,17 @@ const Keyword = () => {
                     <Font text="어떤 점이 좋은가요?" kind="semi24" />
                     <Font text="이 학교에 어울리는 키워드를 1~5개 골라주세요." kind="medium16" color="gray500" />
                 </TitleWrap>
-                {Object.entries(categories).map(([category, items]) => (
+
+                {Object.entries(categorizedKeywords).map(([category, keywords]) => (
                     <KeyWordSectionBox key={category}>
                         <Font text={category} kind="semi18" />
                         <TagWrap>
-                            {items.map(item => (
+                            {keywords.map((keyword: string) => (
                                 <Tag
-                                    key={item.keyword}
-                                    text={item.keyword}
-                                    onPress={() => handleTagPress(item.keyword)}
-                                    selected={selectedKeywords.includes(item.keyword)}
+                                    key={keyword}
+                                    text={keyword}
+                                    onPress={() => handleTagPress(keyword)}
+                                    selected={selectedKeywords.includes(keyword)}
                                 />
                             ))}
                         </TagWrap>

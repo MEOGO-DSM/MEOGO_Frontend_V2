@@ -8,7 +8,7 @@ import {
   SchoolReviewList,
   SchoolReviewImage,
   SchoolRankAndRating,
-  Keyword
+  KeywordType
 } from "../interfaces";
 
 const path = '/review';
@@ -128,7 +128,7 @@ export const getSchoolRankAndRating = (school_id: string) => {
  */
 
 export const getKeyword = () => {
-  return useQuery<Keyword, AxiosError>({
+  return useQuery<KeywordType, AxiosError>({
     queryKey: ["Keyword"],
     queryFn: async () => {
       const {data} = await instance.get(`${path}/keyword`)

@@ -68,7 +68,7 @@ export type CategoryType = "EDUCATION" | "ACTIVITY" | "FACILITY"
 
 export type QuestionType = "LIFE" | "ENTRANCE" | "FACILITIES" | "ETC"
 
-export interface Keyword {
+export interface KeywordType {
   keyword: string,
   category: CategoryType
 }
@@ -110,4 +110,15 @@ export interface Comment {
   date: string,
   content: string,
   replies: Array<{} | null>
+}
+
+export interface KeywordItem {
+  keyword: string;
+  category: CategoryType
+}
+
+export interface CategorizedKeywords {
+  EDUCATION: string[];
+  ACTIVITY: string[];
+  FACILITY: string[];
 }
