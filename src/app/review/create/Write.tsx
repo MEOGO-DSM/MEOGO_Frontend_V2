@@ -75,11 +75,11 @@ export default function Write() {
         text="리뷰 작성"
         leftIcon={
           <Close
-            onPress={() => navigation.navigate('Review')}
+            onPress={() => navigation.navigate('Review' as never)}
           />}
         rightIcon={
           <TouchableOpacity
-            onPress={() => navigation.navigate('KeywordReview')}>
+            onPress={() => navigation.navigate('KeywordReview', { state: { rating, contentValue, imageFiles } })}>
             <Font
               text="다음"
               kind="semi18"
@@ -127,7 +127,7 @@ export default function Write() {
                 <Media color={color.gray300} />
               </ImgUploadBox>
 
-              { imageFiles && <AddImgContent /> }
+              {imageFiles && <AddImgContent />}
             </UploadWrap>
           </ImgWrap>
         </ContentBox>

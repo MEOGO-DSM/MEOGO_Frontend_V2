@@ -5,20 +5,32 @@ import { TouchableOpacity } from "react-native";
 import { color, Font } from "../../../styles";
 import Tag from "../../../components/Review/Tag";
 import { Arrow } from "../../../assets/Arrow";
-import { useNavigation, useRoute } from "@react-navigation/native";
+import { useNavigation, RouteProp, useRoute } from "@react-navigation/native";
 import { createReview, getKeyword } from "../../../apis/review"
-import { useSelector } from 'react-redux';
-import { RootState } from '../../../utils/store/store';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { keywordDummy } from "../../dummy/keyword";
 import { CategorizedKeywords } from "../../../interfaces";
 
-const Keyword = () => {
-    const navigation = useNavigation<StackNavigationProp<any>>();
-    // const images = useSelector((state: RootState) => state.imageAddRemove.image);
-    // const route = useRoute();
-    // const { rating, contentValue } = route.params as RouteParams;
+type RootStackParamList = {
+    KeywordReview: {
+        state: {
+            rating: number;
+            contentValue: string;
+            imageFiles: string[];
+        };
+    };
+};
 
+type KeywordScreenRouteProp = RouteProp<RootStackParamList, 'KeywordReview'>;
+
+const Keyword = () => {
+
+    const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
+    const route = useRoute<KeywordScreenRouteProp>();
+
+    const { mutate } = createReview()
+
+    const { rating, contentValue, imageFiles } = route.params?.state || { rating: 0, contentValue: '', imageFiles: [] };
     const { data: KeywordData, isLoading, isError } = getKeyword()
 
     const [selectedKeywords, setSelectedKeywords] = useState<string[]>([]);
@@ -39,7 +51,7 @@ const Keyword = () => {
         EDUCATION: "교육",
         ACTIVITY: "활동",
         FACILITY: "시설"
-      };
+    };
 
     const handleTagPress = (tag: string) => {
         setSelectedKeywords(prevState => {
@@ -55,14 +67,20 @@ const Keyword = () => {
     };
 
     const handleSubmit = () => {
-        createReview();
+        const request = {
+            content: contentValue,
+            school_id: 1,
+            star: rating,
+            key_word: selectedKeywords
+          }
+        mutate({ request, image: imageFiles });
     };
 
     return (
         <Container>
             <TopBar
                 text="키워드 리뷰"
-                leftIcon={<Arrow onPress={() => navigation.navigate('ReviewWrite')} />}
+                leftIcon={<Arrow onPress={() => navigation.navigate('ReviewWrite' as never)} />}
                 rightIcon={
                     <TouchableOpacity onPress={handleSubmit}>
                         <Font
