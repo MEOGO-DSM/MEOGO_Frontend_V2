@@ -30,17 +30,17 @@ export interface ReviewFormData {
 
 export interface SchoolReviewList {
   count: number,
-  reviews: [
-    {
-      id: number,
-      content: string,
-      date: string,
-      user_name: string,
-      profile: string,
-      star: number,
-      image: Array<string>
-    }
-  ]
+  reviews: ReviewType[]
+}
+
+export interface ReviewType {
+  id: number,
+  content: string,
+  date: string,
+  user_name: string,
+  profile: string,
+  star: number,
+  image: Array<string>
 }
 
 export interface SchoolReviewImage {

@@ -1,18 +1,18 @@
-import { useState } from 'react';
 import styled from 'styled-components/native';
 import { Font, color } from '../../../styles';
-import { Filter } from '../../../assets';
-import WriteButton from '../../../components/Review/WriteButton';
+import { Filter, Pen } from '../../../assets';
 import StarRating from '../../../components/StarRating';
 import ReviewBox from '../../../components/Review/ReviewBox';
-import { reviewValue } from '../../dummy/reviewValue';
-import { useNavigation } from '@react-navigation/native';
 import { getSchoolRankAndRating, getSchoolReviews } from '../../../apis/review';
-import { useQuery } from '@tanstack/react-query';
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from '@react-navigation/stack';
+import { View } from 'react-native';
+import { ReviewType } from '../../../interfaces';
 
 const school_id = ''
 
 export default function ReviewWrap() {
+  const navigation = useNavigation<StackNavigationProp<any>>();
 
   const { data: RankAndRatingData } = getSchoolRankAndRating(school_id);
   const starData = (RankAndRatingData?.star ?? 0).toFixed(1);
@@ -22,7 +22,8 @@ export default function ReviewWrap() {
     RankAndRatingData?.tag3,
   ];
 
-  const [reviewData, setReviewData] = useState<boolean>(true);
+  const { data: ReviewData, isLoading, isError } = getSchoolReviews(school_id)
+  const reviewCount = (ReviewData?.count.toString() ?? '0')
 
   return (
     <Container>
@@ -32,11 +33,11 @@ export default function ReviewWrap() {
             <Font text={starData} kind="semi36" />
             <StarRating num={parseFloat(starData)} isText={false} />
           </ScopeWrap>
-         
-         <GraphWrap>
+
+          <GraphWrap>
             {tags.map((tag, index) => (
               <DataWrap key={index}>
-                <Font text={tag?.tag_name} kind="medium12" />
+                <Font text={`${tag?.tag_name}`} kind="medium12" />
                 <DataBar>
                   <Bar width={tag?.percentage && 0 ? tag.percentage * 1.4 : 0} />
                 </DataBar>
@@ -57,36 +58,31 @@ export default function ReviewWrap() {
               kind="regular12"
               color="gray500"
             />
-            <WriteButton />
+            <WriteButton
+              onPress={() => navigation.navigate('ReviewWrite')}>
+              <Pen size={20} color="white" />
+              <Font text="리뷰작성" kind="medium14" color="white" />
+            </WriteButton>
           </HandleWrap>
           <ReviewAndFilter>
             <Reviews>
               <Font text="리뷰" kind="bold20" />
-              <Font text="138" kind="medium20" color="gray500" />
+              <Font text={reviewCount} kind="medium20" color="gray500" />
             </Reviews>
             <Filter size={24} color="gray500" />
           </ReviewAndFilter>
         </TopWrap>
 
-        {reviewData ? (
-          <ReviewListWrap>
-            {
-              reviewValue.reviews.map((value, index) => (
-                <ReviewBox
-                  key={index}
-                  user_name={value.user_name}
-                  star={value.star}
-                  content={value.content}
-                  image={value.image}
-                />
-              ))
-            }
-          </ReviewListWrap>
-        ) : (
-          <NoReviewWrap>
-            <Font text="아직 리뷰가 없어요!" kind="medium16" />
-          </NoReviewWrap>
-        )}
+        <View>
+          {ReviewData && ReviewData.reviews.map((value: ReviewType, index: number) => (
+            <ReviewBox key={index} {...value}/>
+          ))}
+          {!ReviewData && 
+            <NoReviewWrap>
+              <Font text="아직 리뷰가 없어요!" kind="medium16" />
+            </NoReviewWrap>
+          }
+        </View>
       </UserReviewWrap>
     </Container>
   );
@@ -169,9 +165,16 @@ const Reviews = styled.View`
   gap: 8px;
 `;
 
-const ReviewListWrap = styled.View``;
-
 const NoReviewWrap = styled.View`
   padding: 24px 0;
+  align-items: center;
+`;
+
+const WriteButton = styled.TouchableOpacity`
+  background-color: ${color.black};
+  padding: 8px 16px;
+  gap: 6px;
+  flex-direction: row;
+  border-radius: 20px;
   align-items: center;
 `;

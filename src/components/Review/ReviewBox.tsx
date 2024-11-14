@@ -2,72 +2,71 @@ import React from "react";
 import styled from "styled-components/native";
 import { Setting } from "../../assets"
 import StarRating from "../StarRating";
-import { Font } from "../../styles/font"
-import { color } from "../../styles/color";
+import { Font, color } from "../../styles"
 import { useDispatch } from "react-redux";
 import { TouchableOpacity } from "react-native";
 import { show, isShow, imageArray, currentIndex } from "../../utils/store/modules/appearPhoto"
+import { ReviewType } from "../../interfaces";
 
-interface reviewBoxType {
-    id?: number,
-    content?: string,
-    date?: string,
-    user_name?: string,
-    profile?: string,
-    star?: number,
-    image?: Array<string>
-}
+export default function ReviewBox({
+  id,
+  content,
+  date,
+  user_name,
+  profile,
+  star,
+  image
+}: ReviewType) {
 
-export default function ReviewBox({ id, content, date, user_name, profile, star, image = [] }: reviewBoxType) {
-    const wrapWidth = image ? (image.length > 2 ? '100%' : `${image.length * 160}px`) : '0';
+  const wrapWidth = image ? (image.length > 2 ? '100%' : `${image.length * 160}px`) : '0';
 
-    const dateTime = date?.substring(3)
+  const dateTime = date?.substring(3)
 
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-    const handleImageClick = (imgSrc: string, index: number) => {
-        dispatch(show(imgSrc));
-        dispatch(isShow(true));
-        dispatch(imageArray(image));
-        dispatch(currentIndex(index))
-    };
+  const handleImageClick = (imgSrc: string, index: number) => {
+    dispatch(show(imgSrc));
+    dispatch(isShow(true));
+    dispatch(imageArray(image));
+    dispatch(currentIndex(index))
+  };
 
-    return (
-        <Container key={id}>
-            <ReviewInfoWrap>
-                <UserInfoWrap>
-                    <ProfileImg source={{ uri: profile }} />
-                    <UserNameAndReview>
-                        <Font text={user_name} kind="medium14" />
-                        <StarRating num={star} />
-                    </UserNameAndReview>
-                </UserInfoWrap>
-                <TimeAndSetting>
-                    <Font text={dateTime} kind="medium12" color="gray400" />
-                    <SettingWrap>
-                        <Setting />
-                    </SettingWrap>
-                </TimeAndSetting>
-            </ReviewInfoWrap>
+  return (
+    <Container key={id}>
+      <ReviewInfoWrap>
+        <UserInfoWrap>
+          <ProfileImg source={{ uri: profile }} />
+          <UserNameAndReview>
+            <Font text={user_name} kind="medium14" />
+            <StarRating num={star} />
+          </UserNameAndReview>
+        </UserInfoWrap>
+        <TimeAndSetting>
+          <Font text={dateTime} kind="medium12" color="gray400" />
+          <SettingWrap>
+            <Setting />
+          </SettingWrap>
+        </TimeAndSetting>
+      </ReviewInfoWrap>
 
-            <Font text={content} kind="medium14" />
+      <Font text={content} kind="medium14" />
 
-            {image && image.length > 0 &&
-                <ImgWrap width={wrapWidth} >
-                    <ImgSlider contentContainerStyle={{ columnGap: 2 }} horizontal={true}>
-                        {image.map((imgSrc, index) => (
-                            <TouchableOpacity onPress={() => handleImageClick(imgSrc, index)}>
-                                <Img
-                                    key={index}
-                                    source={{ uri: imgSrc }}
-                                />
-                            </TouchableOpacity>
-                        ))}
-                    </ImgSlider>
-                </ImgWrap>
-            }
-        </Container>
-    )
+      {image && image.length > 0 &&
+        <ImgWrap width={wrapWidth} >
+          <ImgSlider contentContainerStyle={{ columnGap: 2 }} horizontal={true}>
+            {image.map((imgSrc, index) => (
+              <TouchableOpacity onPress={() => handleImageClick(imgSrc, index)}>
+                <Img
+                  key={index}
+                  source={{ uri: imgSrc }}
+                />
+              </TouchableOpacity>
+            ))}
+          </ImgSlider>
+        </ImgWrap>
+      }
+    </Container>
+  )
 }
 
 const Container = styled.View`
@@ -97,7 +96,7 @@ const TimeAndSetting = styled.View`
   gap: 8px;
 `;
 
-const ImgWrap = styled.View<{width: string}>`
+const ImgWrap = styled.View<{ width: string }>`
   width: ${props => props.width};
   height: 160px;
   display: flex;
