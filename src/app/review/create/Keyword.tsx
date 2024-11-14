@@ -35,6 +35,12 @@ const Keyword = () => {
         FACILITY: []
     });
 
+    const categoryNames: { [key: string]: string } = {
+        EDUCATION: "교육",
+        ACTIVITY: "활동",
+        FACILITY: "시설"
+      };
+
     const handleTagPress = (tag: string) => {
         setSelectedKeywords(prevState => {
             const isSelected = prevState.includes(tag);
@@ -49,7 +55,7 @@ const Keyword = () => {
     };
 
     const handleSubmit = () => {
-      createReview();
+        createReview();
     };
 
     return (
@@ -75,7 +81,7 @@ const Keyword = () => {
 
                 {Object.entries(categorizedKeywords).map(([category, keywords]) => (
                     <KeyWordSectionBox key={category}>
-                        <Font text={category} kind="semi18" />
+                        <Font text={categoryNames[category] || "기타"} kind="semi18" />
                         <TagWrap>
                             {keywords.map((keyword: string) => (
                                 <Tag

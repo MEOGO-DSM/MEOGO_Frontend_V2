@@ -106,9 +106,5 @@ export const keywordDummy = [
   {
       "keyword": "시설 관리",
       "category": "FACILITY"
-  },
-  {
-    "keyword" : "사랑해",
-    "category" : "Love you"
   }
 ]
