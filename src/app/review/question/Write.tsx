@@ -5,7 +5,7 @@ import { Font, color } from '../../../styles'
 import { useEffect, useState } from "react"
 import { Dropdown } from "../../../components/Dropdown"
 import styled from "styled-components/native"
-import { uploadQuestion } from "../../../apis/question/uploadQuestion"
+import { createQuestion } from "../../../apis/question"
 import { useNavigation } from "@react-navigation/native"
 import { StackNavigationProp } from "@react-navigation/stack"
 
@@ -57,7 +57,7 @@ export default function Write() {
 
     console.log(questionType, title, content);
 
-    uploadQuestion(school_id, content, questionType)
+    createQuestion()
     navigation.navigate('Review')
   }
 

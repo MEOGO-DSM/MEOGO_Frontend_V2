@@ -1,14 +1,15 @@
-import React from "react";
 import styled from "styled-components/native";
-import { Font } from "../../../styles/font";
-import { color } from "../../../styles/color";
+import { Font, color } from "../../../styles";
 import { photo } from "../../dummy/photo";
 import { TouchableOpacity } from "react-native";
 import { useDispatch } from "react-redux";
 import { show, isShow, imageArray, currentIndex } from "../../../utils/store/modules/appearPhoto"
+import { getSchoolImage } from "../../../apis/review";
 
 export default function Photo() {
     const dispatch = useDispatch();
+
+    const { data: imageData, isLoading, isError } = getSchoolImage('')
 
     const imageSrc = photo.flatMap((item) => item.image)
 

@@ -7,7 +7,7 @@ import ImgSlider from '../../components/Review/ImgSlider';
 import SchoolTag from '../../components/Review/SchoolTag';
 import ListWrap from './List';
 import ExpandImage from '../../components/Review/ExpandImage';
-import useBookMarker from '../../utils/bookMarker';
+import useBookMarker from '../../utils/usebookMarker';
 
 function Review() {
   const schoolId = 1
