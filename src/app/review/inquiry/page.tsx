@@ -3,7 +3,7 @@ import { Font, color } from '../../../styles';
 import { Filter, Pen } from '../../../assets';
 import StarRating from '../../../components/StarRating';
 import ReviewBox from '../../../components/Review/ReviewBox';
-import { getSchoolRankAndRating, getSchoolReviews } from '../../../apis/review';
+import { getSchoolRankAndRating, getSchoolReviews, isReviewSubmitted } from '../../../apis/review';
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from '@react-navigation/stack';
 import { View } from 'react-native';
@@ -24,6 +24,15 @@ export default function ReviewWrap() {
 
   const { data: ReviewData, isLoading, isError } = getSchoolReviews(school_id)
   const reviewCount = (ReviewData?.count.toString() ?? '0')
+
+  const { data: isSubmitted } = isReviewSubmitted(school_id)
+  const handleUploadReview = () => {
+    if(isSubmitted) {
+      navigation.navigate('ReviewWrite')
+    } else {
+      console.log("리뷰를 작성하실 수 없습니다..")
+    }
+  }
 
   return (
     <Container>
@@ -59,7 +68,7 @@ export default function ReviewWrap() {
               color="gray500"
             />
             <WriteButton
-              onPress={() => navigation.navigate('ReviewWrite')}>
+              onPress={handleUploadReview}>
               <Pen size={20} color="white" />
               <Font text="리뷰작성" kind="medium14" color="white" />
             </WriteButton>
