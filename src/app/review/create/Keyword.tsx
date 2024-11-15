@@ -30,7 +30,7 @@ const Keyword = () => {
 
     const { mutate } = createReview()
 
-    const { rating, contentValue, imageFiles } = route.params?.state || { rating: 0, contentValue: '', imageFiles: [] };
+    const { rating, contentValue, imageFiles } = route.params?.state;
     const { data: KeywordData, isLoading, isError } = getKeyword()
 
     const [selectedKeywords, setSelectedKeywords] = useState<string[]>([]);
