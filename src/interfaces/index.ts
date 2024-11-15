@@ -122,3 +122,17 @@ export interface CategorizedKeywords {
   ACTIVITY: string[];
   FACILITY: string[];
 }
+
+export interface SchoolInfo {
+  region: string;
+  estType: string;
+  schoolGubun: string;
+  schoolName: string;
+  totalCount: number;
+  adres: string;
+  link: string;
+  campusName: string;
+  seq: number;
+  collegeinfourl: string | null;
+  schoolType: string;
+}
